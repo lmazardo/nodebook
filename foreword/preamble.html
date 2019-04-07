@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<title>Avant-propos</title>
+<style>
+#header,
+#content,
+#footer {
+  margin: 2rem auto;
+  max-width: 46rem;
+}
+
+#header {
+  margin-top: 0;
+}
+
+.title,
+#toctitle {
+  color: var(--dark-accent);
+}
+
+a {
+  /* white-space: nowrap; */
+}
+
+img, iframe, video, audio {
+  max-width: 100%;
+}
+
+p {
+  font-weight: normal;
+}
+
+/* Taken out from book.css */
+dl dt {
+  margin-bottom: 0.3125em;
+  font-weight: bold;
+}
+dl dd {
+  margin-bottom: 1.25em;
+}
+
+dt,
+th.tableblock,
+td.content,
+div.footnote {
+  text-rendering: optimizeLegibility;
+}
+
+.literalblock pre,
+.literalblock pre[class],
+.listingblock pre,
+.listingblock pre[class] {
+  overflow: auto;
+  word-wrap: break-word;
+}
+.literalblock pre.nowrap,
+.literalblock pre[class].nowrap,
+.listingblock pre.nowrap,
+.listingblock pre[class].nowrap {
+  overflow-x: auto;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.listingblock {
+  margin: 0 0 2em;
+}
+.listingblock > .content {
+  position: relative;
+}
+.listingblock > .title {
+  font-weight: bold;
+}
+.listingblock code[data-lang]::before {
+  display: none;
+  content: attr(data-lang);
+  position: absolute;
+  font-size: 0.75em;
+  top: 1em;
+  right: 1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #999;
+}
+.listingblock:hover code[data-lang]::before {
+  display: block;
+}
+.listingblock.terminal pre .command::before {
+  content: attr(data-prompt);
+  padding-right: 0.5em;
+  color: #999;
+}
+
+td.hdlist1,
+td.hdlist2 {
+  vertical-align: top;
+  padding-right: 0.625em;
+}
+td.hdlist1 {
+  font-weight: bold;
+}
+.literalblock + .colist,
+.listingblock + .colist {
+  margin-top: -1.5em;
+}
+.colist td:not([class]):first-child {
+  padding: 0.4em 0.75em 0 0.75em;
+  line-height: 1;
+  vertical-align: top;
+}
+.colist td:not([class]):first-child img {
+  max-width: none;
+}
+.colist td:not([class]):last-child {
+  padding: 0.25em 0;
+}
+
+/* Custom classes */
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.RemarquePreTitre,
+#toctitle {
+  font-style: normal;
+  font-weight: bold;
+}
+  .RemarquePreTitre::after {
+    content: "•";
+    padding-left: 5px;
+  }
+.admonitionblock {
+}
+.admonitionblock > table,
+.exampleblock {
+  --commented: rgba(17, 17, 68, .65);
+  --border-radius-base: 8px;
+
+  background-color: #fafafa;
+  border: 1px solid var(--dark-shade);
+  border-left: none;
+  border-right: none;
+  margin: 1.5em 0;
+  padding: 1em;
+}
+.exampleblock .title {
+  font-weight: bold;
+}
+.icon .title {
+  font-size: 2em;
+}
+  .admonitionblock > table td.icon {
+    display: none;
+  }
+
+  @media screen and (min-width: 769px) {
+    .admonitionblock > table td.icon {
+      display: table-cell;
+    }
+  }
+
+  .admonitionblock > table td.icon {
+    padding-right: 1em;
+  }
+  .admonitionblock > table td.icon img {
+    max-width: none;
+  }
+
+.colist ol {
+  margin-left: 1.5em;  /* aligns with the listing edge */
+  padding-left: 0;
+  font-weight: bold;   /* makes it stand out more */
+}
+  .colist ol p {
+    margin: 0 0 .5em;
+  }
+.listingblock:not(.prismjs) pre,
+.language-bash.hljs {
+  background: #323232;
+  color: wheat;
+  margin: 0;
+  padding: 1rem;
+}
+.language-bash.hljs .hljs-built_in,
+.language-bash.hljs .hljs-builtin-name {
+  color: white;
+}
+.language-bash.hljs .hljs-string {
+  color: lightgreen;
+}
+.language-bash.hljs .hljs-variable {
+  color: lightskyblue;
+}
+.keyseq {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.language-bash.hljs .keyseq {
+  color: white;
+}
+.language-bash.hljs kbd {
+  background: transparent;
+  box-shadow: none;
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0.1em 0.4em;
+}
+.listingblock pre.highlightjs,
+.listingblock.prismjs pre {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+.listingblock pre.highlightjs > code,
+.listingblock.prismjs .highlight {
+  border-left: 4px solid var(--dark-accent);
+  padding-left: 1em;
+  font-size: .8em;
+}
+.listingblock pre.highlightjs > code.language-bash {
+  border-left-color: limegreen;
+}
+
+.hdlist .hdlist1 {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td > p:first-child {
+  margin-top: 0;
+}
+
+.hljs-comment {
+  font-style: normal !important;
+}
+
+#toc.toc2 a {
+  text-decoration: none;
+  white-space: normal;
+}
+  #toc.toc2 a:hover,
+  #toc.toc2 a:focus {
+    text-decoration: underline;
+  }
+
+#toc.toc2 ul {
+  list-style: none;
+}
+
+  #toc.toc2 > ul {
+    padding-left: 0;
+  }
+
+  #toc.toc2 ul ul {
+    padding-left: 1em;
+  }
+
+@media screen and (min-width: 769px) {
+  body {
+    padding-left: 25vw !important;
+  }
+
+  #header,
+  #content,
+  #footer {
+    margin-left: 0;
+  }
+
+  #toc.toc2 {
+    height: 100%;
+    left: 0;
+    max-width: 20vw;
+    overflow: auto;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+
+  #toc.toc2 > ul {
+    font-size: 0.85em;
+  }
+
+  #toc li.active > a[href^="#"],
+  [id]:target {
+    background: #ffc;
+  }
+}
+
+.admonitionblock.context-callout > table {
+  border-width: 5px;
+  border-color: var(--brand-color);
+}
+
+</style>
+<link rel="stylesheet" href="https://oncletom.io/styles/blog.css?v=v3.3.2">
+<!-- WebMentions -->
+<link rel="pingback" href="https://webmention.io/oncletom.io/xmlrpc">
+<link rel="webmention" href="https://webmention.io/oncletom.io/webmention">
+<!-- Open Graph -->
+<meta property="og:type" content="book">
+<meta property="og:book:author" content="Thomas Parisot">
+<meta property="og:book:isbn" content="978-2212139938">
+<meta property="og:book:release_date" content="978-2212139938">
+<meta property="og:book:tag" content="Node.js">
+<meta property="og:book:tag" content="JavaScript">
+<meta property="og:book:tag" content="npm">
+<meta property="og:book:tag" content="Développement front-end">
+<meta property="og:book:tag" content="Développement back-end">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Node.js • Apprendre par la pratique">
+<!-- Twitter OpenGraph -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oncletom">
+<meta name="twitter:creator" content="@oncletom">
+<style type="text/css" class="prism-theme">/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+.listingblock [data-bash-subs]::before {
+  content: attr(data-bash-subs) " ";
+  opacity: .5; }
+
+.listingblock [data-bash-conum]::before {
+  content: "(" attr(data-bash-conum) ")";
+  font-weight: bold;
+  opacity: .7;
+}</style>
+<script>
+(function(d){
+  d.addEventListener('DOMContentLoaded', function(){
+    const script = d.createElement('script');
+    script.src = 'https://unpkg.com/menuspy@1.3.0/dist/menuspy.js';
+    script.async = true;
+    script.onload = () => new MenuSpy(document.querySelector('#toc'), {enableLocationHash: false});
+    d.body.appendChild(script);
+  });
+})(document);</script>
+<style type="text/css">
+#toc li.active > a[href^="#"] {
+  font-weight: bold;
+}
+#toc li.active > a[href^="#"]::before {
+  content: "▶ ";
+  display: inline-block;
+  position: absolute;
+  margin-left: -1.2em;
+  font-size: .8em;
+  margin-top: 3px;
+}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Avant-propos</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table des matières</div>
+<ul class="sectlevel1">
+<li><a href="#pourquoi_ce_livre">Pourquoi ce livre ?</a></li>
+<li><a href="#à_qui_sadresse_cet_ouvrage">À qui s&#8217;adresse cet ouvrage ?</a></li>
+<li><a href="#structure_de_louvrage">Structure de l&#8217;ouvrage</a></li>
+<li><a href="#remerciements">Remerciements</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock tip context-callout">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Vous êtes en train de lire le
+<a href="https://oncletom.io/node.js/">livre &#8220;Node.js&#8221;</a>, écrit par
+<a href="https://oncletom.io">Thomas Parisot</a> et publié par les
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Éditions Eyrolles</a>.</p>
+</div>
+<div class="paragraph">
+<p>Il vous plaît&#160;? Achetez-le en ligne sur
+<a href="https://amzn.to/2E58PEw">Amazon</a>,
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Eyrolles</a> ou
+<a href="https://www.placedeslibraires.fr/livre/9782212139938">Place des Libraires</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Node.js</strong>&#160;– appelons-le <strong>Node</strong> dès à présent&#160;– est né dans le cerveau de
+Ryan Dahl, ancien étudiant sans le sou et au parcours informatique atypique.
+Son talent a été de s&#8217;obstiner à <strong>résoudre un problème d&#8217;expérience utilisateur</strong>
+fréquent sur le web&#160;: <strong>l&#8217;attente devant un navigateur web figé</strong>.
+Son but&#160;? Rendre possible et facile la création de <strong>barres de progression</strong>
+dans les navigateurs&#160;web.</p>
+</div>
+<div class="paragraph">
+<p>J&#8217;ai utilisé Node pour la première fois en 2010, par curiosité.
+Nous en étions alors à la version&#160;0.4.
+Créer mon propre serveur HTTP était un concept qui semblait étrange,
+habitué que j&#8217;étais à écrire des applications PHP et à les mettre derrière
+un serveur Apache&#160;– nginx commençait à peine à décoller.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;effet "wahou" était pourtant là&#160;: une installation en quelques secondes,
+quelques lignes de JavaScript et j&#8217;avais une API REST câblée avec une base
+de données <em>CouchDB</em> pour impressionner mes collègues.</p>
+</div>
+<div class="paragraph">
+<p>Je bascule dans un <strong>contexte startup</strong> fin 2011&#160;: nous sommes quatre développeurs
+avec des bagages différents.
+Nous voulions <strong>un langage commun</strong> pour le back-end et le front-end.
+Nous partons sur Node, installé sans encombre sur notre serveur dédié
+géré par l&#8217;hébergeur <em>AlwaysData</em>.
+Nous avions la <strong>sensation de progresser rapidement</strong>.
+Nous allions réellement&#160;vite.</p>
+</div>
+<div class="paragraph">
+<p>Depuis, de nombreuses entreprises ont communiqué sur leur adoption de Node&#160;:
+Paypal, LinkedIn, eBay, Airbnb, British&#160;Gas, Allociné, The&#160;New&#160;York&#160;Times,
+Yahoo!, Microsoft, Mozilla, Flickr ou encore Twitter.
+Ces entreprises l&#8217;utilisent pour façonner leur outillage métier,
+gérer les transactions bancaires, leurs serveurs LDAP, des services ou
+des sites&#160;web.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pourquoi_ce_livre">Pourquoi ce livre ?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Je trouve que <strong>Node est un environnement élégant et agréable</strong>.
+Je prends beaucoup de plaisir à l&#8217;utiliser au quotidien, mais je regrette
+l&#8217;accent placé sur la nouveauté permanente et la sur-ingénierie des articles
+et ouvrages en langue française.</p>
+</div>
+<div class="paragraph">
+<p>Node est mon outil de travail principal depuis 2011 et je fais quasiment tout avec
+– y compris l&#8217;outillage de publication de cet ouvrage.
+J&#8217;avais envie de communiquer sur la simplicité, l&#8217;architecture modulaire et
+la versatilité de Node pour que vous puissiez <strong>progresser dans l&#8217;usage de JavaScript</strong>,
+<strong>façonner votre propre outillage</strong> et pour mieux
+<strong>utiliser les ressources des systèmes d&#8217;exploitation</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Je vous propose donc un <strong>contenu moins technique que d&#8217;ordinaire</strong>, orienté sur
+l&#8217;apprentissage par la pratique et des concepts qui durent dans le temps.
+Cet ouvrage s&#8217;installe avec Node&#160;: tous les exemples sont réels et fonctionnent
+dans votre terminal.</p>
+</div>
+<div class="paragraph">
+<p>Indirectement, je souhaite <strong>déconstruire la posture d&#8217;expert et de lecteur</strong>
+en me mettant à vos côtés pendant votre apprentissage.
+Une partie des contenus a été conçue et relue en ateliers collectifs pour que
+la progression se fasse de manière naturelle.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="à_qui_sadresse_cet_ouvrage">À qui s&#8217;adresse cet ouvrage ?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>J&#8217;ai écrit cet ouvrage avec trois profils de lecteurs en tête&#160;:
+des personnes qui souhaitent <strong>se mettre à Node sans savoir par où commencer</strong>,
+celles et ceux qui font du <strong><em>front-end</em> et souhaitent mieux comprendre leur outillage</strong>
+et celles qui veulent <strong>renforcer leurs connaissances</strong> en Node et
+JavaScript afin de changer de travail/métier.</p>
+</div>
+<div class="paragraph">
+<p>Cet ouvrage s&#8217;adresse aussi à des lecteurs qui ne programment pas pour gagner leur
+vie mais qui veulent mieux comprendre de quoi parlent les développeurs et développeuses.
+Je pense que les interactions de travail sont de meilleure qualité quand nous
+comprenons les problématiques de celles et ceux avec qui nous travaillons.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="structure_de_louvrage">Structure de l&#8217;ouvrage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cet ouvrage se lit dans l&#8217;ordre de votre choix.</p>
+</div>
+<div class="paragraph">
+<p>J&#8217;ai fait en sorte que la lecture soit progressive, du plus simple au plus complexe.
+Le contenu des chapitres explore une problématique et se termine
+souvent sur une section avancée, pour aller plus&#160;loin.</p>
+</div>
+<div class="paragraph">
+<p>Cette édition est composée de neuf chapitres et d&#8217;une annexe&#160;:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Histoire, écosystème et gouvernance</strong><br>
+D&#8217;où vient Node et qui sont les acteurs participant à son histoire&#160;?</p>
+</li>
+<li>
+<p><strong>Installer, mettre à jour et développer</strong><br>
+Être autonome pour installer Node.js
+sur notre ordinateur ou un serveur, se tenir au courant
+des mises à jour et jongler entre différentes versions.
+Découvrir des outils confortables pour écrire du&#160;code.</p>
+</li>
+<li>
+<p><strong>Jouer avec JavaScript</strong><br>
+Comprendre les différences entre JavaScript, ECMAScript, le DOM et Node.js.
+Revoir les bases du langage pour se sentir plus à l&#8217;aise.</p>
+</li>
+<li>
+<p><strong>Jouer avec Node.js</strong><br>
+S&#8217;exercer avec des scripts et des modules Node.js&#160;:
+les nôtres, ceux fournis par Node et ceux de la communauté.</p>
+</li>
+<li>
+<p><strong>Jouer avec npm</strong><br>
+Apprendre à tirer parti de l&#8217;outil livré par défaut avec Node.js.
+S&#8217;amuser à créer nos propres outils dignes d&#8217;artisans du logiciel.</p>
+</li>
+<li>
+<p><strong>Déployer notre code</strong><br>
+Déployer notre code le plus tôt possible pour célébrer notre premier programme&#160;!</p>
+</li>
+<li>
+<p><strong>Créer une application web</strong><br>
+Créer une application web en partant de zéro, en utilisant un framework puis
+en parlant à une base de données.
+Bienvenue dans l&#8217;odyssée d&#8217;une requête&#160;HTTP&#160;!</p>
+</li>
+<li>
+<p><strong>Créer un outil en ligne de commande</strong><br>
+Rendre du code métier fonctionnel dans un terminal&#160;;
+la ligne de commande ne paraîtra plus aussi austère.</p>
+</li>
+<li>
+<p><strong>Créer une application <em>front-end</em></strong><br>
+Utiliser la richesse de l&#8217;écosystème&#160;npm et profiter des modules pour écrire des
+applications <em>front-end</em> de qualité.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>L&#8217;annexe complète l&#8217;ouvrage avec une <strong>sélection de modules</strong>&#160;npm,
+pour démarrer plus vite et mieux cerner ce qu&#8217;on peut faire avec&#160;Node.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Ressources</span> Contenu en <span class="line-through">livre</span> libre accès</div>
+<div class="paragraph">
+<p>Le contenu de cet ouvrage est actualisé en permanence sur <span class="URL"><a href="https://oncletom.io/node.js/" class="bare">oncletom.io/node.js/</a></span>.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;intégralité du code source du livre et des exemples sont hébergés sur
+<span class="URL"><a href="https://github.com/oncletom/nodebook" class="bare">github.com/oncletom/nodebook</a></span>.
+J&#8217;utilise la plate-forme collaborative GitHub pour recueillir vos avis,
+corrections et suggestions.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="remerciements">Remerciements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cet ouvrage a été rédigé sur près de quatre années&#160;– longue est la liste
+des personnes à remercier.
+Longue aussi est la liste de celles et ceux à qui je demande pardon pour mes
+sautes d&#8217;humeur, mes absences ou mes passages à vide.
+L&#8217;écriture sur une longue durée est une activité que je trouve éprouvante.
+Elle nécessite un ajustement permanent vis-à-vis de moi-même pour ne pas
+(trop) en souffrir.</p>
+</div>
+<div class="paragraph">
+<p>Mes premiers remerciements vont à Noémie.
+Ta joie, tes encouragements et ta présence sont essentiels à mon équilibre.
+Ils m&#8217;emplissent de confiance, m&#8217;inspirent et atténuent les peurs qui me paralysent.</p>
+</div>
+<div class="paragraph">
+<p>Je remercie Karine, Laurène, Elsa et Alexandre des Éditions Eyrolles pour cette opportunité.
+Vous avez fait preuve d&#8217;une patience et d&#8217;une confiance infinies malgré le délai d&#8217;écriture.</p>
+</div>
+<div class="paragraph">
+<p>Je tiens à remercier mes anciens collègues de BBC&#160;R&amp;D pour leur soutien,
+leur confiance et leur tolérance aux jeux de mots.
+Olivier, Sean, Katie, Chris&#160;N et Chris&#160;L&#160;: c&#8217;était un plaisir et un honneur
+d&#8217;être à vos&#160;côtés.</p>
+</div>
+<div class="paragraph">
+<p>Certain·e·s d&#8217;entre vous m&#8217;ont beaucoup aidé par leurs conseils,
+leurs relectures et leurs encouragements.
+Alors un grand merci pour cela à Béa, Claire, Clémentine, David, Efi, Fabien,
+Frank, Philippe, Stéphane et Thierry.</p>
+</div>
+<div class="paragraph">
+<p>Merci à l&#8217;équipe d&#8217;Asciidoctor pour leur travail précieux et leurs réponses à
+mes innombrables questions.
+Je pense notamment à Guillaume et à&#160;Dan.</p>
+</div>
+<div class="paragraph">
+<p>Merci à Antoine pour notre travail en duo sur l&#8217;écriture numérique.
+Je suis fier d&#8217;apporter ce mode d&#8217;écriture dans les communautés académiques,
+du design et des archivistes.</p>
+</div>
+<div class="paragraph">
+<p>Enfin, je remercie toutes les personnes qui m&#8217;ont accueilli chez elles,
+dans leur maison, dans leur bureau ou dans leur communauté/<em>meet-up</em> pendant mon
+écriture itinérante en&#160;2017 et&#160;2018.</p>
+</div>
+<div class="paragraph">
+<p>Bonne lecture,</p>
+</div>
+<div class="paragraph">
+<p>Thomas</p>
+</div>
+</div>
+</div>
+</div>
+<section class="next">
+  <a href="#top">Haut de page</a> ou
+  <a href="https://oncletom.io/node.js/#apprendre-node-js-en-ligne" class="read-more">retour au sommaire</a>.
+</section>
+</body>
+</html>

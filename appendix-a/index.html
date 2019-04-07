@@ -1,0 +1,2880 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<title>Sélection de modules&#160;npm</title>
+<style>
+#header,
+#content,
+#footer {
+  margin: 2rem auto;
+  max-width: 46rem;
+}
+
+#header {
+  margin-top: 0;
+}
+
+.title,
+#toctitle {
+  color: var(--dark-accent);
+}
+
+a {
+  /* white-space: nowrap; */
+}
+
+img, iframe, video, audio {
+  max-width: 100%;
+}
+
+p {
+  font-weight: normal;
+}
+
+/* Taken out from book.css */
+dl dt {
+  margin-bottom: 0.3125em;
+  font-weight: bold;
+}
+dl dd {
+  margin-bottom: 1.25em;
+}
+
+dt,
+th.tableblock,
+td.content,
+div.footnote {
+  text-rendering: optimizeLegibility;
+}
+
+.literalblock pre,
+.literalblock pre[class],
+.listingblock pre,
+.listingblock pre[class] {
+  overflow: auto;
+  word-wrap: break-word;
+}
+.literalblock pre.nowrap,
+.literalblock pre[class].nowrap,
+.listingblock pre.nowrap,
+.listingblock pre[class].nowrap {
+  overflow-x: auto;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.listingblock {
+  margin: 0 0 2em;
+}
+.listingblock > .content {
+  position: relative;
+}
+.listingblock > .title {
+  font-weight: bold;
+}
+.listingblock code[data-lang]::before {
+  display: none;
+  content: attr(data-lang);
+  position: absolute;
+  font-size: 0.75em;
+  top: 1em;
+  right: 1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #999;
+}
+.listingblock:hover code[data-lang]::before {
+  display: block;
+}
+.listingblock.terminal pre .command::before {
+  content: attr(data-prompt);
+  padding-right: 0.5em;
+  color: #999;
+}
+
+td.hdlist1,
+td.hdlist2 {
+  vertical-align: top;
+  padding-right: 0.625em;
+}
+td.hdlist1 {
+  font-weight: bold;
+}
+.literalblock + .colist,
+.listingblock + .colist {
+  margin-top: -1.5em;
+}
+.colist td:not([class]):first-child {
+  padding: 0.4em 0.75em 0 0.75em;
+  line-height: 1;
+  vertical-align: top;
+}
+.colist td:not([class]):first-child img {
+  max-width: none;
+}
+.colist td:not([class]):last-child {
+  padding: 0.25em 0;
+}
+
+/* Custom classes */
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.RemarquePreTitre,
+#toctitle {
+  font-style: normal;
+  font-weight: bold;
+}
+  .RemarquePreTitre::after {
+    content: "•";
+    padding-left: 5px;
+  }
+.admonitionblock {
+}
+.admonitionblock > table,
+.exampleblock {
+  --commented: rgba(17, 17, 68, .65);
+  --border-radius-base: 8px;
+
+  background-color: #fafafa;
+  border: 1px solid var(--dark-shade);
+  border-left: none;
+  border-right: none;
+  margin: 1.5em 0;
+  padding: 1em;
+}
+.exampleblock .title {
+  font-weight: bold;
+}
+.icon .title {
+  font-size: 2em;
+}
+  .admonitionblock > table td.icon {
+    display: none;
+  }
+
+  @media screen and (min-width: 769px) {
+    .admonitionblock > table td.icon {
+      display: table-cell;
+    }
+  }
+
+  .admonitionblock > table td.icon {
+    padding-right: 1em;
+  }
+  .admonitionblock > table td.icon img {
+    max-width: none;
+  }
+
+.colist ol {
+  margin-left: 1.5em;  /* aligns with the listing edge */
+  padding-left: 0;
+  font-weight: bold;   /* makes it stand out more */
+}
+  .colist ol p {
+    margin: 0 0 .5em;
+  }
+.listingblock:not(.prismjs) pre,
+.language-bash.hljs {
+  background: #323232;
+  color: wheat;
+  margin: 0;
+  padding: 1rem;
+}
+.language-bash.hljs .hljs-built_in,
+.language-bash.hljs .hljs-builtin-name {
+  color: white;
+}
+.language-bash.hljs .hljs-string {
+  color: lightgreen;
+}
+.language-bash.hljs .hljs-variable {
+  color: lightskyblue;
+}
+.keyseq {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.language-bash.hljs .keyseq {
+  color: white;
+}
+.language-bash.hljs kbd {
+  background: transparent;
+  box-shadow: none;
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0.1em 0.4em;
+}
+.listingblock pre.highlightjs,
+.listingblock.prismjs pre {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+.listingblock pre.highlightjs > code,
+.listingblock.prismjs .highlight {
+  border-left: 4px solid var(--dark-accent);
+  padding-left: 1em;
+  font-size: .8em;
+}
+.listingblock pre.highlightjs > code.language-bash {
+  border-left-color: limegreen;
+}
+
+.hdlist .hdlist1 {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td > p:first-child {
+  margin-top: 0;
+}
+
+.hljs-comment {
+  font-style: normal !important;
+}
+
+#toc.toc2 a {
+  text-decoration: none;
+  white-space: normal;
+}
+  #toc.toc2 a:hover,
+  #toc.toc2 a:focus {
+    text-decoration: underline;
+  }
+
+#toc.toc2 ul {
+  list-style: none;
+}
+
+  #toc.toc2 > ul {
+    padding-left: 0;
+  }
+
+  #toc.toc2 ul ul {
+    padding-left: 1em;
+  }
+
+@media screen and (min-width: 769px) {
+  body {
+    padding-left: 25vw !important;
+  }
+
+  #header,
+  #content,
+  #footer {
+    margin-left: 0;
+  }
+
+  #toc.toc2 {
+    height: 100%;
+    left: 0;
+    max-width: 20vw;
+    overflow: auto;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+
+  #toc.toc2 > ul {
+    font-size: 0.85em;
+  }
+
+  #toc li.active > a[href^="#"],
+  [id]:target {
+    background: #ffc;
+  }
+}
+
+.admonitionblock.context-callout > table {
+  border-width: 5px;
+  border-color: var(--brand-color);
+}
+
+</style>
+<link rel="stylesheet" href="https://oncletom.io/styles/blog.css?v=v3.3.2">
+<!-- WebMentions -->
+<link rel="pingback" href="https://webmention.io/oncletom.io/xmlrpc">
+<link rel="webmention" href="https://webmention.io/oncletom.io/webmention">
+<!-- Open Graph -->
+<meta property="og:type" content="book">
+<meta property="og:book:author" content="Thomas Parisot">
+<meta property="og:book:isbn" content="978-2212139938">
+<meta property="og:book:release_date" content="978-2212139938">
+<meta property="og:book:tag" content="Node.js">
+<meta property="og:book:tag" content="JavaScript">
+<meta property="og:book:tag" content="npm">
+<meta property="og:book:tag" content="Développement front-end">
+<meta property="og:book:tag" content="Développement back-end">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Node.js • Apprendre par la pratique">
+<!-- Twitter OpenGraph -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oncletom">
+<meta name="twitter:creator" content="@oncletom">
+<style type="text/css" class="prism-theme">/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+<style type="text/css" class="extension-interactive-runner">[data-interactive-runtime="loaded"] .interactive--javascript code[data-lang]:before {
+  background-color: #fcfcfc;
+  border: 1px solid #0c2;
+  border-radius: 1px;
+  color: #0c2;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  padding: .5em 1em;
+  top: -2em;
+}
+
+  [lang="en"] [data-interactive-runtime="loaded"] .interactive--javascript code[data-lang]:before {
+    content: "▶ run code";
+  }
+  [lang="fr"] [data-interactive-runtime="loaded"] .interactive--javascript code[data-lang]:before {
+    content: "▶ voir le résultat";
+  }
+  .interactive--javascript code[data-label]:before {
+    content: attr(data-label);
+  }
+
+.interactive iframe {
+  position: absolute;
+  visibility: hidden;
+}
+
+.interactive.status--loaded iframe {
+  position: inherit;
+  visibility: visible;
+}
+
+.interactive.status--loading {
+  opacity: .5;
+}
+</style>
+<script class="extension-interactive-runner">
+(function(d){
+  document.addEventListener('DOMContentLoaded', function(){
+    const script = d.createElement('script');
+    script.src = 'https://embed.runkit.com/';
+    script.async = true;
+    script.onload = function(){
+      function makeListingInteractive (element){
+  if (element.classList.contains('interactive--installed') || element.classList.contains('status--loading')) {
+    return;
+  }
+
+  const code = element.querySelector('code');
+  const nodeVersion = /interactive--runtime--node-([^\s]+)/.exec(element.className)[1];
+  const isEndpoint = element.classList.contains('interactive--endpoint');
+  const mode = isEndpoint ? 'endpoint' : null;
+  let preamble = '';
+
+  const source = code
+    .textContent
+    .replace(/\/\/\s*\(\d+\)$/gm, '')
+    .replace(/^["']?use strict["'][; ]*\n/, '');
+
+  if (isEndpoint) {
+    preamble = `process.nextTick(() => {
+      if (typeof module.exports === 'function') {
+        exports.endpoint = module.exports;
+      }
+      else if (typeof server !== 'undefined') {
+        exports.endpoint = server.listeners("request").pop();
+      }
+});`
+  }
+
+  element.classList.add('status--loading');
+
+  // eslint-disable-next-line no-undef
+  RunKit.createNotebook({
+    nodeVersion,
+    element,
+    source,
+    mode,
+    preamble,
+    onLoad: function(ntbk) {
+      element.classList.add('interactive--installed');
+      element.classList.remove('status--loading');
+      element.classList.add('status--loaded');
+      code.parentNode.setAttribute('hidden', true);
+
+      ntbk.evaluate();
+    }
+  });
+}
+function installEvents () {
+  function getParent(el, condition) {
+    let parent = el;
+
+    while(parent = parent.parentNode) {
+      if (condition(parent)) {
+        return parent;
+      }
+    }
+  }
+
+  function hasClass(className) {
+    return function check(el) {
+      return el.classList.contains(className);
+    }
+  }
+
+  document.querySelector('body').addEventListener('click', function(el) {
+    if (el.target.classList.contains('language-javascript') || el.target.classList.contains('language-js')) {
+      const parentNode = getParent(
+        el.target,
+        hasClass('interactive--javascript')
+      );
+
+      makeListingInteractive(parentNode);
+    }
+  });
+}
+      installEvents();
+      document.body.dataset.interactiveRuntime = 'loaded';
+    };
+    document.body.appendChild(script);
+  });
+})(document);</script>
+<style type="text/css">
+.listingblock [data-bash-subs]::before {
+  content: attr(data-bash-subs) " ";
+  opacity: .5; }
+
+.listingblock [data-bash-conum]::before {
+  content: "(" attr(data-bash-conum) ")";
+  font-weight: bold;
+  opacity: .7;
+}</style>
+<script>
+(function(d){
+  d.addEventListener('DOMContentLoaded', function(){
+    const script = d.createElement('script');
+    script.src = 'https://unpkg.com/menuspy@1.3.0/dist/menuspy.js';
+    script.async = true;
+    script.onload = () => new MenuSpy(document.querySelector('#toc'), {enableLocationHash: false});
+    d.body.appendChild(script);
+  });
+})(document);</script>
+<style type="text/css">
+#toc li.active > a[href^="#"] {
+  font-weight: bold;
+}
+#toc li.active > a[href^="#"]::before {
+  content: "▶ ";
+  display: inline-block;
+  position: absolute;
+  margin-left: -1.2em;
+  font-size: .8em;
+  margin-top: 3px;
+}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Sélection de modules&#160;npm</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table des matières</div>
+<ul class="sectlevel1">
+<li><a href="#boîte_à_outils_du_quotidien">1. Boîte à outils du quotidien</a>
+<ul class="sectlevel2">
+<li><a href="#lodash">1.1. lodash</a></li>
+<li><a href="#he">1.2. he</a></li>
+<li><a href="#chance">1.3. chance</a></li>
+<li><a href="#date_fns">1.4. date-fns</a></li>
+<li><a href="#tcomb">1.5. tcomb</a></li>
+<li><a href="#eventemitter3">1.6. eventemitter3</a></li>
+</ul>
+</li>
+<li><a href="#dev">2. Pendant le développement</a>
+<ul class="sectlevel2">
+<li><a href="#debug">2.1. debug</a></li>
+<li><a href="#nodemon">2.2. nodemon</a></li>
+<li><a href="#npm_run_all">2.3. npm-run-all</a></li>
+<li><a href="#husky">2.4. husky</a></li>
+<li><a href="#onchange">2.5. onchange</a></li>
+<li><a href="#tiny_lr">2.6. tiny-lr</a></li>
+<li><a href="#livereactload">2.7. livereactload</a></li>
+</ul>
+</li>
+<li><a href="#protéger_nos_applications">3. Protéger nos applications</a>
+<ul class="sectlevel2">
+<li><a href="#sanitize_filename">3.1. sanitize-filename</a></li>
+<li><a href="#helmet">3.2. helmet</a></li>
+<li><a href="#dompurify">3.3. dompurify</a></li>
+<li><a href="#filenamify">3.4. filenamify</a></li>
+<li><a href="#retire_js">3.5. retire.js</a></li>
+<li><a href="#snyk">3.6. snyk</a></li>
+</ul>
+</li>
+<li><a href="#vérifier_la_syntaxe_de_notrecode">4. Vérifier la syntaxe de notre&#160;code</a>
+<ul class="sectlevel2">
+<li><a href="#htmlhint">4.1. htmlhint</a></li>
+<li><a href="#eslint">4.2. eslint</a></li>
+<li><a href="#csslint">4.3. csslint</a></li>
+<li><a href="#doiuse">4.4. doiuse</a></li>
+</ul>
+</li>
+<li><a href="#optimize">5. Optimiser notre&#160;code</a>
+<ul class="sectlevel2">
+<li><a href="#uglify_es">5.1. uglify-es</a></li>
+<li><a href="#postcss">5.2. postcss</a></li>
+<li><a href="#autoprefixer">5.3. autoprefixer</a></li>
+<li><a href="#uncss">5.4. uncss</a></li>
+<li><a href="#csswring">5.5. csswring</a></li>
+<li><a href="#google_closure_compiler_js">5.6. google-closure-compiler-js</a></li>
+<li><a href="#csso">5.7. csso</a></li>
+<li><a href="#svgo">5.8. svgo</a></li>
+<li><a href="#wawoff2">5.9. wawoff2</a></li>
+</ul>
+</li>
+<li><a href="#transpiling">6. Passer d&#8217;un langage à un autre</a>
+<ul class="sectlevel2">
+<li><a href="#less">6.1. less</a></li>
+<li><a href="#sass">6.2. sass</a></li>
+<li><a href="#browserify">6.3. browserify</a></li>
+<li><a href="#babel">6.4. babel</a></li>
+<li><a href="#typescript">6.5. typescript</a></li>
+</ul>
+</li>
+<li><a href="#fs">7. Gérer des fichiers</a>
+<ul class="sectlevel2">
+<li><a href="#mkdirp">7.1. mkdirp</a></li>
+<li><a href="#rimraf">7.2. rimraf</a></li>
+<li><a href="#glob">7.3. glob</a></li>
+<li><a href="#fs_extra">7.4. fs-extra</a></li>
+<li><a href="#graceful_fs">7.5. graceful-fs</a></li>
+<li><a href="#chokidar">7.6. chokidar</a></li>
+</ul>
+</li>
+<li><a href="#databases">8. Stocker dans des bases de données</a>
+<ul class="sectlevel2">
+<li><a href="#db_migrate">8.1. db-migrate</a></li>
+<li><a href="#knex">8.2. knex</a></li>
+<li><a href="#bookshelf">8.3. bookshelf</a></li>
+<li><a href="#sequelize">8.4. sequelize</a></li>
+<li><a href="#mongoose">8.5. mongoose</a></li>
+<li><a href="#levelup">8.6. levelup</a></li>
+<li><a href="#redis">8.7. redis</a></li>
+<li><a href="#elasticsearch">8.8. elasticsearch</a></li>
+</ul>
+</li>
+<li><a href="#cli">9. Ligne de commande</a>
+<ul class="sectlevel2">
+<li><a href="#yargs_parser">9.1. yargs-parser</a></li>
+<li><a href="#args">9.2. args</a></li>
+<li><a href="#caporal">9.3. caporal</a></li>
+<li><a href="#promptly">9.4. promptly</a></li>
+<li><a href="#supports_color">9.5. supports-color</a></li>
+</ul>
+</li>
+<li><a href="#webapp">10. Applications&#160;web</a>
+<ul class="sectlevel2">
+<li><a href="#fastify">10.1. fastify</a></li>
+<li><a href="#passport">10.2. passport</a></li>
+<li><a href="#restify">10.3. restify</a></li>
+<li><a href="#faye">10.4. faye</a></li>
+<li><a href="#swagger_client">10.5. swagger-client</a></li>
+</ul>
+</li>
+<li><a href="#templating">11. Modules front-end et templating</a>
+<ul class="sectlevel2">
+<li><a href="#nunjucks">11.1. nunjucks</a></li>
+<li><a href="#handlebars">11.2. handlebars</a></li>
+<li><a href="#pug">11.3. pug</a></li>
+<li><a href="#ejs">11.4. ejs</a></li>
+<li><a href="#react">11.5. react</a></li>
+<li><a href="#storybook">11.6. storybook</a></li>
+</ul>
+</li>
+<li><a href="#testing">12. Tester notre code</a>
+<ul class="sectlevel2">
+<li><a href="#tape">12.1. tape</a></li>
+<li><a href="#chai">12.2. chai</a></li>
+<li><a href="#sinon">12.3. sinon</a></li>
+<li><a href="#nyc">12.4. nyc</a></li>
+<li><a href="#karma">12.5. karma</a></li>
+<li><a href="#supertest">12.6. supertest</a></li>
+</ul>
+</li>
+<li><a href="#internet-of-things">13. Objets connectés</a>
+<ul class="sectlevel2">
+<li><a href="#nitrogen">13.1. nitrogen</a></li>
+<li><a href="#serialport">13.2. serialport</a></li>
+<li><a href="#firmata">13.3. firmata</a></li>
+<li><a href="#johnny_five">13.4. johnny-five</a></li>
+<li><a href="#node_red">13.5. node-red</a></li>
+</ul>
+</li>
+<li><a href="#accessibilité">14. Accessibilité</a>
+<ul class="sectlevel2">
+<li><a href="#a11y">14.1. a11y</a></li>
+<li><a href="#a11y_css">14.2. a11y.css</a></li>
+<li><a href="#lighthouse">14.3. lighthouse</a></li>
+<li><a href="#storybook_addon_a11y">14.4. storybook-addon-a11y</a></li>
+</ul>
+</li>
+<li><a href="#travailler_avec_des_images_des_sons_et_des_vidéos">15. Travailler avec des images, des sons et des vidéos</a>
+<ul class="sectlevel2">
+<li><a href="#sharp">15.1. sharp</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock tip context-callout">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Vous êtes en train de lire le
+<a href="https://oncletom.io/node.js/">livre &#8220;Node.js&#8221;</a>, écrit par
+<a href="https://oncletom.io">Thomas Parisot</a> et publié par les
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Éditions Eyrolles</a>.</p>
+</div>
+<div class="paragraph">
+<p>Il vous plaît&#160;? Achetez-le en ligne sur
+<a href="https://amzn.to/2E58PEw">Amazon</a>,
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Eyrolles</a> ou
+<a href="https://www.placedeslibraires.fr/livre/9782212139938">Place des Libraires</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Cette annexe est une sélection de modules&#160;<code>npm</code> (<span class="URL"><a href="https://npmjs.com" class="bare">npmjs.com</a></span>)
+à laquelle vous référer pour démarrer rapidement, mais aussi pour découvrir
+des usages et des domaines d&#8217;application insoupçonnés.</p>
+</div>
+<div class="paragraph">
+<p>J&#8217;ai bâti cette liste à partir de mon expérience personnelle et sur la confiance
+que je porte aux personnes à l&#8217;origine de ces modules.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Remarque</span> Versions de Node et npm</div>
+<div class="paragraph">
+<p>Le contenu de ce chapitre utilise les versions <strong>Node&#160;v10</strong>
+et <strong>npm&#160;v6</strong>.
+Ce sont les versions stables recommandées en&#160;2019.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Jouer avec les exemples dans un terminal</div>
+<div class="paragraph">
+<p>Les exemples titrés d&#8217;un nom de fichier peuvent être installés sur votre ordinateur.
+Exécutez-les dans un terminal et amusez-vous à les modifier en parallèle de
+votre lecture pour voir ce qui change.</p>
+</div>
+<div class="listingblock">
+<div class="title">Installation des exemples via le module npm <code>nodebook</code></div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install --global nodebook
+<span data-bash-subs="$"></span>nodebook install appendix-a
+<span data-bash-subs="$"></span>cd $(nodebook dir appendix-a)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La commande suivante devrait afficher un résultat qui confirme que vous êtes
+au bon endroit&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>node hello.js</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Suivez à nouveau les instructions d&#8217;installation pour rétablir les exemples
+dans leur état initial.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boîte_à_outils_du_quotidien">1. Boîte à outils du quotidien</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ces modules répondent à des besoins quotidiens, pour travailler plus rapidement
+sur des structures ECMAScript.</p>
+</div>
+<div class="sect2">
+<h3 id="lodash">1.1. lodash</h3>
+<div class="paragraph">
+<p><em>lodash</em> (<span class="URL"><a href="https://npmjs.com/lodash" class="bare">npmjs.com/lodash</a></span>) est une collection de plusieurs
+dizaines de fonctions pour travailler plus facilement avec des chaînes de caractères,
+des tableaux, des fonctions et des objets.</p>
+</div>
+<div class="paragraph">
+<p>Vous pourrez ainsi filtrer, sélectionner, fusionner, vérifier et composer
+de nouvelles variables, aussi bien pour Node que dans les navigateurs.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs interactive interactive--javascript interactive--runtime--node-v10">
+<div class="title">lodash.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> intersection<span class="token punctuation">,</span> first <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'lodash'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">DC</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Batman'</span><span class="token punctuation">,</span> <span class="token string">'Brainiac'</span><span class="token punctuation">,</span> <span class="token string">'Thor'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> Marvel <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Spiderman'</span><span class="token punctuation">,</span> <span class="token string">'Thor'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">first</span><span class="token punctuation">(</span><span class="token function">intersection</span><span class="token punctuation">(</span><span class="token constant">DC</span><span class="token punctuation">,</span> Marvel<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// <b class="conum">(1)</b></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Affiche <code>Thor</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="he">1.2. he</h3>
+<div class="paragraph">
+<p><em>he</em> (<span class="URL"><a href="https://npmjs.com/he" class="bare">npmjs.com/he</a></span>) est un utilitaire pour encoder et décoder
+des entités HTML dans des chaînes de caractères.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs interactive interactive--javascript interactive--runtime--node-v10">
+<div class="title">he.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span>encode<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'he'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> html <span class="token operator">=</span> <span class="token string">'&lt;h1>Blog Post&lt;/h1>'</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>html<span class="token punctuation">)</span><span class="token punctuation">;</span>                   <span class="token comment">// <b class="conum">(1)</b></span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">encode</span><span class="token punctuation">(</span>html<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// <b class="conum">(2)</b></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Affiche <code>&lt;h1&gt;Blog Post&lt;/h1&gt;</code>.</p>
+</li>
+<li>
+<p>Affiche <code>&amp;#x3C;h1&amp;#x3E;Blog Post&amp;#x3C;/h1&amp;#x3E;</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="chance">1.3. chance</h3>
+<div class="paragraph">
+<p><em>chance</em> (<span class="URL"><a href="https://npmjs.com/chance" class="bare">npmjs.com/chance</a></span>) crée des données de manière aléatoire.
+Le module retourne aussi des prénoms fictifs, mais aussi des numéros de téléphone,
+des nombres, des paragraphes, des dates d&#8217;anniversaire, des identifiants Android
+ou Apple, etc.</p>
+</div>
+<div class="paragraph">
+<p>Il s&#8217;utilise surtout pour générer des données factices à des fins de tests,
+en attendant les vraies données.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="date_fns">1.4. date-fns</h3>
+<div class="paragraph">
+<p><em>date-fns</em> (<span class="URL"><a href="https://npmjs.com/date-fns" class="bare">npmjs.com/date-fns</a></span>) est une collection de fonctions
+pour travailler avec des dates, plus facilement qu&#8217;avec l&#8217;objet natif&#160;<code>Date</code>.</p>
+</div>
+<div class="paragraph">
+<p>Vous pouvez formater, ajouter ou retirer des jours, vérifier si deux périodes
+de temps se chevauchent ou si deux dates font partie d&#8217;une même semaine calendaire.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tcomb">1.5. tcomb</h3>
+<div class="paragraph">
+<p><em>tcomb</em> (<span class="URL"><a href="https://npmjs.com/tcomb" class="bare">npmjs.com/tcomb</a></span>) renforce la création de structures
+typées et non mutables.
+Cela réduit les effets de bord de nos applications lorsque les
+données n&#8217;ont pas la structure attendue.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs interactive interactive--javascript interactive--runtime--node-v10">
+<div class="title">tcomb.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> t <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'tcomb'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">GPS</span> <span class="token operator">=</span> t<span class="token punctuation">.</span><span class="token function">struct</span><span class="token punctuation">(</span><span class="token punctuation">{</span>                                <span class="token comment">// <b class="conum">(1)</b></span>
+  lat<span class="token punctuation">:</span> t<span class="token punctuation">.</span>Number<span class="token punctuation">,</span>
+  lon<span class="token punctuation">:</span> t<span class="token punctuation">.</span>Number<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>strict<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> Bordeaux <span class="token operator">=</span> <span class="token constant">GPS</span><span class="token punctuation">(</span><span class="token punctuation">{</span> lat<span class="token punctuation">:</span> <span class="token number">44.8638</span><span class="token punctuation">,</span> lon<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">0.6561</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> Crest <span class="token operator">=</span> <span class="token constant">GPS</span><span class="token punctuation">(</span><span class="token punctuation">{</span> lat<span class="token punctuation">:</span> <span class="token number">44.7311</span><span class="token punctuation">,</span> long<span class="token punctuation">:</span> <span class="token number">4.9861</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// <b class="conum">(2)</b></span>
+<span class="token keyword">const</span> Toulouse <span class="token operator">=</span> <span class="token constant">GPS</span><span class="token punctuation">(</span><span class="token punctuation">{</span> lat<span class="token punctuation">:</span> <span class="token number">43.6008</span><span class="token punctuation">,</span> lon<span class="token punctuation">:</span> <span class="token string">'r0s3'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// <b class="conum">(3)</b></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Définition d&#8217;une structure stricte qui a pour propriétés <code>lat</code> et <code>lon</code>, pour <em>latitude</em> et <em>longitude</em>.</p>
+</li>
+<li>
+<p>Cet appel va lancer une exception car la propriété <code>long</code> est inconnue.</p>
+</li>
+<li>
+<p>Cet appel va lancer une exception car la propriété <code>lon</code> doit être un nombre.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="eventemitter3">1.6. eventemitter3</h3>
+<div class="paragraph">
+<p><em>eventemitter3</em> (<span class="URL"><a href="https://npmjs.com/eventemitter3" class="bare">npmjs.com/eventemitter3</a></span>) sert à gérer
+des événements de manière uniforme dans un script Node et dans les navigateurs.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs interactive interactive--javascript interactive--runtime--node-v10">
+<div class="title">eventemitter3.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> EventEmitter <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'eventemitter3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> emitter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">EventEmitter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+emitter<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'ping'</span><span class="token punctuation">,</span> <span class="token parameter">data</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'on: %s'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+emitter<span class="token punctuation">.</span><span class="token function">once</span><span class="token punctuation">(</span><span class="token string">'ping'</span><span class="token punctuation">,</span> <span class="token parameter">data</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'once: %s'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>emitter<span class="token punctuation">.</span><span class="token function">listeners</span><span class="token punctuation">(</span><span class="token string">'ping'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// <b class="conum">(1)</b></span>
+
+emitter<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'ping'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'ping'</span><span class="token punctuation">,</span> <span class="token string">'ping'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// <b class="conum">(2)</b></span>
+emitter<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'ping'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'pong'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// <b class="conum">(3)</b></span>
+
+emitter<span class="token punctuation">.</span><span class="token function">removeListener</span><span class="token punctuation">(</span><span class="token string">'ping'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+emitter<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'ping'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'pong'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// <b class="conum">(4)</b></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Affiche <code>[ [Function], [Function] ]</code>.</p>
+</li>
+<li>
+<p>Affiche <code>on: ping,ping</code> puis <code>once: ping,ping</code>.</p>
+</li>
+<li>
+<p>Affiche <code>on: ping,ping</code>.</p>
+</li>
+<li>
+<p>N&#8217;affiche rien, l&#8217;événement étant désormais déconnecté.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dev">2. Pendant le développement</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="debug">2.1. debug</h3>
+<div class="paragraph">
+<p><em>debug</em> (<span class="URL"><a href="https://npmjs.com/debug" class="bare">npmjs.com/debug</a></span>) rend optionnel l&#8217;affichage de
+messages de débogage.
+Les messages s&#8217;affichent en présence d&#8217;une variable d&#8217;environnement.
+Nous pouvons ainsi lancer un processus et retracer un cheminement complexe de
+données.</p>
+</div>
+<div class="paragraph">
+<p>Par défaut, les messages ne s&#8217;affichent pas&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>node examples/debug.js</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Les messages du débogueur <code>app</code> s&#8217;affichent désormais&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span><mark>DEBUG=app</mark> node examples/debug.js
+  app fromages [ 'livarot', 'chaource' ] +0ms</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous pouvons en afficher plusieurs en même temps, en usant du caractère&#160;<code>*</code>
+ou en séparant les noms de débogueurs avec des virgules&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>DEBUG=app<mark>*</mark> node examples/debug.js
+  app fromages [ 'livarot', 'chaource' ] +0ms
+  app:timer now 1531304027271 +0ms</pre>
+</div>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">debug.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> debug <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'debug'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> log <span class="token operator">=</span> <span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">'app'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                     <span class="token comment">// <b class="conum">(1)</b></span>
+<span class="token keyword">const</span> logInterval <span class="token operator">=</span> <span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">'app:timer'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// <b class="conum">(2)</b></span>
+
+<span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'fromages %o'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'livarot'</span><span class="token punctuation">,</span> <span class="token string">'chaource'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// <b class="conum">(3)</b></span>
+
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">logInterval</span><span class="token punctuation">(</span><span class="token string">'now %d'</span><span class="token punctuation">,</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">// <b class="conum">(4)</b></span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Création du débogueur <code>app</code>.</p>
+</li>
+<li>
+<p>Création du débogueur <code>app:timer</code>.</p>
+</li>
+<li>
+<p>La fonction de débogage s&#8217;utilise de la même manière que <code>console.log</code>.</p>
+</li>
+<li>
+<p>Cette fonction fait appel au débogueur <code>app:timer</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nodemon">2.2. nodemon</h3>
+<div class="paragraph">
+<p><em>nodemon</em> (<span class="URL"><a href="https://npmjs.com/nodemon" class="bare">npmjs.com/nodemon</a></span>) relance le processus actif
+dès qu&#8217;un fichier ECMAScript ou JSON est modifié.
+C&#8217;est un module exécutable particulièrement utile lorsque nous voulons prendre
+en compte les changements dans une application qui tourne en continu.
+C&#8217;est le cas des applications web, entre autres.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Pour en savoir plus, rendez-vous à la section
+&#8220;<a href="../chapter-07/index.html#dev">Pendant le développement&#160;: relancer le serveur automatiquement</a>&#8221;
+du <a href="../chapter-07/index.html">chapitre&#160;7</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="npm_run_all">2.3. npm-run-all</h3>
+<div class="paragraph">
+<p><em>npm-run-all</em> (<span class="URL"><a href="https://npmjs.com/npm-run-all" class="bare">npmjs.com/npm-run-all</a></span>) est mon outil favori
+pour composer avec les scripts&#160;<code>npm</code>.
+Il a l&#8217;avantage d&#8217;être adaptable, de régler finement ce qui
+doit être exécuté en parallèle ou séquentiellement.
+Le module transfère les arguments aux sous-scripts.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  <span class="token property">"..."</span><span class="token operator">:</span> <span class="token string">"..."</span><span class="token punctuation">,</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"npm-run-all -p 'build:*' -s start"</span><span class="token punctuation">,</span>
+    <span class="token property">"build:css"</span><span class="token operator">:</span> <span class="token string">"sass ..."</span><span class="token punctuation">,</span>
+    <span class="token property">"build:js"</span><span class="token operator">:</span> <span class="token string">"browserify ..."</span><span class="token punctuation">,</span>
+    <span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"node server.js"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="husky">2.4. husky</h3>
+<div class="paragraph">
+<p><em>husky</em> (<span class="URL"><a href="https://npmjs.com/husky" class="bare">npmjs.com/husky</a></span>) intègre Git aux
+<a href="../chapter-05/index.html#scripts">scripts&#160;<code>npm</code></a>.
+Autrement dit, vous pouvez déclencher des scripts lors d&#8217;événements Git,
+lors d&#8217;un <code>push</code>, avant un <code>commit</code> ou après avoir rapatrié des changements.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  <span class="token property">"..."</span><span class="token operator">:</span> <span class="token string">"..."</span><span class="token punctuation">,</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"precommit"</span><span class="token operator">:</span> <span class="token string">"lint-staged"</span><span class="token punctuation">,</span>
+    <span class="token property">"post-merge"</span><span class="token operator">:</span> <span class="token string">"npm install"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La liste complète des <em>hooks</em> Git se trouve dans la documentation
+officielle&#160;: <span class="URL"><a href="https://git-scm.com/docs/githooks" class="bare">git-scm.com/docs/githooks</a></span>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="onchange">2.5. onchange</h3>
+<div class="paragraph">
+<p><em>onchange</em> (<span class="URL"><a href="https://npmjs.com/onchange" class="bare">npmjs.com/onchange</a></span>) observe une liste de fichiers
+en continu et déclenche une commande dès que l&#8217;un d&#8217;entre eux est modifié.
+C&#8217;est particulièrement utile pour reconstruire automatiquement des fichiers
+de configuration ou des fichiers <em>front-end</em> pendant le développement.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  <span class="token property">"..."</span><span class="token operator">:</span> <span class="token string">"..."</span><span class="token punctuation">,</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"build:css"</span><span class="token operator">:</span> <span class="token string">"sass ..."</span><span class="token punctuation">,</span>
+    <span class="token property">"dev"</span><span class="token operator">:</span> <span class="token string">"npm-run-script -p 'watch:*' start"</span><span class="token punctuation">,</span>
+    <span class="token property">"watch:css"</span><span class="token operator">:</span> <span class="token string">"onchange '**/*.scss' -- npm run build:css"</span><span class="token punctuation">,</span>
+    <span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"node server.js"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tiny_lr">2.6. tiny-lr</h3>
+<div class="paragraph">
+<p><em>tiny-lr</em> (<span class="URL"><a href="https://npmjs.com/tiny-lr" class="bare">npmjs.com/tiny-lr</a></span>) est une implémentation minimale
+du protocole <em>livereload</em> (<span class="URL"><a href="http://livereload.com" class="bare">livereload.com</a></span>).
+Il s&#8217;intègre à un serveur HTTP ou à une application <em>Express</em> pour relayer
+la liste des fichiers modifiés côté client.</p>
+</div>
+<div class="paragraph">
+<p>Le script ou l&#8217;extension navigateur client remplace les anciens fichiers
+par les nouveaux pour refléter les changements sans recharger la&#160;page.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="livereactload">2.7. livereactload</h3>
+<div class="paragraph">
+<p><em>livereactload</em> (<span class="URL"><a href="https://npmjs.com/livereactload" class="bare">npmjs.com/livereactload</a></span>) recherche les composants
+<a href="#react"><em>React</em></a> à chaud, c&#8217;est-à-dire sans rafraîchir la page ni perdre l&#8217;état des données.
+C&#8217;est un module indispensable pour développer des applications <em>front-end</em> réactives.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Rendez-vous dans la section &#8220;<a href="../chapter-09/index.html#livereload">Changements en temps&#160;réel dans le navigateur</a>&#8221;
+du <a href="../chapter-09/index.html">chapitre&#160;9</a> pour en savoir plus sur son
+installation et son intégration.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="protéger_nos_applications">3. Protéger nos applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Le code que nous écrivons se protège dès la conception et dans le temps.
+Certains modules filtrent les tentatives d&#8217;exploitation de nos
+applications, tandis que d&#8217;autres vérifient si le code déployé est toujours&#160;sûr.</p>
+</div>
+<div class="sect2">
+<h3 id="sanitize_filename">3.1. sanitize-filename</h3>
+<div class="paragraph">
+<p><em>sanitize-filename</em> (<span class="URL"><a href="https://npmjs.com/sanitize-filename" class="bare">npmjs.com/sanitize-filename</a></span>) nettoie
+une variable de tout caractère ambigu ou qui ne serait pas attendu.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs interactive interactive--javascript interactive--runtime--node-v10">
+<div class="title">sanitize-filename.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> sanitize <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'sanitize-filename'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">sanitize</span><span class="token punctuation">(</span><span class="token string">'aucun-problème.txt'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// <b class="conum">(1)</b></span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">sanitize</span><span class="token punctuation">(</span><span class="token string">'../../.ssh/id_rsa'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// <b class="conum">(2)</b></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Affiche <code>aucun-problème.txt</code>.</p>
+</li>
+<li>
+<p>Affiche <code>.....sshid_rsa</code>&#160;– les caractères&#160;<code>/</code> sont nettoyés car il permettrait de créer des chemins compromettants pour l&#8217;application ou le système d&#8217;exploitation.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="helmet">3.2. helmet</h3>
+<div class="paragraph">
+<p><em>helmet</em> (<span class="URL"><a href="https://npmjs.com/helmet" class="bare">npmjs.com/helmet</a></span>) est un module à intégrer systématiquement
+dans toute application <em>Express</em>.
+Il ajoute des en-têtes HTTP <em>Content-Security Policy</em>, <em>Strict Transport Policy</em>
+et d&#8217;autres qui empêchent le détournement d&#8217;informations.</p>
+</div>
+<div class="paragraph">
+<p>Chacune de ses protections se configure aussi au cas par cas.
+Elles s&#8217;intègrent manuellement dans d&#8217;autres types d&#8217;applications web,
+y&#160;compris un serveur HTTP natif à&#160;Node.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dompurify">3.3. dompurify</h3>
+<div class="paragraph">
+<p><em>dompurify</em> (<span class="URL"><a href="https://npmjs.com/dompurify" class="bare">npmjs.com/dompurify</a></span>) nettoie un contenu HTML
+pour le rendre affichable en toute sécurité.
+Il nettoie des scripts indésirés, des balises mal formées qui casseraient l&#8217;affichage,
+ou encore des <em>iframes</em> qui injecteraient des contenus tiers sans notre consentement.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filenamify">3.4. filenamify</h3>
+<div class="paragraph">
+<p><em>filenamify</em> (<span class="URL"><a href="https://npmjs.com/filenamify" class="bare">npmjs.com/filenamify</a></span>) nettoie une valeur
+pour retirer tout caractère invalide dans un nom de fichier.
+C&#8217;est pratique pour laisser la possibilité à un utilisateur de choisir
+un nom de fichier sans pour autant mettre en danger le système ou l&#8217;application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="retire_js">3.5. retire.js</h3>
+<div class="paragraph">
+<p><em>retire.js</em> (<span class="URL"><a href="https://npmjs.com/retire" class="bare">npmjs.com/retire</a></span>) sert à scanner soi-même des
+vulnérabilités connues dans des fichiers JavaScript.
+Il est complémentaire de la commande <a href="../chapter-05/index.html#audit"><code>npm audit</code></a>
+car il inspecte des dépendances qui ne sont pas forcément sur&#160;<code>npm</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="snyk">3.6. snyk</h3>
+<div class="paragraph">
+<p><em>snyk</em> (<span class="URL"><a href="https://npmjs.com/snyk" class="bare">npmjs.com/snyk</a></span>) est à la fois un service en ligne
+et un module pour vérifier la présence de failles de sécurité connues
+dans les dépendances de nos projets.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="vérifier_la_syntaxe_de_notrecode">4. Vérifier la syntaxe de notre&#160;code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>La vérification syntaxique est un mécanisme s&#8217;assurant que votre code respecte
+la grammaire du langage associé.
+Elle révèle aussi des anomalies fondamentales (balise mal fermée,
+expression inconnue, etc.) et renforce des pratiques de programmation commune
+au groupe de développement.</p>
+</div>
+<div class="paragraph">
+<p>Vérifier la syntaxe de notre code est une excellente première étape avant
+d&#8217;introduire des tests unitaires ou fonctionnels.</p>
+</div>
+<div class="sect2">
+<h3 id="htmlhint">4.1. htmlhint</h3>
+<div class="paragraph">
+<p><em>htmlhint</em> (<span class="URL"><a href="https://npmjs.com/htmlhint" class="bare">npmjs.com/htmlhint</a></span>) vérifie la structure de
+nos documents HTML.
+Il rapporte les doublons d&#8217;attributs&#160;<code>id</code>, la présence de balises
+mal formées, l&#8217;absence de balise fermante ou encore l&#8217;existence de chaînes de
+caractères non imprimables dans des attributs critiques, entre autres.</p>
+</div>
+<div class="paragraph">
+<p>Prenons en exemple le document suivant&#160;:</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">sample.html</div>
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sample.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>OK<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>KO<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>BUTTON</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>btn__primary--curent btn--active<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>BUTTON</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Une lecture distraite pourrait nous faire passer à côté d&#8217;erreurs et
+d&#8217;incohérences de programmation.
+Les erreurs de ce genre passent d&#8217;autant plus inaperçues que la base de code
+devient volumineuse et change fréquemment.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécution de <em>htmlhint</em> avec ses règles par défaut remontera les alertes
+suivantes&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>../node_modules/.bin/htmlhint sample.html
+sample.html:
+line 1, col 1: Doctype must be first.
+line 8, col 10: Id redefinition of [ btn ].
+line 10, col 3: Tagname [ BUTTON ] must be lower case.
+...
+line 10, col 52: Tagname [ BUTTON ] must be lower case.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="eslint">4.2. eslint</h3>
+<div class="paragraph">
+<p><em>eslint</em> (<span class="URL"><a href="https://npmjs.com/eslint" class="bare">npmjs.com/eslint</a></span>) est l&#8217;outil de vérification
+syntaxique pour ECMAScript par excellence.
+Il est souple, rapide à mettre en œuvre et s&#8217;adapte à des contextes complexes.
+J&#8217;aime son mécanisme de configuration de règles&#160;: utilisation systématique du
+<a href="../chapter-03/index.html#strict">mode strict</a>, nombre maximum de paramètres
+de fonctions, objets non déclarés, variables inconnues, etc.</p>
+</div>
+<div class="paragraph">
+<p><em>eslint</em> expose également des fonctions pour créer vos propres règles métier.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  <span class="token property">"..."</span><span class="token operator">:</span> <span class="token string">"..."</span><span class="token punctuation">,</span>
+  <span class="token property">"eslintConfig"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"env"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"node"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">"es6"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"extends"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"eslint:recommended"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"rules"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"strict"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"error"</span><span class="token punctuation">,</span> <span class="token string">"global"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">"quotes"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"error"</span><span class="token punctuation">,</span> <span class="token string">"single"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">"no-undef"</span><span class="token operator">:</span> <span class="token string">"error"</span><span class="token punctuation">,</span>
+      <span class="token property">"curly"</span><span class="token operator">:</span> <span class="token string">"error"</span><span class="token punctuation">,</span>
+      <span class="token property">"eqeqeq"</span><span class="token operator">:</span> <span class="token string">"error"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le niveau de sévérité de chaque règle est représenté par un identifiant&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>none</code>&#160;: règle désactivée&#160;;</p>
+</li>
+<li>
+<p><code>warn</code>&#160;: affiche un avertissement&#160;;</p>
+</li>
+<li>
+<p><code>error</code>&#160;: affiche une erreur (le processus se terminera avec un code d&#8217;erreur).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Certaines règles demandent ou acceptent des arguments supplémentaires.
+Elles sont toutes documentées sur le site web du projet&#160;:
+<span class="URL"><a href="http://eslint.org/docs/rules/" class="bare">eslint.org/docs/rules/</a></span>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Documentation</span> Règles personnalisées</div>
+<div class="paragraph">
+<p>Un exemple réutilisable de règles personnalisées se trouve sur le dépôt
+GitHub de Airbnb&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="URL"><a href="https://github.com/airbnb/javascript" class="bare">github.com/airbnb/javascript</a></span></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="csslint">4.3. csslint</h3>
+<div class="paragraph">
+<p><em>csslint</em> (<span class="URL"><a href="https://npmjs.com/csslint" class="bare">npmjs.com/csslint</a></span>) est un outil de vérification
+syntaxique de feuilles de style CSS.
+Il a été créé par deux anciens ingénieurs de Yahoo! dont les anciens travaux
+dans le domaine de la performance ont influencé
+l&#8217;architecture et le choix des règles par défaut.</p>
+</div>
+<div class="paragraph">
+<p><em>csslint</em> fournit les mécanismes de vérification adéquats pour alerter de
+possibles effets de bord de <em>box&#160;model</em>, de déclaration incompatible de
+<code>@font-face</code>, de <em>vendor prefix</em> dépréciés ou encore de combinaisons de
+propriétés connues pour casser l&#8217;affichage dans certains navigateurs.</p>
+</div>
+<div class="paragraph">
+<p>Prenons par exemple le fichier CSS suivant&#160;:</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">sample.css</div>
+<div class="content">
+<pre class="highlight"><code class="language-css" data-lang="css"><span class="token selector">.btn</span> <span class="token punctuation">{</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> black<span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 0px solid black<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.btn__primary</span> <span class="token punctuation">{</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 1.3em<span class="token punctuation">;</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> font-weight 0.2s ease<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.btn__primary--current</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> gray<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.btn__primary--current.btn--active</span> <span class="token punctuation">{</span>
+  <span class="token property">font-weight</span><span class="token punctuation">:</span> 700<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><em>csslint</em> lancera trois alertes en lisant le fichier <code>sample.css</code>,
+même si celui-ci est syntaxiquement parfaitement valide&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>../node_modules/.bin/csslint sample.css
+
+csslint: There are 3 problems in sample.css.
+
+sample.css
+1: warning at line 4, col 11
+Values of 0 shouldn't have units specified.
+  border: 0px solid black;
+
+sample.css
+2: warning at line 4, col 3
+Using height with border can sometimes make
+  elements larger than you expect.
+  border: 0px solid black;
+...</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="doiuse">4.4. doiuse</h3>
+<div class="paragraph">
+<p><em>doiuse</em> (<span class="URL"><a href="https://npmjs.com/doiuse" class="bare">npmjs.com/doiuse</a></span>) est un utilitaire qui repose
+sur la base de données du site communautaire <span class="URL"><a href="https://caniuse.com" class="bare">caniuse.com</a></span>.
+Il nous alerte des possibles incompatibilités de syntaxe en fonction de la liste
+de navigateurs à gérer.
+Cette liste concerne aussi bien des versions spécifiques (Internet Explorer&#160;8)
+que des parts de marché (tous les navigateurs avec plus de 5&#160;% de parts de marché).</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exemple suivant illustre les alertes relevées par <em>doiuse</em> dans le cas
+d&#8217;une recherche de compatibilité avec Internet Explorer&#160;6 et Internet
+Explorer&#160;7&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>../node_modules/.bin/doiuse -b 'ie < 8' sample.css
+sample.css:1:1: CSS 2.1 selectors not supported by: IE (6)
+sample.css:8:1: CSS 2.1 selectors not supported by: IE (6)
+sample.css:12:1: CSS3 Transitions not supported by: IE (6,7)
+sample.css:14:1: CSS 2.1 selectors not supported by: IE (6)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="optimize">5. Optimiser notre&#160;code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commentaires, indentations ou encore noms de variables&#160;: tout cela occupe de
+la place&#160;– autant d&#8217;octets transférés sur le réseau avant d&#8217;être exécutés
+par un client web.
+Les outils d&#8217;optimisation offrent l&#8217;opportunité aux développeurs et développeuses
+d&#8217;écrire du code sans compromettre sa lisibilité et sa maintenabilité.</p>
+</div>
+<div class="paragraph">
+<p>Les minifieurs et optimiseurs mettent en œuvre différentes techniques pour
+réduire le poids de notre&#160;code&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>suppression des commentaires et caractères non significatifs&#160;;</p>
+</li>
+<li>
+<p>renommage de variables&#160;;</p>
+</li>
+<li>
+<p>factorisation d&#8217;occurrences multiples similaires&#160;;</p>
+</li>
+<li>
+<p>suppression des instructions relatives au débogage/développement&#160;;</p>
+</li>
+<li>
+<p>suppression du code inutilisé&#160;;</p>
+</li>
+<li>
+<p>écriture automatique de code pour prendre en charge des environnements anciens ou futurs.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="uglify_es">5.1. uglify-es</h3>
+<div class="paragraph">
+<p><em>UglifyJS</em> (<span class="URL"><a href="https://npmjs.com/uglify-es" class="bare">npmjs.com/uglify-es</a></span>) est un des premiers
+compresseurs à utiliser une représentation syntaxique en arbre
+(<em>Abstract Syntax Tree</em>&#160;– <em>AST</em>) en lieu et place des classiques
+optimisations avec expressions régulières.</p>
+</div>
+<div class="paragraph">
+<p>Cette méthode élargit les perspectives de la compression via de
+la réécriture de&#160;code&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>hoisting</em> des variables (remontée de leur déclaration en début de portée)&#160;;</p>
+</li>
+<li>
+<p>combinaison des déclarations de variables&#160;;</p>
+</li>
+<li>
+<p>factorisation des valeurs de variables&#160;;</p>
+</li>
+<li>
+<p>réécriture partielle d&#8217;expressions&#160;;</p>
+</li>
+<li>
+<p>injection en ligne du contenu de variables.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>UglifyJS</em> s&#8217;utilise en ligne de commande ou comme un module&#160;Node.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="postcss">5.2. postcss</h3>
+<div class="paragraph">
+<p><em>PostCSS</em> (<span class="URL"><a href="https://npmjs.com/postcss" class="bare">npmjs.com/postcss</a></span>) est une optimiseur CSS modulaire.
+Cet outil est construit autour d&#8217;un parseur CSS, d&#8217;un arbre syntaxique
+et d&#8217;un compilateur de texte.
+C&#8217;est la même recette qui a participé au succès et à la richesse fonctionnelle
+d&#8217;outils comme <a href="#uglify-js2">UglifyJS</a> et <a href="#eslint">ESLint</a>.</p>
+</div>
+<div class="paragraph">
+<p>Avec une ou plusieurs extension(s), vous basculez d&#8217;un optimiseur de code
+vers la possibilité de créer votre propre préprocesseur, comme&#160;Sass&#160;!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="autoprefixer">5.3. autoprefixer</h3>
+<div class="paragraph">
+<p><em>autoprefixer</em> (<span class="URL"><a href="https://npmjs.com/autoprefixer" class="bare">npmjs.com/autoprefixer</a></span>) est <em>le</em> module qui
+vous épargnera l&#8217;écriture de centaines de lignes CSS.
+Il ajoute automatiquement les préfixes navigateurs aux bons endroits&#160;:
+<code>-webkit</code>, <code>-moz</code>, etc.</p>
+</div>
+<div class="paragraph">
+<p><em>autoprefixer</em> s&#8217;utilise comme extension au module <a href="#postcss"><em>PostCSS</em></a>,
+en ligne de commande ou comme module&#160;Node.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>../node_modules/.bin/postcss sample.css \
+    --use autoprefixer  | grep transition
+          transition: font-weight 0.2s ease;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le choix de compatibilité avec les navigateurs repose sur la variable
+d&#8217;environnement <code>BROWSERSLIST</code>, gérée par le module <em>browserslist</em>
+(<span class="URL"><a href="https://npmjs.com/browserslist" class="bare">npmjs.com/browserslist</a></span>)&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>export BROWSERSLIST='firefox > 8'
+<span data-bash-subs="$"></span>../node_modules/.bin/postcss sample.css \
+    --use autoprefixer | grep transition
+     -moz-transition: font-weight 0.2s ease;
+          transition: font-weight 0.2s ease;</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="uncss">5.4. uncss</h3>
+<div class="paragraph">
+<p><em>uncss</em> (<span class="URL"><a href="https://npmjs.com/uncss" class="bare">npmjs.com/uncss</a></span>) est le pendant inverse d'<em>autoprefixer</em>
+puisqu&#8217;il se charge de supprimer le code CSS inutilisé.
+Il s&#8217;utilise de manière autonome ou comme module <a href="#postcss">PostCSS</a>.</p>
+</div>
+<div class="paragraph">
+<p>Le module charge une ou plusieurs page(s) web, calcule la différence entre
+les règles utilisées et celles qui ne le sont pas.
+Vous êtes libre de mentionner une liste blanche de règles à ne jamais supprimer.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="csswring">5.5. csswring</h3>
+<div class="paragraph">
+<p><em>csswring</em> (<span class="URL"><a href="https://npmjs.com/csswring" class="bare">npmjs.com/csswring</a></span>) est un minifieur de code CSS
+qui s&#8217;interface lui aussi avec <a href="#postcss">PostCSS</a>.
+Vous lui donnez du code, il en ressort une version avec le minimum de caractères
+possible.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="google_closure_compiler_js">5.6. google-closure-compiler-js</h3>
+<div class="paragraph">
+<p><em>Google Closure Compiler</em> (<span class="URL"><a href="https://npmjs.com/google-closure-compiler-js" class="bare">npmjs.com/google-closure-compiler-js</a></span>)
+est un compilateur ECMAScript plus poussé qu'<em>UglifyJS</em> mais qui impose un
+style d&#8217;écriture plus strict, voire plus contraignant.
+Ses optimisations sont en général bien plus poussées et permettent d&#8217;atteindre
+des niveaux de finesse difficiles à obtenir autrement.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="csso">5.7. csso</h3>
+<div class="paragraph">
+<p><em>csso</em> (<span class="URL"><a href="https://npmjs.com/csso" class="bare">npmjs.com/csso</a></span>) est une alternative à <a href="#csswring">csswring</a>,
+écrite par l&#8217;équipe derrière la méthodologie BEM (<span class="URL"><a href="https://en.bem.info" class="bare">en.bem.info</a></span>).</p>
+</div>
+<div class="paragraph">
+<p><em>csso</em> ira jusqu&#8217;à réécrire les codes couleurs, les <code>margin</code> et <code>padding</code> et
+factorisera les sélecteurs similaires.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="svgo">5.8. svgo</h3>
+<div class="paragraph">
+<p><em>svgo</em> (<span class="URL"><a href="https://www.npmjs.com/svgo" class="bare">www.npmjs.com/svgo</a></span>) s&#8217;attaque au nettoyage des fichiers
+graphiques vectoriels au format SVG.
+Il simplifie les chemins et supprime les attributs et déclarations superflues.</p>
+</div>
+<div class="paragraph">
+<p>Vous pouvez l&#8217;essayer en ligne sur <span class="URL"><a href="https://jakearchibald.github.io/svgomg/" class="bare">jakearchibald.github.io/svgomg/</a></span>
+ou l&#8217;intégrer comme extension à <a href="#postcss">PostCSS</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="wawoff2">5.9. wawoff2</h3>
+<div class="paragraph">
+<p><em>wawoff2</em> (<span class="URL"><a href="https://npmjs.com/wawoff2" class="bare">npmjs.com/wawoff2</a></span>) optimise des polices de caractères
+pour le Web.
+Le module convertit des polices au format TTF vers le format WOFF2&#160;– à préférer
+car plus léger et donc rapide à charger.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="transpiling">6. Passer d&#8217;un langage à un autre</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Les préprocesseurs sont des outils de productivité pour CSS.
+Ils transforment un langage plus avancé dans quelque chose qui est compris
+par un navigateur&#160;web.</p>
+</div>
+<div class="paragraph">
+<p>La même chose s&#8217;applique avec la compilation ou la transpilation pour ECMAScript,
+pour utiliser dès maintenant une version du futur.</p>
+</div>
+<div class="sect2">
+<h3 id="less">6.1. less</h3>
+<div class="paragraph">
+<p><em>less</em> (<span class="URL"><a href="https://npmjs.com/less" class="bare">npmjs.com/less</a></span>) est un préprocesseur CSS.
+Il gère des variables, des <em>mixins</em>, des calculs de couleurs et des fonctions
+qui encouragent une écriture modulaire, plus logique et plus succincte.</p>
+</div>
+<div class="listingblock">
+<div class="title">stylesheet.less</div>
+<div class="content">
+<pre class="highlight"><code>@warning-color: red;
+@base-font-size: 18px;
+
+.btn {
+  border: 1px solid black;
+  border-radius: @base-font-size / 6;
+  font-size: @base-font-size;
+
+  &amp;--large {
+    font-size: @base-font-size * 1.5;
+  }
+
+  &amp;--warning {
+    border-color: fadeout(@warning-color, 10%);
+    color: @warning-color;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>lessc</code> compile le fichier <em>less</em>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>../node_modules/.bin/lessc stylesheet.less</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sass">6.2. sass</h3>
+<div class="paragraph">
+<p><em>sass</em> (<span class="URL"><a href="https://npmjs.com/node-sass" class="bare">npmjs.com/node-sass</a></span>) est un autre préprocesseur CSS.
+Il est issu du monde Ruby et est désormais tout aussi puissant dans Node
+grâce à <em>LibSass</em>, un module rapide et portable écrit en&#160;C&#43;&#43;.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="browserify">6.3. browserify</h3>
+<div class="paragraph">
+<p><em>browserify</em> (<span class="URL"><a href="https://npmjs.com/browserify" class="bare">npmjs.com/browserify</a></span>) transforme des modules et du
+code initialement écrit pour Node vers du code exécutable dans un navigateur&#160;web.</p>
+</div>
+<div class="paragraph">
+<p>Un puissant mécanisme de transformations étend ses capacités au coup par&#160;coup.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Nous en parlons plus en détail dans la section
+&#8220;<a href="../chapter-09/index.html#browserify">Importer des modules&#160;<code>npm</code> pour le Web</a>&#8221;
+au <a href="../chapter-09/index.html">chapitre&#160;9</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="babel">6.4. babel</h3>
+<div class="paragraph">
+<p><em>babel</em> (<span class="URL"><a href="https://npmjs.com/babel" class="bare">npmjs.com/babel</a></span>) est un outil qui permet de passer
+d&#8217;une version d&#8217;ECMAScript à une autre, fonctionnalité par fonctionnalité.
+C&#8217;est un outil indispensable pour écrire un code moderne et le faire
+fonctionner dans des navigateurs anciens.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="typescript">6.5. typescript</h3>
+<div class="paragraph">
+<p><em>TypeScript</em> (<span class="URL"><a href="https://npmjs.com/typescript" class="bare">npmjs.com/typescript</a></span>) est un langage de programmation
+typé.
+Toute structure utilisée est décrite avec un schéma que TypeScript valide.
+Nous sommes prévenu·e·s des erreurs avant même d&#8217;avoir exécuté notre code
+car l&#8217;outillage sait si on manipule des données qui existent.</p>
+</div>
+<div class="paragraph">
+<p>Au final, le code est transformé en ECMAScript et exécuté en tant que tel.
+Le code est tellement propre que nous pouvons arrêter d&#8217;utiliser TypeScript
+du jour au lendemain et travailler sur le code qu&#8217;il aura généré sans aucun problème.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fs">7. Gérer des fichiers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ces bibliothèques nous aident à écrire moins de lignes de code
+pour des besoins quotidiens de manipulation de fichiers.</p>
+</div>
+<div class="sect2">
+<h3 id="mkdirp">7.1. mkdirp</h3>
+<div class="paragraph">
+<p><em>mkdirp</em> (<span class="URL"><a href="https://npmjs.com/mkdirp" class="bare">npmjs.com/mkdirp</a></span>) est identique à la
+commande Unix <code>mkdir -p</code>, c&#8217;est-à-dire que les répertoires seront créés récursivement
+s&#8217;ils n&#8217;existent pas au préalable.</p>
+</div>
+<div class="paragraph">
+<p>Si nous utilisions le module Node&#160;<code>fs</code>, nous devrions créer l&#8217;arborescence de
+répertoires par nous-même, niveau par niveau.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rimraf">7.2. rimraf</h3>
+<div class="paragraph">
+<p><em>rimraf</em> (<span class="URL"><a href="https://npmjs.com/rimraf" class="bare">npmjs.com/rimraf</a></span>) est le pendant opposé de <em>mkdirp</em>.
+Il supprime une arborescence de manière récursive.
+C&#8217;est l&#8217;équivalent de la commande Unix&#160;<code>rm -rf</code>.</p>
+</div>
+<div class="paragraph">
+<p>Si nous utilisions le module Node&#160;<code>fs</code>, nous devrions supprimer d&#8217;abord
+les fichiers puis les répertoires, un par&#160;un.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="glob">7.3. glob</h3>
+<div class="paragraph">
+<p><em>glob</em> (<span class="URL"><a href="https://npmjs.com/glob" class="bare">npmjs.com/glob</a></span>) est un utilitaire pour obtenir
+une liste de fichiers en utilisant des motifs.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs interactive interactive--javascript interactive--runtime--node-v10">
+<div class="title">glob.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span>promisify<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'util'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> glob <span class="token operator">=</span> <span class="token function">promisify</span><span class="token punctuation">(</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'glob'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">glob</span><span class="token punctuation">(</span><span class="token string">'*.js'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// <b class="conum">(1)</b></span>
+<span class="token function">glob</span><span class="token punctuation">(</span><span class="token string">'re*.js'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// <b class="conum">(2)</b></span>
+<span class="token function">glob</span><span class="token punctuation">(</span><span class="token string">'sample.*'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// <b class="conum">(3)</b></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Affiche une liste de fichiers dont l&#8217;extension est&#160;<code>.js</code>.</p>
+</li>
+<li>
+<p>Affiche une liste de fichiers qui commencent par&#160;<code>re</code> et dont l&#8217;extension est&#160;<code>.js</code>.</p>
+</li>
+<li>
+<p>Affiche une liste de fichiers qui s&#8217;appellent <code>sample</code>, peu importe leur extension.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fs_extra">7.4. fs-extra</h3>
+<div class="paragraph">
+<p><em>fs-extra</em> (<span class="URL"><a href="https://npmjs.com/fs-extra" class="bare">npmjs.com/fs-extra</a></span>) est une collection
+de fonctions pour gérer les opérations de fichiers.
+Le module inclut <em>rimraf</em> et <em>mkdirp</em> en plus d&#8217;autres fonctions récursives,
+pour copier, déplacer ou supprimer des fichiers.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="graceful_fs">7.5. graceful-fs</h3>
+<div class="paragraph">
+<p><em>graceful-fs</em> (<span class="URL"><a href="https://npmjs.com/graceful-fs" class="bare">npmjs.com/graceful-fs</a></span>) est identique
+au module Node&#160;<code>fs</code>.</p>
+</div>
+<div class="paragraph">
+<p>La différence se situe sous le capot&#160;: le module gère les défaillances
+du système et tente d&#8217;accéder à nouveau aux ressources demandées
+si les erreurs sont liées à des problèmes de performance.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est un module à utiliser si notre application dépend fortement de la disponibilité
+du système de fichiers et si celui-ci est fortement sollicité.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="chokidar">7.6. chokidar</h3>
+<div class="paragraph">
+<p><em>chokidar</em> (<span class="URL"><a href="https://npmjs.com/chokidar" class="bare">npmjs.com/chokidar</a></span>) crée des observateurs du
+système de fichiers.
+Il gère les différences des systèmes d&#8217;exploitation et nous permet d&#8217;écrire
+un seul et même code.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est la bibliothèque vers laquelle se tourner lorsque nous avons besoin
+de déclencher des actions quand des fichiers sont modifiés.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="databases">8. Stocker dans des bases de données</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Node sait communiquer avec tout type de bases de données grâce à l&#8217;écosystème&#160;<code>npm</code>.
+Préférez les modules faisant état de pilote natif/binaire&#160;–
+le transfert de données n&#8217;en sera que plus rapide.</p>
+</div>
+<div class="sect2">
+<h3 id="db_migrate">8.1. db-migrate</h3>
+<div class="paragraph">
+<p><em>db-migrate</em> (<span class="URL"><a href="https://npmjs.com/db-migrate" class="bare">npmjs.com/db-migrate</a></span>) est un outil de gestion
+de migrations pour MySQL, SQLite, MongoDB et PostgreSQL.
+À l&#8217;aide de scripts de migration, il rend reproductibles des changements
+de structure dans une base de données&#160;– ajout ou suppression de champ, de table
+ou d&#8217;index.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="knex">8.2. knex</h3>
+<div class="paragraph">
+<p><em>knex</em> (<span class="URL"><a href="https://npmjs.com/knex" class="bare">npmjs.com/knex</a></span>) propose d&#8217;interagir et d&#8217;interroger
+des bases de données SQL comme PostgreSQL, MariaDB, MySQL et SQLite.</p>
+</div>
+<div class="paragraph">
+<p>Les requêtes s&#8217;écrivent en SQL pur ou en utilisant une API dite &#8220;fluide&#8221;,
+pour ne pas écrire le SQL à la&#160;main.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">knex.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span>join<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> db <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'knex'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  client<span class="token punctuation">:</span> <span class="token string">'sqlite3'</span><span class="token punctuation">,</span>                            <span class="token comment">// <b class="conum">(1)</b></span>
+  connection<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'sample.sqlite'</span><span class="token punctuation">)</span>  <span class="token comment">// <b class="conum">(2)</b></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  <span class="token function">db</span><span class="token punctuation">(</span><span class="token string">'books'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'like'</span><span class="token punctuation">,</span> <span class="token string">'%Node%'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// <b class="conum">(3)</b></span>
+  <span class="token function">db</span><span class="token punctuation">(</span><span class="token string">'books'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token string">'title as count'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">first</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">// <b class="conum">(4)</b></span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">[</span>rows<span class="token punctuation">,</span> count<span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>rows<span class="token punctuation">)</span><span class="token punctuation">;</span>                            <span class="token comment">// <b class="conum">(5)</b></span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>                           <span class="token comment">// <b class="conum">(6)</b></span>
+  db<span class="token punctuation">.</span><span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Indique que nous allons nous connecter à une base de données de type SQLite.</p>
+</li>
+<li>
+<p>Spécifie l&#8217;emplacement de la base de données.</p>
+</li>
+<li>
+<p>Effectue une recherche floue sur les lignes dont le titre contient le mot&#160;<code>'Node'</code>.</p>
+</li>
+<li>
+<p>Compte le nombre de lignes et retourne le premier (et seul) résultat de la requête.</p>
+</li>
+<li>
+<p>Affiche <code>[ { id: 1, title: 'Node.js ', created_at: '2018-07-11 10:34:33' } ]</code>.</p>
+</li>
+<li>
+<p>Affiche <code>{ count: 3 }</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bookshelf">8.3. bookshelf</h3>
+<div class="paragraph">
+<p><em>bookshelf</em> (<span class="URL"><a href="https://npmjs.com/bookshelf" class="bare">npmjs.com/bookshelf</a></span>) est une surcouche à <a href="#knex"><em>Knex</em></a>,
+écrite par les mêmes personnes.
+Elle modélise les données sous forme d&#8217;objets et de schémas (ORM) pour
+automatiser des actions et ajouter plus d'&#8220;intelligence&#8221; à notre modèle de données.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sequelize">8.4. sequelize</h3>
+<div class="paragraph">
+<p><em>sequelize</em> (<span class="URL"><a href="https://npmjs.com/sequelize" class="bare">npmjs.com/sequelize</a></span>) est une alternative
+à <a href="#knex"><em>Knex</em></a> et à <a href="#bookshelf"><em>Bookshelf</em></a>.
+Elle gère des schémas de données de manière optionnelle, mais aussi les migrations.
+Ces dernières permettent de scripter les changements de structure d&#8217;une base
+de données, de les tester en local avant de les jouer en production.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mongoose">8.5. mongoose</h3>
+<div class="paragraph">
+<p><em>mongoose</em> (<span class="URL"><a href="https://npmjs.com/mongoose" class="bare">npmjs.com/mongoose</a></span>) sert à composer des modèles
+de données pour la base de données MongoDB&#160;– dite NoSQL.
+Elle définit des comportements annexes comme des mixins
+ou des <em>accesseurs</em> dynamiques.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="levelup">8.6. levelup</h3>
+<div class="paragraph">
+<p><em>LevelDB</em> (<span class="URL"><a href="https://npmjs.com/levelup" class="bare">npmjs.com/levelup</a></span>) est un système de bases de
+données clé/valeur extrêmement modulaire.
+Le stockage se fait sur disque par défaut, mais il peut évoluer vers du stockage
+en mémoire (module <code>memdown</code>) ou même dans un navigateur web (avec IndexedDB).</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">levelup.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> levelup <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'levelup'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> memdown <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'memdown'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> encode <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'encoding-down'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> db <span class="token operator">=</span> <span class="token function">levelup</span><span class="token punctuation">(</span><span class="token function">encode</span><span class="token punctuation">(</span><span class="token function">memdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>          <span class="token comment">// <b class="conum">(1)</b></span>
+  <span class="token punctuation">{</span> valueEncoding<span class="token punctuation">:</span> <span class="token string">'json'</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  db<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'node'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>title<span class="token punctuation">:</span> <span class="token string">'Node.js'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  db<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'css'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>title<span class="token punctuation">:</span> <span class="token string">'CSS maintenables'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  db<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'opensky'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>title<span class="token punctuation">:</span> <span class="token string">'Open Sky'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> db<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'node'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                   <span class="token comment">// <b class="conum">(2)</b></span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">result</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>                        <span class="token comment">// <b class="conum">(3)</b></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Crée la connexion à la base de données en mémoire.</p>
+</li>
+<li>
+<p>Recherche un enregistrement après l&#8217;avoir enregistré en mémoire.</p>
+</li>
+<li>
+<p>Affiche <code>{ title: 'Node.js' }</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redis">8.7. redis</h3>
+<div class="paragraph">
+<p><em>redis</em> (<span class="URL"><a href="https://npmjs.com/redis" class="bare">npmjs.com/redis</a></span>) est un gestionnaire de bases de données
+clés/valeurs distribuées et performantes.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">redis.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'redis'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">createClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> hset <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'util'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">promisify</span><span class="token punctuation">(</span>client<span class="token punctuation">.</span>hset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  <span class="token function">hset</span><span class="token punctuation">(</span><span class="token string">'book:node'</span><span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'Node.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">hset</span><span class="token punctuation">(</span><span class="token string">'book:css'</span><span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'CSS maintenables'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">hset</span><span class="token punctuation">(</span><span class="token string">'book:opensky'</span><span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'Open Sky'</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Enregistrements créés.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  client<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><em>hiredis</em> (<span class="URL"><a href="https://npmjs.com/hiredis" class="bare">npmjs.com/hiredis</a></span>) est un pilote C&#43;&#43; qui
+augmente les performances de connexion à une base de données&#160;<em>redis</em>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="elasticsearch">8.8. elasticsearch</h3>
+<div class="paragraph">
+<p><em>elasticsearch</em> (<span class="URL"><a href="https://npmjs.com/elasticsearch" class="bare">npmjs.com/elasticsearch</a></span>) est un client pour
+simplifier la connexion à une base de données Elasticsearch.
+Une base de ce type est particulièrement adaptée à l&#8217;indexation des données,
+pour des recherches performantes et complexes.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cli">9. Ligne de commande</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ces modules complètent le panorama déjà très varié présenté
+dans le <a href="#../chapter-08/index.adoc">chapitre&#160;8</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="yargs_parser">9.1. yargs-parser</h3>
+<div class="paragraph">
+<p><em>yargs-parser</em> (<span class="URL"><a href="https://npmjs.com/yargs-parser" class="bare">npmjs.com/yargs-parser</a></span>) est le module
+d&#8217;interprétation des arguments utilisé par le module <em>yargs</em>.
+C&#8217;est une alternative plus puissante et plus complexe que <em>minimist</em>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="args">9.2. args</h3>
+<div class="paragraph">
+<p><em>args</em> (<span class="URL"><a href="https://npmjs.com/args" class="bare">npmjs.com/args</a></span>) est un module minimaliste
+pour interpréter les arguments, les structurer et afficher une aide
+claire à nos utilisateurs et utilisatrices.</p>
+</div>
+<div class="paragraph">
+<p>Cerise sur le gâteau&#160;: le module suggère un choix de commande en cas
+d&#8217;erreur de frappe.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="caporal">9.3. caporal</h3>
+<div class="paragraph">
+<p><em>caporal</em> (<span class="URL"><a href="https://npmjs.com/caporal" class="bare">npmjs.com/caporal</a></span>) est un framework complet
+pour bâtir des applications en ligne de commandes.
+Il gère les classiques arguments et options ainsi que les sous-commandes,
+les types de valeurs et l&#8217;autocomplétion.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="promptly">9.4. promptly</h3>
+<div class="paragraph">
+<p><em>promptly</em> (<span class="URL"><a href="https://npmjs.com/promptly" class="bare">npmjs.com/promptly</a></span>) est un utilitaire pour
+poser des questions, valider et travailler avec les réponses obtenues.
+Il est minimaliste et a un faible nombre de dépendances.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="supports_color">9.5. supports-color</h3>
+<div class="paragraph">
+<p><em>supports-color</em> (<span class="URL"><a href="https://npmjs.com/supports-color" class="bare">npmjs.com/supports-color</a></span>) vérifie
+si le contexte d&#8217;exécution du programme en ligne de commande
+supporte les couleurs.</p>
+</div>
+<div class="paragraph">
+<p>Cela nous évite d&#8217;envoyer des codes ANSI, qui, seraient affichés
+au lieu d&#8217;être interprétés comme des couleurs.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="webapp">10. Applications&#160;web</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ces modules complètent le panorama déjà très varié présenté
+dans le <a href="#../chapter-07/index.adoc">chapitre&#160;7</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="fastify">10.1. fastify</h3>
+<div class="paragraph">
+<p><em>fastify</em> (<span class="URL"><a href="https://npmjs.com/fastify" class="bare">npmjs.com/fastify</a></span>) est un framework
+inspiré de <em>Express</em>.
+Il se focalise sur la simplicité de l&#8217;expérience de développement et sur
+de hautes performances.
+Il sait valider les données sortantes à l&#8217;aide de schémas.</p>
+</div>
+<div class="paragraph">
+<p>Pour aller au-delà des données, il se combine avec le module <em>point-of-view</em>
+(<span class="URL"><a href="https://npmjs.com/point-of-view" class="bare">npmjs.com/point-of-view</a></span>).
+Vous avez ainsi accès à l&#8217;utilisation de <a href="#templating">modules de templating</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="passport">10.2. passport</h3>
+<div class="paragraph">
+<p><em>passport</em> (<span class="URL"><a href="https://npmjs.com/passport" class="bare">npmjs.com/passport</a></span>) est une bibliothèque modulaire
+d&#8217;authentification pour <em>Express</em>.
+Elle se branche à différents mécanismes pour vérifier les utilisateurs&#160;:
+utilisateur et mot de passe, compte GitHub, Twitter, OAuth, etc.</p>
+</div>
+<div class="paragraph">
+<p>Les sessions d&#8217;utilisateurs se gèrent à côté&#160;– pour mémoriser
+qui est connecté ou non, et avec quel identifiant sécurisé et unique.</p>
+</div>
+<div class="paragraph">
+<p>Référez-vous à sa documentation pour des exemples détaillés d&#8217;utilisation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="restify">10.3. restify</h3>
+<div class="paragraph">
+<p><em>restify</em> (<span class="URL"><a href="https://npmjs.com/restify" class="bare">npmjs.com/restify</a></span>) est un framework web
+spécialisé dans la création d&#8217;API&#160;HTTP.</p>
+</div>
+<div class="paragraph">
+<p>Il gère les versions de routes et expose un client permettant de consommer
+des données sur d&#8217;autres API&#160;REST&#160;– proxy.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">restify.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> restify <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'restify'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>NotFoundError<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'restify-errors'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> server <span class="token operator">=</span> restify<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> countries <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'i18n-iso-countries'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">responseV1</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> codes <span class="token operator">=</span> countries<span class="token punctuation">.</span><span class="token function">getNames</span><span class="token punctuation">(</span><span class="token string">'en'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>codes<span class="token punctuation">[</span>request<span class="token punctuation">.</span>params<span class="token punctuation">.</span>code<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NotFoundError</span><span class="token punctuation">(</span><span class="token string">'Country not found'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  response<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> codes<span class="token punctuation">[</span>request<span class="token punctuation">.</span>params<span class="token punctuation">.</span>code<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+server<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">'/:code'</span><span class="token punctuation">,</span> version<span class="token punctuation">:</span> <span class="token string">'1.0.0'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> responseV1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">8080</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Serveur accessible sur %s'</span><span class="token punctuation">,</span> server<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="faye">10.4. faye</h3>
+<div class="paragraph">
+<p><em>faye</em> (<span class="URL"><a href="https://npmjs.com/faye" class="bare">npmjs.com/faye</a></span>) est un serveur WebSocket pour communiquer
+en temps réel entre un client et un serveur.
+Il sait débrayer vers Ajax ou JSON-P pour les navigateurs anciens qui
+ne comprennent pas WebSocket.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">faye.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> faye <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'faye'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> ws <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">faye<span class="token punctuation">.</span>NodeAdapter</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  mount<span class="token punctuation">:</span> <span class="token string">'/realtime'</span><span class="token punctuation">,</span> timeout<span class="token punctuation">:</span> <span class="token number">10</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> server <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function">writeHead</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token string">'Content-Tyoe'</span><span class="token punctuation">:</span> <span class="token string">'text/plain'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token string">'Contenu non temps réel'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ws<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cet exemple de serveur minimaliste expose un point d&#8217;entrée auquel on peut accéder
+via le client <em>Faye</em>, dans un navigateur ou via un autre script&#160;Node.</p>
+</div>
+<div class="paragraph">
+<p>Tout message émit par un client sera relayé auprès des autres clients
+connectés.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="swagger_client">10.5. swagger-client</h3>
+<div class="paragraph">
+<p><em>swagger-client</em> (<span class="URL"><a href="https://npmjs.com/swagger-client" class="bare">npmjs.com/swagger-client</a></span>) sert à valider
+des requêtes et des réponses HTTP en fonction de schémas qui répondent
+à la spécification OpenAPI.</p>
+</div>
+<div class="paragraph">
+<p>Cette spécification permet entre autres de gérer automatiquement les routes
+de notre application pour nous concentrer sur le code qui génère les données de sortie.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="templating">11. Modules front-end et templating</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Les bibliothèques de templating proposent d&#8217;associer
+une structure de données à une logique de présentation.
+Pour la plupart, elles fonctionnent aussi bien sous Node que dans les navigateurs,
+ce qui est une excellente nouvelle pour partager des comportements d&#8217;affichage
+entre les deux environnements.</p>
+</div>
+<div class="paragraph">
+<p>Tous les modules que nous allons voir généreront cette sortie&#160;HTML&#160;:</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html"><span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Template demo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>CSS maintenables<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Node.js<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Open Sky<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nunjucks">11.1. nunjucks</h3>
+<div class="paragraph">
+<p><em>nunjucks</em> (<span class="URL"><a href="https://npmjs.com/nunjucks" class="bare">npmjs.com/nunjucks</a></span>) est un portage de <em>Jinja</em>,
+bibliothèque bien connue par les adeptes de Python.
+Sa syntaxe inclut des fonctionnalités comme les filtres, les blocs ou
+l&#8217;héritage de gabarit.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">template.html</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html<span class="token operator">></span>
+<span class="token operator">&lt;</span>html<span class="token operator">></span>
+<span class="token operator">&lt;</span>head<span class="token operator">></span>
+  <span class="token operator">&lt;</span>title<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span> title <span class="token operator">|</span> <span class="token keyword">default</span><span class="token punctuation">(</span><span class="token string">'Template demo'</span><span class="token punctuation">)</span> <span class="token operator">|</span> capitalize <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">></span>
+<span class="token operator">&lt;</span>body<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">set</span> items <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Node.js'</span><span class="token punctuation">,</span> <span class="token string">'CSS maintenables'</span><span class="token punctuation">,</span> <span class="token string">'Open Sky'</span><span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span>ul<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">for</span> item <span class="token keyword">in</span> items<span class="token operator">|</span>sort <span class="token operator">-</span><span class="token operator">%</span><span class="token punctuation">}</span>
+  <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span> item <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> endfor <span class="token operator">-</span><span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="handlebars">11.2. handlebars</h3>
+<div class="paragraph">
+<p><em>handlebars</em> (<span class="URL"><a href="https://npmjs.com/handlebars" class="bare">npmjs.com/handlebars</a></span>) et son prédécesseur <em>mustache</em>
+sont les vétérans du templating Node.
+Leur parti pris est de proposer le minimum de logique afin que celle-ci
+reste au plus près des données.</p>
+</div>
+<div class="paragraph">
+<p><em>handlebars</em> sait aussi précompiler les gabarits sous forme de fonctions ECMAScript.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">template.hbs</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html<span class="token operator">></span>
+<span class="token operator">&lt;</span>html<span class="token operator">></span>
+<span class="token operator">&lt;</span>head<span class="token operator">></span>
+  <span class="token operator">&lt;</span>title<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>#<span class="token keyword">if</span> title<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token keyword">else</span><span class="token punctuation">}</span><span class="token punctuation">}</span>Template demo<span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">></span>
+<span class="token operator">&lt;</span>body<span class="token operator">></span>
+<span class="token operator">&lt;</span>ul<span class="token operator">></span>
+  <span class="token punctuation">{</span><span class="token punctuation">{</span>#each items<span class="token punctuation">}</span><span class="token punctuation">}</span>
+  <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+  <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token operator">/</span>each<span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="pug">11.3. pug</h3>
+<div class="paragraph">
+<p><em>pug</em> (<span class="URL"><a href="https://npmjs.com/pug" class="bare">npmjs.com/pug</a></span>) opte pour un parti minimaliste qui
+repose entièrement sur l&#8217;indentation.
+Son mécanisme de blocs facilite la réutilisation d&#8217;éléments de présentation.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">template.pug</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">doctype html
+html
+  head
+    title<span class="token operator">=</span> title <span class="token operator">||</span> <span class="token string">'Template demo'</span>
+  body
+    ul
+      each item <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">'Node.js'</span><span class="token punctuation">,</span> <span class="token string">'CSS maintenables'</span><span class="token punctuation">,</span> <span class="token string">'Open Sky'</span><span class="token punctuation">]</span>
+        li<span class="token operator">=</span> item</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ejs">11.4. ejs</h3>
+<div class="paragraph">
+<p><em>ejs</em> (<span class="URL"><a href="https://npmjs.com/ejs" class="bare">npmjs.com/ejs</a></span>) part du principe qu&#8217;il n&#8217;y a pas besoin
+d&#8217;un langage de templating autre qu&#8217;ECMAScript.
+Donc c&#8217;est tout simplement ce qui vous sera proposé, impliquant de ce fait
+une faible courbe d&#8217;apprentissage.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">template.ejs</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html<span class="token operator">></span>
+<span class="token operator">&lt;</span>html<span class="token operator">></span>
+<span class="token operator">&lt;</span>head<span class="token operator">></span>
+  <span class="token operator">&lt;</span>title<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">%=</span> <span class="token keyword">typeof</span> title <span class="token operator">===</span> <span class="token string">'string'</span> <span class="token operator">?</span> title <span class="token punctuation">:</span> <span class="token string">'Template demo'</span> <span class="token operator">%</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">></span>
+<span class="token operator">&lt;</span>body<span class="token operator">></span>
+<span class="token operator">&lt;</span>ul<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">%</span> <span class="token punctuation">[</span><span class="token string">'Node.js'</span><span class="token punctuation">,</span> <span class="token string">'CSS maintenables'</span><span class="token punctuation">,</span> <span class="token string">'Open Sky'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token operator">-</span><span class="token operator">%</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">%=</span> item <span class="token operator">%</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">%</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">-</span><span class="token operator">%</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="react">11.5. react</h3>
+<div class="paragraph">
+<p><em>React</em> (<span class="URL"><a href="https://npmjs.com/react" class="bare">npmjs.com/react</a></span>) est une bibliothèque de présentation
+dite &#8220;réactive&#8221; et orientée composants.
+Elle génère un arbre visuel à partir de données passées en entrée.
+Cet arbre est ensuite transformé en HTML, en interface iOS ou Android, entre autres.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">template.jsx</div>
+<div class="content">
+<pre class="highlight"><code class="language-jsx" data-lang="jsx"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> React <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'react'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">BookList</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>books<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">{</span>books<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">bookName<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>bookName<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>title<span class="token punctuation">,</span> books<span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span><span class="token punctuation">{</span>title <span class="token operator">||</span> <span class="token string">'Template demo'</span><span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">BookList</span></span> <span class="token attr-name">books</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>books<span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="storybook">11.6. storybook</h3>
+<div class="paragraph">
+<p><em>storybook</em> (<span class="URL"><a href="https://github.com/storybooks/storybook" class="bare">github.com/storybooks/storybook</a></span>) complète <a href="#react">React</a>
+et d&#8217;autres frameworks de <em>templating</em> en créant un catalogue de composants
+auto-documentés.
+Les composants sont affichés en même temps que le code nécessaire pour les utiliser
+dans une autre application.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing">12. Tester notre code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Le module <code>assert</code> intégré à Node suffit pour démarrer.
+Il existe cependant tout un outillage pour tester notre code à destination de
+Node (tests unitaires) ou des navigateurs (tests fonctionnels) ainsi que pour
+écrire des assertions plus facilement.</p>
+</div>
+<div class="sect2">
+<h3 id="tape">12.1. tape</h3>
+<div class="paragraph">
+<p><em>tape</em> (<span class="URL"><a href="https://npmjs.com/tape" class="bare">npmjs.com/tape</a></span>) est une bibliothèque
+d&#8217;exécution de tests minimaliste qui se base sur le
+<em>Test Anything Protocol</em> (<em>TAP</em>, <span class="URL"><a href="https://testanything.org" class="bare">testanything.org</a></span>).
+Elle embarque aussi le minimum vital pour écrire des assertions.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">tape.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'tape'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'Date test'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">t</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>                             <span class="token comment">// <b class="conum">(1)</b></span>
+  t<span class="token punctuation">.</span><span class="token function">plan</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  t<span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2013-03-24'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// <b class="conum">(2)</b></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Création d&#8217;un test.</p>
+</li>
+<li>
+<p>Écriture d&#8217;une assertion.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="chai">12.2. chai</h3>
+<div class="paragraph">
+<p><em>chai</em> (<span class="URL"><a href="https://npmjs.com/chai" class="bare">npmjs.com/chai</a></span>) est une bibliothèque poussée d&#8217;assertions.
+Son mécanisme chaîne permet de quasiment écrire des phrases pour exprimer
+l&#8217;intention des choses à vérifier.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">chai.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span>expect<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'chai'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">expect</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span>be<span class="token punctuation">.</span><span class="token function">an</span><span class="token punctuation">(</span><span class="token string">'array'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// <b class="conum">(1)</b></span>
+<span class="token function">expect</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span>deep<span class="token punctuation">.</span><span class="token function">equal</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// <b class="conum">(2)</b></span>
+<span class="token function">expect</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span>be<span class="token punctuation">.</span><span class="token function">an</span><span class="token punctuation">(</span><span class="token string">'object'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>and<span class="token punctuation">.</span>to<span class="token punctuation">.</span>be<span class="token punctuation">.</span>empty<span class="token punctuation">;</span><span class="token comment">// <b class="conum">(3)</b></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Vérification du type d&#8217;une variable.</p>
+</li>
+<li>
+<p>Vérification stricte de valeur d&#8217;une variable.</p>
+</li>
+<li>
+<p>Double vérification&#160;– il s&#8217;agit bien d&#8217;objet et il est vide, sans clé/valeur.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sinon">12.3. sinon</h3>
+<div class="paragraph">
+<p><em>sinon</em> (<span class="URL"><a href="https://npmjs.com/sinon" class="bare">npmjs.com/sinon</a></span>) est un compagnon idéal pour
+intercepter le fonctionnement interne de variables et d&#8217;objets.
+Le module propose de créer des écouteurs (<em>spys</em>) et des bouchons
+(<em>stubs</em>, <em>mocks</em>).</p>
+</div>
+<div class="paragraph">
+<p>En d&#8217;autres termes, vous prenez la main sur des portions de votre propre
+code pendant la durée des tests.
+Ces techniques servent pour simuler des erreurs et différentes situations
+tout en observant le comportement réel de notre&#160;code.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">sinon.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'tape'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> sinon <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'sinon'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'Date'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">t</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> d <span class="token operator">=</span> Date<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> dateTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'1983-03-24'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> stub <span class="token operator">=</span> sinon<span class="token punctuation">.</span><span class="token function">stub</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> <span class="token string">'now'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// <b class="conum">(1)</b></span>
+  stub<span class="token punctuation">.</span><span class="token function">returns</span><span class="token punctuation">(</span><span class="token number">9999999999999</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">// <b class="conum">(2)</b></span>
+
+  d<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  t<span class="token punctuation">.</span><span class="token function">equal</span><span class="token punctuation">(</span>stub<span class="token punctuation">.</span>calledOnce<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// <b class="conum">(3)</b></span>
+  t<span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span>stub<span class="token punctuation">.</span>returnValues<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">></span> dateTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  t<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Création d&#8217;un bouchon pour la méthode <code>now()</code> d&#8217;un objet&#160;<code>Date</code>.</p>
+</li>
+<li>
+<p>Surcharge de la valeur retournée par la méthode <code>d.now()</code>.</p>
+</li>
+<li>
+<p>Nous constatons le nombre de fois où la méthode <code>d.now()</code> a été appelée.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Le module <em>sinon-chai</em> (<span class="URL"><a href="https://npmjs.com/sinon-chai" class="bare">npmjs.com/sinon-chai</a></span>)
+intègre <em>sinon</em> avec le mécanisme d&#8217;assertions de&#160;<a href="#chai"><em>chai</em></a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nyc">12.4. nyc</h3>
+<div class="paragraph">
+<p><em>nyc</em> (<span class="URL"><a href="https://npmjs.com/nyc" class="bare">npmjs.com/nyc</a></span>) génère une couverture de code.
+Il inspecte le code exécuté pendant les tests et en déduit les portions
+qui n&#8217;ont pas été visitées et, donc, qui n&#8217;ont pas été testées.
+C&#8217;est un indicateur utile pour attester de la fiabilité d&#8217;une base de code
+– plus la couverture est importante, plus il y a de chances que les cas à la marge
+aient été vérifiés.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/nyc-cli.png" alt="nyc cli" width="85%">
+</div>
+<div class="title">Figure 1. Couverture de code visualisée dans un terminal</div>
+</div>
+<div class="paragraph">
+<p><em>nyc</em> se greffe sur n&#8217;importe quelle bibliothèque d&#8217;exécution de tests.
+Sous le capot, c&#8217;est le module <em>istanbul</em> (<span class="URL"><a href="https://npmjs.com/istanbul" class="bare">npmjs.com/istanbul</a></span>)
+qui est utilisé pour effectuer les calculs de couverture de&#160;code.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/nyc-web.png" alt="nyc web" width="85%">
+</div>
+<div class="title">Figure 2. Couverture de code visualisée dans un navigateur&#160;web</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="karma">12.5. karma</h3>
+<div class="paragraph">
+<p><em>karma</em> (<span class="URL"><a href="https://npmjs.com/karma" class="bare">npmjs.com/karma</a></span>) pilote l&#8217;exécution de tests
+depuis un ou plusieur(s) navigateurs web.
+Ces derniers (Chrome, Safari, Firefox, etc.) se pilotent sur notre ordinateur,
+depuis une machine virtuelle (VirtualBox) ou même par le biais d&#8217;un service
+en ligne (<em>SauceLabs</em>, <em>BrowserStack</em>, etc.).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/karma.png" alt="karma" width="85%">
+</div>
+<div class="title">Figure 3. Exemple d&#8217;exécution de tests en continu avec&#160;Karma</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="supertest">12.6. supertest</h3>
+<div class="paragraph">
+<p><em>supertest</em> (<span class="URL"><a href="https://npmjs.com/supertest" class="bare">npmjs.com/supertest</a></span>) sert à tester une interface HTTP.
+Le module envoie des requêtes et nos assertions vérifient qu&#8217;elles retournent
+bien ce qui est attendu&#160;– code HTTP, structure de réponse etc.</p>
+</div>
+<div class="paragraph">
+<p>Je trouve ce module pratique pour tester des choses qui seraient difficiles
+à couvrir uniquement avec des tests unitaires.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internet-of-things">13. Objets connectés</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Node a bénéficié de l&#8217;engouement autour des objets connectés grâce à sa nature
+asynchrone et à sa légèreté.
+C&#8217;est une plate-forme de choix pour dialoguer ou embarquer dans des
+nano-ordinateurs, réfrigérateurs et autres ampoules connectées.</p>
+</div>
+<div class="sect2">
+<h3 id="nitrogen">13.1. nitrogen</h3>
+<div class="paragraph">
+<p><em>nitrogen</em> (<span class="URL"><a href="https://npmjs.com/nitrogen" class="bare">npmjs.com/nitrogen</a></span>) gère les interactions entre
+différents périphériques, sur un même réseau local et à travers Internet.</p>
+</div>
+<div class="paragraph">
+<p>La bibliothèque se base sur un mécanisme déclaratif de fonctionnalités et de
+terminaux ainsi que la publication de messages.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="serialport">13.2. serialport</h3>
+<div class="paragraph">
+<p><em>serialport</em> (<span class="URL"><a href="https://npmjs.com/serialport" class="bare">npmjs.com/serialport</a></span>) est la bibliothèque de base
+pour communiquer avec le <em>port série</em> d&#8217;un appareil.
+Un câble USB suffit ensuite pour envoyer nos instructions à cet appareil.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="firmata">13.3. firmata</h3>
+<div class="paragraph">
+<p><em>firmata</em> (<span class="URL"><a href="https://npmjs.com/firmata" class="bare">npmjs.com/firmata</a></span>) est un <em>firmware</em>, un protocole
+de communication, ainsi qu&#8217;une bibliothèque de communication pour microcontrôleur
+Arduino.</p>
+</div>
+<div class="paragraph">
+<p>Le module Node apprend ainsi à communiquer avec un Arduino préalablement
+flashé avec Firmata.
+Cela nous permet notamment d&#8217;écrire des applications en JavaScript au lieu
+d&#8217;utiliser&#160;du&#160;C.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="johnny_five">13.4. johnny-five</h3>
+<div class="paragraph">
+<p><em>johnny-five</em> (<span class="URL"><a href="https://npmjs.com/johnny-five" class="bare">npmjs.com/johnny-five</a></span>) est une bibliothèque
+haut&#160;niveau pour Arduino, Raspberry&#160;Pi et tout autre microcontrôleur.
+Elle simplifie les interactions avec des moteurs, des servo-contrôleurs,
+des capteurs etc.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="node_red">13.5. node-red</h3>
+<div class="paragraph">
+<p><em>node-red</em> (<span class="URL"><a href="https://npmjs.com/node-red" class="bare">npmjs.com/node-red</a></span>) est une interface visuelle
+pour programmer des flux de données entre objets connectés.
+Le projet émane d&#8217;employé·e·s&#160;d&#8217;IBM.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable démarre un serveur web dont l&#8217;interface nous sert à relier
+des sources de données, des réactions à des événements avec des objets prêts à
+recevoir les instructions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="accessibilité">14. Accessibilité</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>L&#8217;écosystème&#160;<code>npm</code> a participé à un essor d&#8217;outillage lié à l&#8217;accessibilité
+d&#8217;applications web.
+Auparavant, les outils étaient difficilement automatisables.</p>
+</div>
+<div class="sect2">
+<h3 id="a11y">14.1. a11y</h3>
+<div class="paragraph">
+<p><em>a11y</em> (<span class="URL"><a href="https://npmjs.com/a11y" class="bare">npmjs.com/a11y</a></span>) est un automate d&#8217;inspection de pages web.
+Il détecte des problèmes de contrastes, de calques qui masquent du contenu
+ou d&#8217;éléments qui ne seraient pas navigables au clavier, entre autres.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est un excellent outil pour améliorer la qualité d&#8217;une application tout en
+l&#8217;ouvrant à un public trop souvent mis de&#160;côté.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npx a11y https://oncletom.io
+  ✖ Controls and media elements should have labels
+
+  #search > .form-control
+
+
+✔ This element does not support ARIA roles
+✔ Elements with ARIA roles must be in the correct scope
+✔ This element has an invalid ARIA attribute
+✔ ARIA state and property values must be valid</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a11y_css">14.2. a11y.css</h3>
+<div class="paragraph">
+<p><em>a11y.css</em> (<span class="URL"><a href="https://npmjs.com/a11y.css" class="bare">npmjs.com/a11y.css</a></span>) est une feuille de styles CSS
+à injecter dans une page web pour rendre visible des incohérences.
+Parmi ces dernières, nous retrouvons des boutons sans intitulé, l&#8217;absence
+de langue du document ou encore l&#8217;absence de bouton de validation de formulaire
+ou de texte alternatif d&#8217;images.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lighthouse">14.3. lighthouse</h3>
+<div class="paragraph">
+<p><em>lighthouse</em> (<span class="URL"><a href="https://npmjs.com/lighthouse" class="bare">npmjs.com/lighthouse</a></span>) est l&#8217;outil d&#8217;analyse de
+performances, de référencement (SEO) et d&#8217;accessibilité embarqué dans
+le navigateur web Google&#160;Chrome.</p>
+</div>
+<div class="paragraph">
+<p>Ce module&#160;<code>npm</code> le rend utilisable depuis un terminal et écrit le rapport
+dans un fichier&#160;HTML.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="storybook_addon_a11y">14.4. storybook-addon-a11y</h3>
+<div class="paragraph">
+<p><em>storybook-addon-a11y</em> (<span class="URL"><a href="https://npmjs.com/storybook-addon-a11y" class="bare">npmjs.com/storybook-addon-a11y</a></span>)
+est une extension au module <a href="#storybook"><em>storybook</em></a>.
+Le module signale les problèmes d&#8217;accessibilité au niveau de chaque composant.
+Le suivi est ainsi fait en continu, au plus proche des composants distribués
+et utilisés dans les applications.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="travailler_avec_des_images_des_sons_et_des_vidéos">15. Travailler avec des images, des sons et des vidéos</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="sharp">15.1. sharp</h3>
+<div class="paragraph">
+<p><em>sharp</em> (<span class="URL"><a href="https://npmjs.com/sharp" class="bare">npmjs.com/sharp</a></span>) est un module de redimensionnement
+et de transformation d&#8217;images JPG, PNG et WebP écrit en JavaScript et&#160;C&#43;&#43;.
+Il ne nécessite pas de programme externe et est compatible avec une approche
+en flux.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="next">
+  <a href="#top">Haut de page</a> ou
+  <a href="https://oncletom.io/node.js/#apprendre-node-js-en-ligne" class="read-more">retour au sommaire</a>.
+</section>
+</body>
+</html>

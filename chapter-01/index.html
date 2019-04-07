@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<title>Histoire, écosystème et gouvernance</title>
+<style>
+#header,
+#content,
+#footer {
+  margin: 2rem auto;
+  max-width: 46rem;
+}
+
+#header {
+  margin-top: 0;
+}
+
+.title,
+#toctitle {
+  color: var(--dark-accent);
+}
+
+a {
+  /* white-space: nowrap; */
+}
+
+img, iframe, video, audio {
+  max-width: 100%;
+}
+
+p {
+  font-weight: normal;
+}
+
+/* Taken out from book.css */
+dl dt {
+  margin-bottom: 0.3125em;
+  font-weight: bold;
+}
+dl dd {
+  margin-bottom: 1.25em;
+}
+
+dt,
+th.tableblock,
+td.content,
+div.footnote {
+  text-rendering: optimizeLegibility;
+}
+
+.literalblock pre,
+.literalblock pre[class],
+.listingblock pre,
+.listingblock pre[class] {
+  overflow: auto;
+  word-wrap: break-word;
+}
+.literalblock pre.nowrap,
+.literalblock pre[class].nowrap,
+.listingblock pre.nowrap,
+.listingblock pre[class].nowrap {
+  overflow-x: auto;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.listingblock {
+  margin: 0 0 2em;
+}
+.listingblock > .content {
+  position: relative;
+}
+.listingblock > .title {
+  font-weight: bold;
+}
+.listingblock code[data-lang]::before {
+  display: none;
+  content: attr(data-lang);
+  position: absolute;
+  font-size: 0.75em;
+  top: 1em;
+  right: 1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #999;
+}
+.listingblock:hover code[data-lang]::before {
+  display: block;
+}
+.listingblock.terminal pre .command::before {
+  content: attr(data-prompt);
+  padding-right: 0.5em;
+  color: #999;
+}
+
+td.hdlist1,
+td.hdlist2 {
+  vertical-align: top;
+  padding-right: 0.625em;
+}
+td.hdlist1 {
+  font-weight: bold;
+}
+.literalblock + .colist,
+.listingblock + .colist {
+  margin-top: -1.5em;
+}
+.colist td:not([class]):first-child {
+  padding: 0.4em 0.75em 0 0.75em;
+  line-height: 1;
+  vertical-align: top;
+}
+.colist td:not([class]):first-child img {
+  max-width: none;
+}
+.colist td:not([class]):last-child {
+  padding: 0.25em 0;
+}
+
+/* Custom classes */
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.RemarquePreTitre,
+#toctitle {
+  font-style: normal;
+  font-weight: bold;
+}
+  .RemarquePreTitre::after {
+    content: "•";
+    padding-left: 5px;
+  }
+.admonitionblock {
+}
+.admonitionblock > table,
+.exampleblock {
+  --commented: rgba(17, 17, 68, .65);
+  --border-radius-base: 8px;
+
+  background-color: #fafafa;
+  border: 1px solid var(--dark-shade);
+  border-left: none;
+  border-right: none;
+  margin: 1.5em 0;
+  padding: 1em;
+}
+.exampleblock .title {
+  font-weight: bold;
+}
+.icon .title {
+  font-size: 2em;
+}
+  .admonitionblock > table td.icon {
+    display: none;
+  }
+
+  @media screen and (min-width: 769px) {
+    .admonitionblock > table td.icon {
+      display: table-cell;
+    }
+  }
+
+  .admonitionblock > table td.icon {
+    padding-right: 1em;
+  }
+  .admonitionblock > table td.icon img {
+    max-width: none;
+  }
+
+.colist ol {
+  margin-left: 1.5em;  /* aligns with the listing edge */
+  padding-left: 0;
+  font-weight: bold;   /* makes it stand out more */
+}
+  .colist ol p {
+    margin: 0 0 .5em;
+  }
+.listingblock:not(.prismjs) pre,
+.language-bash.hljs {
+  background: #323232;
+  color: wheat;
+  margin: 0;
+  padding: 1rem;
+}
+.language-bash.hljs .hljs-built_in,
+.language-bash.hljs .hljs-builtin-name {
+  color: white;
+}
+.language-bash.hljs .hljs-string {
+  color: lightgreen;
+}
+.language-bash.hljs .hljs-variable {
+  color: lightskyblue;
+}
+.keyseq {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.language-bash.hljs .keyseq {
+  color: white;
+}
+.language-bash.hljs kbd {
+  background: transparent;
+  box-shadow: none;
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0.1em 0.4em;
+}
+.listingblock pre.highlightjs,
+.listingblock.prismjs pre {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+.listingblock pre.highlightjs > code,
+.listingblock.prismjs .highlight {
+  border-left: 4px solid var(--dark-accent);
+  padding-left: 1em;
+  font-size: .8em;
+}
+.listingblock pre.highlightjs > code.language-bash {
+  border-left-color: limegreen;
+}
+
+.hdlist .hdlist1 {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td > p:first-child {
+  margin-top: 0;
+}
+
+.hljs-comment {
+  font-style: normal !important;
+}
+
+#toc.toc2 a {
+  text-decoration: none;
+  white-space: normal;
+}
+  #toc.toc2 a:hover,
+  #toc.toc2 a:focus {
+    text-decoration: underline;
+  }
+
+#toc.toc2 ul {
+  list-style: none;
+}
+
+  #toc.toc2 > ul {
+    padding-left: 0;
+  }
+
+  #toc.toc2 ul ul {
+    padding-left: 1em;
+  }
+
+@media screen and (min-width: 769px) {
+  body {
+    padding-left: 25vw !important;
+  }
+
+  #header,
+  #content,
+  #footer {
+    margin-left: 0;
+  }
+
+  #toc.toc2 {
+    height: 100%;
+    left: 0;
+    max-width: 20vw;
+    overflow: auto;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+
+  #toc.toc2 > ul {
+    font-size: 0.85em;
+  }
+
+  #toc li.active > a[href^="#"],
+  [id]:target {
+    background: #ffc;
+  }
+}
+
+.admonitionblock.context-callout > table {
+  border-width: 5px;
+  border-color: var(--brand-color);
+}
+
+</style>
+<link rel="stylesheet" href="https://oncletom.io/styles/blog.css?v=v3.3.2">
+<!-- WebMentions -->
+<link rel="pingback" href="https://webmention.io/oncletom.io/xmlrpc">
+<link rel="webmention" href="https://webmention.io/oncletom.io/webmention">
+<!-- Open Graph -->
+<meta property="og:type" content="book">
+<meta property="og:book:author" content="Thomas Parisot">
+<meta property="og:book:isbn" content="978-2212139938">
+<meta property="og:book:release_date" content="978-2212139938">
+<meta property="og:book:tag" content="Node.js">
+<meta property="og:book:tag" content="JavaScript">
+<meta property="og:book:tag" content="npm">
+<meta property="og:book:tag" content="Développement front-end">
+<meta property="og:book:tag" content="Développement back-end">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Node.js • Apprendre par la pratique">
+<!-- Twitter OpenGraph -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oncletom">
+<meta name="twitter:creator" content="@oncletom">
+<style type="text/css" class="prism-theme">/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+.listingblock [data-bash-subs]::before {
+  content: attr(data-bash-subs) " ";
+  opacity: .5; }
+
+.listingblock [data-bash-conum]::before {
+  content: "(" attr(data-bash-conum) ")";
+  font-weight: bold;
+  opacity: .7;
+}</style>
+<script>
+(function(d){
+  d.addEventListener('DOMContentLoaded', function(){
+    const script = d.createElement('script');
+    script.src = 'https://unpkg.com/menuspy@1.3.0/dist/menuspy.js';
+    script.async = true;
+    script.onload = () => new MenuSpy(document.querySelector('#toc'), {enableLocationHash: false});
+    d.body.appendChild(script);
+  });
+})(document);</script>
+<style type="text/css">
+#toc li.active > a[href^="#"] {
+  font-weight: bold;
+}
+#toc li.active > a[href^="#"]::before {
+  content: "▶ ";
+  display: inline-block;
+  position: absolute;
+  margin-left: -1.2em;
+  font-size: .8em;
+  margin-top: 3px;
+}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Histoire, écosystème et gouvernance</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table des matières</div>
+<ul class="sectlevel1">
+<li><a href="#node_js_un_environnement_dexécution_javascript">1. Node.js : un environnement d&#8217;exécution JavaScript</a></li>
+<li><a href="#bref_historique">2. Bref historique</a></li>
+<li><a href="#les_raisons_du_succès">3. Les raisons du succès</a></li>
+<li><a href="#avoiding-node">4. Pourquoi éviter Node.js ?</a></li>
+<li><a href="#pourquoi_choisir_node_js">5. Pourquoi choisir Node.js ?</a></li>
+<li><a href="#lécosystème_des_acteurs">6. L&#8217;écosystème des acteurs</a>
+<ul class="sectlevel2">
+<li><a href="#joyent">6.1. Joyent</a></li>
+<li><a href="#npm">6.2. npm</a></li>
+<li><a href="#npm-inc">6.3. npm,&#160;Inc.</a></li>
+<li><a href="#iojs">6.4. io.js</a></li>
+<li><a href="#node-foundation">6.5. Node.js Foundation</a></li>
+<li><a href="#nodejitsu">6.6. Nodejitsu</a></li>
+<li><a href="#node_security_platform">6.7. Node Security Platform</a></li>
+</ul>
+</li>
+<li><a href="#governance">7. Gouvernance du projet</a></li>
+<li><a href="#conclusion">8. Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock tip context-callout">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Vous êtes en train de lire le
+<a href="https://oncletom.io/node.js/">livre &#8220;Node.js&#8221;</a>, écrit par
+<a href="https://oncletom.io">Thomas Parisot</a> et publié par les
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Éditions Eyrolles</a>.</p>
+</div>
+<div class="paragraph">
+<p>Il vous plaît&#160;? Achetez-le en ligne sur
+<a href="https://amzn.to/2E58PEw">Amazon</a>,
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Eyrolles</a> ou
+<a href="https://www.placedeslibraires.fr/livre/9782212139938">Place des Libraires</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Faisons le point sur ce qu&#8217;est Node pour mieux comprendre les discussions qui
+animent la communauté et d&#8217;où vient cette plate-forme qui fait tant parler d&#8217;elle.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<div class="title">Sommaire</div>
+<ul>
+<li>
+<p>Bref historique</p>
+</li>
+<li>
+<p>Les raisons du succès</p>
+</li>
+<li>
+<p>Pourquoi éviter Node</p>
+</li>
+<li>
+<p>Pourquoi choisir Node</p>
+</li>
+<li>
+<p>L&#8217;écosystème des acteurs</p>
+</li>
+<li>
+<p>Gouvernance du projet</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quoteblock abstract">
+<blockquote>
+<div class="paragraph">
+<p>Node.js est-il un langage de programmation&#160;?
+Node.js est-il un framework JavaScript&#160;?
+Qu&#8217;en restera-t-il une fois la frénésie retombée&#160;?</p>
+</div>
+<div class="paragraph">
+<p>Ce chapitre permet de <strong>comprendre pourquoi Node a émergé</strong> et comment.
+Surtout, il vous permettra de comprendre les choix techniques
+à l&#8217;origine des fondations de Node et ce que l&#8217;utiliser
+peut vous apporter, que ce soit dans un contexte personnel ou professionnel.</p>
+</div>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="node_js_un_environnement_dexécution_javascript">1. Node.js : un environnement d&#8217;exécution JavaScript</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Node.js n&#8217;est pas un langage de programmation.
+Ce n&#8217;est pas non plus un framework JavaScript.
+<strong>Node.js est un environnement d&#8217;exécution JavaScript</strong>.</p>
+</div>
+<div class="paragraph">
+<p>La différence entre ces trois désignations peut sembler subtile, futile voire
+inutile, mais le terme "environnement" est la véritable nature de Node.</p>
+</div>
+<div class="paragraph">
+<p>Exécuter du JavaScript côté serveur n&#8217;est pas une révolution.
+Netscape Enterprise Server s&#8217;y est déjà essayé au milieu des années 1990,
+juste après son introduction dans le navigateur web Netscape Navigator.</p>
+</div>
+<div class="paragraph">
+<p>En 1997, la société Netscape s&#8217;est attelée à créer Rhino
+(<span class="URL"><a href="https://www.mozilla.org/rhino/" class="bare">www.mozilla.org/rhino/</a></span>), un environnement d&#8217;exécution JavaScript
+tournant sous Java disponible sous licence libre.
+C&#8217;était un des projets liés à la réécriture de Netscape Navigator en Java.
+Si la société a depuis fermé ses portes, <em>Rhino</em> a entraîné l&#8217;émergence de projets
+utiles aux développeurs&#160;web.</p>
+</div>
+<div class="paragraph">
+<p>Entre-temps, le langage JavaScript évolue, le Web&#160;2.0 émerge des cendres de la
+première bulle Internet et d&#8217;autres initiatives voient le jour dans les années 2000
+comme APE (<em>Ajax Push Engine</em>, <span class="URL"><a href="http://ape-project.org/" class="bare">ape-project.org/</a></span>).
+Elles mettent également en œuvre JavaScript côté serveur.
+JavaScript était surtout un choix logique de partage de code entre client et
+serveur pour Comet, le précurseur des <a href="../chapter-09/index.html#websockets">WebSockets</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Glossaire</span> Comet</div>
+<div class="paragraph">
+<p>Comet est un terme regroupant les différentes tentatives techniques permettant
+à un serveur web d&#8217;envoyer des données à un client sans que celui-ci ne les ait
+demandées initialement.</p>
+</div>
+<div class="paragraph">
+<p>Parmi ces techniques, on retrouve le <em>long polling</em>, consistant à conserver une
+connexion Ajax ouverte pendant la durée de vie d&#8217;une page web.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Glossaire</span> WebSockets</div>
+<div class="paragraph">
+<p>WebSockets est un protocole basé sur&#160;TCP.</p>
+</div>
+<div class="paragraph">
+<p>Il maintient une connexion HTTP active entre un client et un serveur et y fait
+transiter les données de manière bidirectionnelle.</p>
+</div>
+<div class="paragraph">
+<p>Ce protocole sera probablement rendu obsolète par HTTP/2, le successeur de HTTP/1.1.
+HTTP/2 a été lancé par Google sous le nom de protocole SPDY (prononcer <em>speedy</em>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title">Cas d&#8217;utilisation modernes de Rhino</div>
+<div class="paragraph">
+<p>Rhino est toujours utile dès qu&#8217;un projet Java implique du JavaScript.</p>
+</div>
+<div class="paragraph">
+<p>Google l&#8217;utilise comme environnement d&#8217;exécution de ses <a href="https://gsuite-developers.googleblog.com/2012/11/using-open-source-libraries-in-apps.html">Apps Scripts</a>.
+Ces scripts sont destinés à développer des extensions et des interactions
+supplémentaires pour les documents Google&#160;Drive.</p>
+</div>
+<div class="paragraph">
+<p>Rhino est également employé dans YUI Compressor (<span class="URL"><a href="https://yui.github.io/yuicompressor/" class="bare">yui.github.io/yuicompressor/</a></span>),
+un optimiseur CSS et JavaScript créé par Yahoo,
+désormais surpassé par Closure Compiler (<span class="URL"><a href="https://developers.google.com/closure/compiler/" class="bare">developers.google.com/closure/compiler/</a></span>)
+et UglifyJS (<span class="URL"><a href="https://npmjs.com/uglify-js" class="bare">npmjs.com/uglify-js</a></span>).
+Ce dernier est écrit en JavaScript et repose sur Node.
+La boucle est bouclée.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Node représente un <strong>environnement d&#8217;exécution</strong> (<em>runtime</em>), un
+<strong>ensemble d&#8217;API JavaScript</strong> ainsi qu&#8217;une <strong>machine virtuelle&#160;(VM) JavaScript</strong>
+performante (parseur, interpréteur et compilateur) capable d&#8217;accéder à des ressources
+système telles que des fichiers (<em>filesystem</em>) ou des connexions réseau (<em>sockets</em>).
+</p>
+</div>
+<div class="paragraph">
+<p>Typiquement, une personne développant en Node écrit du code se basant sur les
+API à disposition.
+Ce code est lu par le <em>runtime</em> Node, qui le transmet à la&#160;VM JavaScript.
+Enfin, cette dernière traduit le programme en langage machine (<em>bytecode</em>)
+avant que le programme soit effectivement exécuté par le processeur.</p>
+</div>
+<div class="paragraph">
+<p>Pour comprendre comment Node a opté pour cette approche, retournons en 2009,
+lorsque son créateur Ryan&#160;Dahl cherche à résoudre élégamment un problème de
+performance de programmation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="bref_historique">2. Bref historique</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>En 2006, Ryan&#160;Dahl est un étudiant américain en troisième année de doctorat
+de mathématiques.
+Son but initial était de devenir professeur dans cette matière, mais il prend la
+décision de ne pas terminer sa thèse et d&#8217;entreprendre un voyage au&#160;Chili.</p>
+</div>
+<div class="paragraph">
+<p>Alors qu&#8217;il cherche à effectuer des petits boulots, il y rencontre une autre
+personne développant des sites web.
+Ruby&#160;on&#160;Rails connaît un succès grandissant et attire son attention.
+Alors que Ryan envisage d&#8217;utiliser Rails, il découvre avec horreur la lenteur
+du framework et cherche à en découvrir les causes.</p>
+</div>
+<div class="paragraph">
+<p>Ryan débute alors sa quête des applications web performantes et découvre
+Mongrel, un serveur HTTP écrit en Ruby.
+Il est séduit par deux choses&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>la possibilité d&#8217;inclure un serveur HTTP comme bibliothèque applicative&#160;;</p>
+</li>
+<li>
+<p>la simplicité de fonctionnement&#160;: recevoir une requête HTTP et
+décider soi-même de la réponse à apporter.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>La quête initiale le dirige alors vers la possibilité de <strong>créer un serveur web non bloquant</strong>&#160;;
+en d&#8217;autres termes, un serveur capable, dans un même processus, de traiter d&#8217;autres
+requêtes en attendant de renvoyer la réponse initiale.</p>
+</div>
+<div class="paragraph">
+<p>Nous sommes alors en 2008 et le site de partage de photos Flickr innove avec un
+nouveau système de téléversement d&#8217;images&#160;: une <strong>barre de progression</strong> représentant
+le statut du téléversement remplace alors la page figée&#160;– effet  inhérent à l&#8217;envoi
+de fichiers depuis un formulaire&#160;HTML.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://www.flickr.com/photos/schill/7112862941/"><img src="./images/7112862941_3b8c8e9916_o_d.png" alt="7112862941 3b8c8e9916 o d" width="85%"></a>
+</div>
+<div class="title">Figure 1. Interface du service Flickr après et avant l&#8217;introduction du téléversement progressif</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Lien</span> Annonce du nouveau Flickr Uploadr</div>
+<div class="paragraph">
+<p>L&#8217;équipe d&#8217;ingénierie de Flickr explique dans un article (<span class="URL"><a href="https://wp.me/p2DMyG-ok" class="bare">wp.me/p2DMyG-ok</a></span>)
+comment elle a contourné le problème  de l&#8217;upload via un formulaire classique.
+Ce problème gelait la fenêtre du navigateur pendant la durée du téléversement.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>C&#8217;est le déclic pour Ryan&#160;: bien que Mongrel ait déjà un plug-in pour cette fonctionnalité,
+il souhaite simplifier davantage le travail pour les développeurs.
+Il reproduit le mécanisme avec succès en&#160;C.
+Les développeurs web jugeant la solution trop complexe, Ryan tente la même
+approche avec d&#8217;autres langages, comme Python, Lua ou même Haskell.
+Il se heurte au sempiternel problème des ressources bloquantes des différents interpréteurs.</p>
+</div>
+<div class="paragraph">
+<p>Le deuxième déclic se produit en janvier 2009,
+lorsque JavaScript émerge dans une discussion entre développeurs.
+<em>Eurêka</em>&#160;!
+La machine virtuelle JavaScript&#160;V8 de Google a été libérée en open source
+depuis quelques mois et Apple, Microsoft, Mozilla et Google se livrent à une
+course à la performance de leurs machines virtuelles respectives.
+En ligne de mire, il faut rendre la navigation sur mobile et sur ordinateur plus
+rapide et moins gourmande en ressources.</p>
+</div>
+<div class="paragraph">
+<p>Ryan admet que JavaScript dispose des caractéristiques idéales, même s&#8217;il n&#8217;est
+pas un adepte du langage&#160;: fonctions anonymes, <em>closures</em> et l'<em>event loop</em>
+(dans le DOM en tout cas).
+Il manque juste aux machines virtuelles JavaScript la capacité d&#8217;accéder à des
+<em>sockets</em>, au système de fichiers et à d&#8217;autres fonctions système.</p>
+</div>
+<div class="paragraph">
+<p>Ryan quitte alors son travail, s&#8217;inspire de ses travaux de modules non bloquants
+pour Nginx et s&#8217;affaire pendant six mois à marier JavaScript, V8 et l&#8217;environnement
+du système d&#8217;exploitation.
+De ses efforts naît Node.js.</p>
+</div>
+<div class="paragraph">
+<p>Il présente alors officiellement son travail (<span class="URL"><a href="https://gist.github.com/ry/a3d0bbbff196af633995" class="bare">gist.github.com/ry/a3d0bbbff196af633995</a></span>
+et <span class="URL"><a href="https://www.youtube.com/watch?v=ztspvPYybIY" class="bare">www.youtube.com/watch?v=ztspvPYybIY</a></span>) qui suscite l&#8217;enthousiasme
+et attire l&#8217;attention.</p>
+</div>
+<div class="videoblock">
+<div class="title">Présentation de Node.js par Ryan Dahl lors de JSConf.eu 2009</div>
+<div class="content">
+<iframe width="640" height="480" src="https://www.youtube.com/embed/ztspvPYybIY?rel=0&amp;hl=fr" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;entreprise américaine Joyent l&#8217;embauche à plein temps pour continuer le développement de Node.
+Ils pressentent que cet outil répondra à leurs projets de <em>datacenter</em> et d&#8217;hébergement.
+<strong>Node et sa communauté se constituent</strong> et continuent leur chemin depuis lors&#160;;
+pour une simple affaire de barre de progression et une obsession pour la
+perception de rapidité.</p>
+</div>
+<div class="paragraph">
+<p>En 2018, l&#8217;avenir de Node est au beau fixe avec plus de 2&#160;000
+contributeurs et plus de 782&#160;000 modules publics hébergés sur
+le registre&#160;<code>npm</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Vidéo</span> <em>History of Node.js</em></div>
+<div class="paragraph">
+<p>La vidéo <span class="URL"><a href="https://youtube.com/watch?v=SAc0vQCC6UQ" class="bare">youtube.com/watch?v=SAc0vQCC6UQ</a></span> est une présentation
+donnée par Ryan&#160;Dahl, le créateur de Node, au cours de l&#8217;année 2011.
+C&#8217;est la première fois qu&#8217;il intervient pour expliquer son parcours et la
+genèse du projet.</p>
+</div>
+<div class="paragraph">
+<p>Voilà peut-être un élément qui figurera dans les livres d&#8217;histoire&#160;!</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<iframe width="640" height="480" src="https://www.youtube.com/embed/SAc0vQCC6UQ?rel=0&amp;hl=fr" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="les_raisons_du_succès">3. Les raisons du succès</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>La tension et l&#8217;attention autour de JavaScript sont énormes en 2009.
+La mode du tout Ajax et des <em>mashups</em> s&#8217;est estompée, mais une chose en est
+ressortie&#160;: JavaScript n&#8217;a plus à rougir ni à être relégué au rang de sous-langage.
+Les initiatives JSLint, CommonJS et les <em>good&#160;parts</em> de
+Douglas&#160;Crockford sont pour beaucoup dans la création de code élégant.</p>
+</div>
+<div class="paragraph">
+<p>D&#8217;un autre côté, les entreprises développant des navigateurs web se livrent à
+une féroce compétition d&#8217;optimisation.
+Google, Mozilla et Apple ont besoin de navigateurs rapides pour améliorer leurs
+parts de marché sur les ordinateurs, mais aussi les téléphones et tablettes.
+On peut considérer que JavaScript est à cette époque le langage de programmation
+bénéficiant du plus grand investissement financier et humain en&#160;R&amp;D.</p>
+</div>
+<div class="paragraph">
+<p>La communauté JavaScript accueille avec ferveur Node lors
+de la conférence JSConf Europe en&#160;2009.
+Elle contribue à son amélioration et à la création d&#8217;un écosystème
+de modules réutilisables.</p>
+</div>
+<div class="paragraph">
+<p>Il faudra attendre la création de <code>npm</code> au tout début 2010,
+qui a pour but d&#8217;héberger des modules Node et de faciliter
+leur installation.
+Dès lors, une simple commande suffit pour inclure dans nos projets du
+code écrit par d&#8217;autres personnes.</p>
+</div>
+<div class="paragraph">
+<p><code>npm</code> devient une pierre angulaire, à tel point qu&#8217;il est inclus dans
+l&#8217;installation de Node à partir de la version&#160;0.6.3 en novembre&#160;2011.
+La communauté Node fait le reste du travail
+en constituant un <strong>écosystème de modules riches et variés</strong>&#160;:
+frameworks web, pilotes de bases de données,
+serveurs HTTP, serveurs WebSockets, préprocesseurs CSS,
+CoffeeScript, parseurs, proxy, serveurs de log, modules de tests,
+langages de <em>templating</em>,&#160;etc.</p>
+</div>
+<div class="paragraph">
+<p>Malgré ses défauts de jeunesse, Node réussit le tour
+de force de la performance.
+La recette de l&#8217;accès non-bloquant a-t-elle fonctionné&#160;?
+À en croire les personnes ayant migré vers Node pour ces raisons,
+la réponse est "oui".</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="avoiding-node">4. Pourquoi éviter Node.js ?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Il est tentant de vouloir suivre un chemin populaire,
+d&#8217;adopter le dernier outil ou framework à la&#160;mode.</p>
+</div>
+<div class="paragraph">
+<p>J&#8217;ai pourtant envie d&#8217;écrire qu&#8217;il n&#8217;est pas forcément nécessaire
+de passer à&#160;Node.</p>
+</div>
+<div class="paragraph">
+<p>Si votre équipe dispose déjà de fortes compétences,
+d&#8217;aisance et de productivité dans un autre langage,
+il n&#8217;y a pas de raison de passer à Node.
+Cette équipe a tout intérêt à capitaliser sur ses
+connaissances pour être efficace et minimiser la dette technique
+de ses applications.</p>
+</div>
+<div class="paragraph">
+<p>L'<strong>offre logicielle est également à prendre en compte</strong>&#160;: CMS,
+systèmes e-commerce ou autre application prête à l&#8217;emploi
+que la communauté Node n&#8217;offrirait pas à ce&#160;jour.</p>
+</div>
+<div class="paragraph">
+<p>Un facteur important et souvent oublié est
+<strong>l&#8217;acceptation et la compréhension de l&#8217;utilisation de Node</strong> par une équipe.
+Il est alors plus intéressant de comprendre les raisons
+d&#8217;un blocage que de forcer ou d&#8217;imposer cet outil.
+La solution peut être simple&#160;: balayer des idées reçues,
+animer un atelier technique ou inviter un·e expert·e
+pour répondre aux questions, interrogations et utilité d&#8217;un tel changement.</p>
+</div>
+<div class="paragraph">
+<p>Node ne vous aidera probablement pas si vous cherchez
+à <strong>réaliser des choses contre-productives pour JavaScript</strong>.
+Je pense à des opérations mathématiques de très haute précision,
+de l&#8217;apprentissage automatique avancé (<em>machine learning</em>) ou
+du calcul scientifique poussé par exemple.
+Il est difficile d&#8217;égaler la richesse fonctionnelle de Python
+et de ses bibliothèques (SciPy, NumPy, scikit-learn)
+ou la finesse de gestion de mémoire de&#160;C&#43;&#43; ou de&#160;Rust.</p>
+</div>
+<div class="paragraph">
+<p><strong>Node ne résout pas les problèmes par magie</strong>.
+Cela reste avant tout une affaire de compétences et d&#8217;expérience.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pourquoi_choisir_node_js">5. Pourquoi choisir Node.js ?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Node est un choix de langage principal tout à fait viable.</p>
+</div>
+<div class="paragraph">
+<p>Il est préférable que ce choix soit une <strong>volonté partagée</strong> entre membres d&#8217;une équipe,
+qu&#8217;il soit motivé par ce que Node apporte et simplifie pour&#160;vous.</p>
+</div>
+<div class="paragraph">
+<p>Node est tout désigné pour créer des <strong>applications à nombreuses actions concurrentes</strong>&#160;;
+autrement dit, dès qu&#8217;une application ou programme fait appel à des accès réseau,
+aux fichiers ou au système.</p>
+</div>
+<div class="paragraph">
+<p>Node est également adapté pour <strong>transformer des flux importants de données</strong>
+en économisant la mémoire.
+Cela concerne aussi bien la lecture de fichiers CSV, JSON ou XML de plusieurs gigaoctets.</p>
+</div>
+<div class="paragraph">
+<p>Le mécanisme de modules de Node encourage à respecter le <em>principe de responsabilité unique</em>.
+Nos applications seront <strong>modulaires et autonomes</strong> au lieu d&#8217;être lourdes et monolithiques.</p>
+</div>
+<div class="paragraph">
+<p>Les développeurs et développeuses verront dans Node leur
+<strong>compagnon idéal pour compiler, générer, assembler et minifier</strong> leurs applications <em>front-end</em>.
+Le bénéfice évident est le partage d&#8217;un outillage CSS, JavaScript et HTML
+entre équipes, par projet.</p>
+</div>
+<div class="paragraph">
+<p>Conséquence directe, Node offre l&#8217;opportunité d'<strong>unifier vos équipes de développement <em>front-end</em> et <em>back-end</em></strong>.
+Il devient un environnement commun, un langage partagé entre les individus,
+qui peuvent se focaliser sur des fonctionnalités quelle que soit la cible,
+aussi bien pour le Web, un serveur ou une&#160;API.</p>
+</div>
+<div class="paragraph">
+<p>Node est un environnement adapté à <strong>l&#8217;apprentissage et l&#8217;amélioration de nos connaissances en JavaScript</strong>.
+On peut désormais penser sur du long terme, en se souciant moins de devoir supporter de vieilles versions de Node ou de navigateurs web tant il est facile de passer d&#8217;une version du langage à une autre.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lécosystème_des_acteurs">6. L&#8217;écosystème des acteurs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Les développements initiaux de Node sont en majorité financés par Joyent,
+à commencer par l&#8217;embauche de Ryan&#160;Dahl.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;écosystème des acteurs se diversifie avec le temps.
+Avec de nouveaux employés chez Joyent, puis avec des contributeurs externes
+qui voient un avenir prometteur dans le projet.
+S&#8217;ensuivent des entreprises privées comme IBM ou PayPal, qui sponsorisent le
+projet ou le salaire de contributeurs.</p>
+</div>
+<div class="sect2">
+<h3 id="joyent">6.1. Joyent</h3>
+<div class="paragraph">
+<p>Joyent est une entreprise américaine fondée en&#160;2004.
+Elle propose à l&#8217;origine des services de collaborations
+en ligne&#160;: documents, calendriers, courriels,&#160;etc.</p>
+</div>
+<div class="paragraph">
+<p>Elle se lance sur le marché de l&#8217;hébergement fin&#160;2005
+par le biais d&#8217;une acquisition-fusion.
+Parmi ses clients, on dénombre le site de Ruby&#160;on&#160;Rails
+(société Basecamp), WordPress.com (société Automattic) ou
+encore le site historique A&#160;List&#160;Apart (<span class="URL"><a href="https://alistapart.com" class="bare">alistapart.com</a></span>).</p>
+</div>
+<div class="paragraph">
+<p>En&#160;2009, Joyent se spécialise dans les infrastructures et
+plates-formes à la demande et à haute performance.
+L&#8217;entreprise se concentre sur des solutions dites temps réel
+pour les réseaux sociaux, applications mobiles et compagnies
+de jeux vidéo en ligne.</p>
+</div>
+<div class="paragraph">
+<p>En avril&#160;2011, Joyent dépose la marque <em>Node.js</em> ainsi que son&#160;logo.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/nodejs-new-pantone-black.png" alt="nodejs new pantone black" width="40%">
+</div>
+<div class="title">Figure 2. Logo officiel de Node.js</div>
+</div>
+<div class="paragraph">
+<p>En février&#160;2015, Joyent transfère la gestion de Node à la
+<a href="#node-foundation">Node.js&#160;Foundation</a>, mais reste propriétaire de
+la marque et de son&#160;logo.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Lien</span> Annonce du dépôt de marque</div>
+<div class="paragraph">
+<p>Ryan&#160;Dahl, alors développeur actif de Node, annonce le dépôt de marque par
+l&#8217;entreprise Joyent sur le blog officiel du projet
+(<span class="URL"><a href="https://nodejs.org/en/blog/uncategorized/trademark/" class="bare">nodejs.org/en/blog/uncategorized/trademark/</a></span>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="npm">6.2. npm</h3>
+<div class="paragraph">
+<p><em>npm</em> est une dénomination qui abrite plusieurs concepts&#160;: un outil en ligne
+de commandes, un registre de modules ainsi qu&#8217;une entreprise privée à but lucratif
+(<a href="#npm-inc">npm,&#160;Inc.</a>).</p>
+</div>
+<div class="paragraph">
+<p>À l&#8217;origine, c&#8217;est un module Node créé par Isaac&#160;Schlueter,
+qui sert à installer des modules tiers et à les lier sous forme d&#8217;un
+arbre de dépendances.
+Il est l’équivalent de RubyGems (<span class="URL"><a href="https://rubygems.org" class="bare">rubygems.org</a></span>) pour Ruby, de
+CPAN (<span class="URL"><a href="http://www.cpan.org" class="bare">www.cpan.org</a></span>) pour Perl ou encore de PyPI
+(<span class="URL"><a href="https://pypi.python.org/pypi" class="bare">pypi.python.org/pypi</a></span>) pour Python.</p>
+</div>
+<div class="paragraph">
+<p>Nous reviendrons plus en détail sur son utilisation dans le
+<a href="../chapter-05/index.html">chapitre&#160;5</a>.</p>
+</div>
+<div class="paragraph">
+<p><code>npm</code> désigne également le registre principal qui héberge les modules des
+communautés Node&#160;: <span class="URL"><a href="https://npmjs.com" class="bare">npmjs.com</a></span>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Lien</span> Annonce de l&#8217;inclusion de <em>npm</em> dans Node</div>
+<div class="paragraph">
+<p><code>npm</code> est installé par défaut avec Node depuis la version&#160;0.6.3,
+sortie en novembre&#160;2011.
+Vous retrouverez son annonce sur <span class="URL"><a href="https://nodejs.org/en/blog/release/v0.6.3/" class="bare">nodejs.org/en/blog/release/v0.6.3/</a></span>.</p>
+</div>
+<div class="paragraph">
+<p>Auparavant, il fallait l&#8217;installer séparément.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="npm-inc">6.3. npm,&#160;Inc.</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Isaac&#160;Schlueter est embauché par Joyent en septembre&#160;2010.
+Il succède à Ryan&#160;Dahl dans la gestion du projet Node de
+janvier&#160;2012 jusqu&#8217;à janvier&#160;2014, date à laquelle il quitte Joyent
+pour fonder npm,&#160;Inc.
+Cette entreprise a pour but de fournir des solutions professionnelles basées
+sur <code>npm</code> et soutient en parallèle l&#8217;effort open source
+et les coûts d’infrastructure du registre.</p>
+</div>
+<div class="paragraph">
+<p>Elle lève 2,6&#160;millions de dollars en février&#160;2014 pour élaborer
+une nouvelle architecture du registre <code>npm</code>.
+Ce financement a également pour vocation la mise en place d&#8217;une stratégie
+commerciale basée sur les modules privés et les solutions professionnelles.</p>
+</div>
+<div class="paragraph">
+<p>La société npm,&#160;Inc détient les marques npm, npm,&#160;Inc ainsi que
+le logo npm.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/logo-npm.png" alt="logo npm" width="40%">
+</div>
+<div class="title">Figure 3. Logo officiel de npm,&#160;Inc</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="iojs">6.4. io.js</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p><em>io.js</em> est un <em>fork</em> de Node initié par la communauté en décembre&#160;2014
+en raison de la main-mise de Joyent sur les développements et de la communication
+erratique sur le projet.</p>
+</div>
+<div class="paragraph">
+<p>Les objectifs initiaux du projet io.js sont doubles&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>offrir à la communauté Node une gestion transparente, inclusive et ouverte&#160;;</p>
+</li>
+<li>
+<p>fournir un environnement technique plus moderne, une version de&#160;V8
+plus récente, ainsi qu&#8217;une intégration rapide des nouvelles fonctionnalités ECMAScript.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Le projet io.js connaît une fin heureuse en&#160;2015&#160;:
+les efforts du projet et de sa communauté auront abouti à
+la création de la <a href="#node-foundation">Node.js Foundation</a> et
+du Node.js Advisory Board, respectivement l&#8217;organe
+de gestion du projet et le groupe d&#8217;individus qui en a la charge.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Lien</span> Clap de&#160;fin</div>
+<div class="paragraph">
+<p>L&#8217;annonce de la sortie de Node&#160;v4 et de la création de la Node.js Foundation
+est consultable à l&#8217;adresse suivante&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="URL"><a href="https://nodejs.org/en/blog/announcements/foundation-v4-announce/" class="bare">nodejs.org/en/blog/announcements/foundation-v4-announce/</a></span></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="node-foundation">6.5. Node.js Foundation</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>La Node.js Foundation (<span class="URL"><a href="https://foundation.nodejs.org" class="bare">foundation.nodejs.org</a></span>) est l&#8217;un des
+organes officiels de gouvernance du projet Node depuis juin&#160;2015.
+C&#8217;est est une organisation à but non lucratif.
+Elle fait elle-même partie de la Linux Foundation (<span class="URL"><a href="http://collabprojects.linuxfoundation.org" class="bare">collabprojects.linuxfoundation.org</a></span>),
+au même titre que des projets comme Open&#160;Container, Let&#8217;s&#160;Encrypt ou&#160;Xen.</p>
+</div>
+<div class="paragraph">
+<p>La tâche première de la fondation est d&#8217;opérer la fusion entre les bases de
+code de Node et d'<a href="#iojs">io.js</a> en septembre&#160;2015.
+Cela donne lieu à la sortie de Node&#160;v4.0.0.</p>
+</div>
+<div class="paragraph">
+<p>La fondation fait partie intégrante de la <a href="#governance">gouvernance du projet&#160;Node</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nodejitsu">6.6. Nodejitsu</h3>
+<div class="paragraph">
+<p>Nodejitsu est une entreprise privée américaine fondée en&#160;2010.
+Elle vise à fournir des solutions professionnelles autour de Node en tant que
+<em>Platform&#160;as&#160;a&#160;Service</em> (<em>PaaS</em>), ainsi qu&#8217;avec des dépôts <code>npm</code> privés.<br>
+Son activité en fait un concurrent direct de <a href="#joyent">Joyent</a> et de <a href="#npm-inc">npm,&#160;Inc.</a>.</p>
+</div>
+<div class="paragraph">
+<p>Nodejitsu démontre un investissement fort dans la communauté Node en contribuant
+à plusieurs centaines de modules.
+La société prend en charge l&#8217;hébergement du registre <code>npm</code> de&#160;2010 jusqu&#8217;en décembre&#160;2013.</p>
+</div>
+<div class="paragraph">
+<p>En&#160;2013, l&#8217;entreprise lance l&#8217;initiative controversée <a href="#scalenpm">#scalenpm</a>
+(voir l&#8217;encadré ci-après).
+Elle vise à collecter des fonds pour améliorer la performance
+et la stabilité du registre <code>npm</code> (<span class="URL"><a href="https://www.npmjs.com/" class="bare">www.npmjs.com/</a></span>).
+Nodejitsu attise les tensions avec la compagnie npm,&#160;Inc.
+en tentant de lui couper l&#8217;herbe sous le pied.
+Ce ne sera pas un succès.</p>
+</div>
+<div class="paragraph">
+<p>En février&#160;2015, la société américaine GoDaddy rachète Nodejitsu,
+absorbe son équipe et met fin à ses activités commerciales.</p>
+</div>
+<div id="scalenpm" class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Lien</span> La controverse #scalenpm</div>
+<div class="paragraph">
+<p>L&#8217;initiative #scalenpm réunit quelque 326&#160;000&#160;$ auprès
+d&#8217;entreprises privées et de la communauté&#160;Node.</p>
+</div>
+<div class="paragraph">
+<p>Son effort se poursuit dans le but de fournir une meilleure instrumentation et
+une architecture résistant à la montée en puissance de l&#8217;utilisation des modules <code>npm</code>.</p>
+</div>
+<div class="paragraph">
+<p>Cette initiative a suscité une controverse dans la mesure où l’opération s’est
+déroulée lors de la naissance de npm,&#160;Inc et du dépôt de marque associé,
+mais sans entente apparente entre les deux parties.</p>
+</div>
+<div class="paragraph">
+<p>Le contenu est depuis archivé sur
+<span class="URL"><a href="http://web.archive.org/web/20160506191542/https://scalenpm.nodejitsu.com/" class="bare">web.archive.org/web/20160506191542/https://scalenpm.nodejitsu.com/</a></span>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="node_security_platform">6.7. Node Security Platform</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>La Node Security Platform (<span class="URL"><a href="https://nodesecurity.io" class="bare">nodesecurity.io</a></span>&#160;–
+anciennement Node Security Project) est un projet à but lucratif soutenu par
+la société américaine &amp;yet (<span class="URL"><a href="https://andyet.com" class="bare">andyet.com</a></span>).
+Il a été initié au début de l&#8217;année&#160;2013.
+La société, les employés et les logiciels ont été rachetés par <a href="#npm-inc">npm,&#160;Inc.</a> en&#160;2018.</p>
+</div>
+<div class="paragraph">
+<p>Son but est triple&#160;:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>auditer la sécurité de tous les modules <code>npm</code>&#160;;</p>
+</li>
+<li>
+<p>communiquer les failles auprès des auteurs de modules&#160;;</p>
+</li>
+<li>
+<p>communiquer à tous si un module donné dépend de modules vulnérables.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Le projet met à disposition des services et des modules,
+tout en cherchant à impliquer la communauté Node dans le processus.
+Cela concerne aussi bien la déclaration des vulnérabilités
+que leur résolution ou l&#8217;éducation des développeurs à la sécurité.</p>
+</div>
+<div class="paragraph">
+<p>Nous aborderons le sujet de la sécurité tout au long de cet ouvrage&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>au <a href="../chapter-04/index.html#security">chapitre&#160;4</a>&#160;: mettre à jour Node en cas de failles de sécurité&#160;;</p>
+</li>
+<li>
+<p>au <a href="../chapter-06/index.html#security">chapitre&#160;6</a>&#160;: surveiller la santé d&#8217;une application en production&#160;;</p>
+</li>
+<li>
+<p>au <a href="../chapter-07/index.html#security">chapitre&#160;7</a>&#160;: identifier les opérations à risques dans une application&#160;web.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="governance">7. Gouvernance du projet</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Node a connu une forte croissance depuis&#160;2012.
+La gouvernance du projet open source a été effectuée
+par la <a href="#joyent">société Joyent</a>.
+Ses agissements et la direction donnée au projet ont régulièrement
+fait grincer des dents, notamment en entretenant un climat d&#8217;incertitude sur
+la pérennité à long terme, si Node venait à ne plus
+répondre aux intérêts commerciaux de Joyent.</p>
+</div>
+<div class="paragraph">
+<p>Des voix se sont élevées pour critiquer l&#8217;absence d&#8217;une
+organisation ouverte, commercialement neutre et
+ouverte aux contributeurs externes.
+Cela a mené à la création d&#8217;un <em>fork</em> de Node&#160;:&#160;<a href="#iojs">io.js</a>.</p>
+</div>
+<div class="paragraph">
+<p>La réconciliation entre les projets Node et io.js a sérieusement assaini
+les rapports de gouvernance.
+Cela a également apporté une direction et des opportunités plus claires
+de contribuer à la direction du projet.</p>
+</div>
+<div class="paragraph">
+<p>Depuis juin&#160;2015, la gérance du projet est garantie par plusieurs entités&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Technical Steering Committee (TSC)&#160;: planning, décisions techniques, direction du projet, documentation et qualité du projet&#160;;</p>
+</li>
+<li>
+<p><a href="#node-foundation">Node.js Foundation</a> Board&#160;: promotion du projet, relations commerciales&#160;;</p>
+</li>
+<li>
+<p><a href="#node-foundation">Node.js Foundation</a> Community Committee (CommComm)&#160;: relation avec la communauté, <em>onboarding</em>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Le <em>Technical Steering Committee</em> (<span class="URL"><a href="https://github.com/nodejs/TSC" class="bare">github.com/nodejs/TSC</a></span>) réfère
+ses intentions d&#8217;actions au <em>Board</em>.
+Son fonctionnement est régi par une charte co-signée avec ce dernier.
+Ce comité est composé de contributeurs et de collaborateurs individuels.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Anecdote</span> Une fois n&#8217;est pas coutume</div>
+<div class="paragraph">
+<p>Le TSC était autrefois dissocié d&#8217;une autre entité,
+le Core&#160;Technical&#160;Committee (<span class="URL"><a href="https://github.com/nodejs/CTC" class="bare">github.com/nodejs/CTC</a></span>).
+Les conflits de gouvernance ayant résulté dans la création du <em>fork</em> ayo.js
+ont mené à la fusion des deux comités.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;objectif recherché était de rapprocher gouvernance et décisions techniques
+tout en réduisant les opportunités d&#8217;abus de pouvoir par les membres
+techniques éminents.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>À l&#8217;inverse, le <em>Board</em> géré par la <a href="#node-foundation">Node.js Foundation</a>
+est composé essentiellement d&#8217;acteurs de l&#8217;industrie&#160;– dont Google,
+IBM, Joyent et PayPal.
+Certains membres émérites ou choisis par le <em>Board</em> (<span class="URL"><a href="https://github.com/nodejs/board" class="bare">github.com/nodejs/board</a></span>)
+sont des individus agissant en leur nom propre.</p>
+</div>
+<div class="paragraph">
+<p>Les participant·e·s du TSC ont une obligation
+de régularité, de présence et de vote aux différents rendez-vous
+organisés par le comité.
+Ce mécanisme a été choisi afin de préserver la vitalité du projet.</p>
+</div>
+<div class="paragraph">
+<p>Un quota d&#8217;appartenance à une même entreprise a été mis en place
+pour maintenir une diversité de représentation.
+Dans une moindre mesure, ce mécanisme vise à réduire les possibles conflits
+d&#8217;intérêts ou une prise en otage du projet comme a pu le faire
+<a href="#joyent">Joyent</a> avant l&#8217;apparition de ce modèle de gouvernance.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Liens</span> Documentation</div>
+<div class="paragraph">
+<p>Les documents clés régissant le fonctionnement du projet Node
+sont répartis dans les dépôts GitHub des différents acteurs&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="URL"><a href="https://github.com/nodejs/node/blob/master/GOVERNANCE.md" class="bare">github.com/nodejs/node/blob/master/GOVERNANCE.md</a></span></p>
+</li>
+<li>
+<p><span class="URL"><a href="https://github.com/nodejs/TSC/blob/master/TSC-Charter.md" class="bare">github.com/nodejs/TSC/blob/master/TSC-Charter.md</a></span></p>
+</li>
+<li>
+<p><span class="URL"><a href="https://github.com/nodejs/admin/blob/master/CODE_OF_CONDUCT.md" class="bare">github.com/nodejs/admin/blob/master/CODE_OF_CONDUCT.md</a></span></p>
+</li>
+<li>
+<p><span class="URL"><a href="https://github.com/nodejs/node/blob/master/COLLABORATOR_GUIDE.md" class="bare">github.com/nodejs/node/blob/master/COLLABORATOR_GUIDE.md</a></span></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion">8. Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nous venons d&#8217;en apprendre davantage sur les origines de Node,
+les différentes parties prenantes dans son développement, mais aussi sa
+philosophie&#160;– de conception, de distribution et d&#8217;évolution.</p>
+</div>
+<div class="paragraph">
+<p>Nous allons voir dans le prochain chapitre comment installer un environnement
+fonctionnel pour développer et exécuter des programmes&#160;Node.</p>
+</div>
+</div>
+</div>
+</div>
+<section class="next">
+  <a href="#top">Haut de page</a> ou
+  <a href="https://oncletom.io/node.js/#apprendre-node-js-en-ligne" class="read-more">retour au sommaire</a>.
+</section>
+</body>
+</html>

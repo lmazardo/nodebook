@@ -1,0 +1,48 @@
+{
+  "name": "nodebook.appendix-a",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "^10.0.0"
+  },
+  "author": "Thomas Parisot (https://oncletom.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oncletom/nodebook/issues"
+  },
+  "dependencies": {
+    "autoprefixer": "^8.6.5",
+    "chai": "^4.2.0",
+    "cheerio": "^1.0.0-rc.2",
+    "css-whitespace": "^1.1.0",
+    "csslint": "^1.0.5",
+    "debug": "^3.2.6",
+    "doiuse": "^4.2.0",
+    "encoding-down": "^5.0.4",
+    "eventemitter3": "^3.1.0",
+    "faye": "^1.0.3",
+    "glob": "^5.0.6",
+    "he": "^1.2.0",
+    "htmlhint": "^0.9.13",
+    "i18n-iso-countries": "^3.7.8",
+    "knex": "^0.15.2",
+    "less": "^3.9.0",
+    "levelup": "^3.1.1",
+    "lodash": "^4.17.11",
+    "memdown": "^3.0.0",
+    "nunjucks": "^3.2.0",
+    "postcss-cli": "^5.0.1",
+    "redis": "^2.1.0",
+    "restify": "^7.7.0",
+    "restify-errors": "^6.1.1",
+    "sanitize-filename": "^1.6.1",
+    "sinon": "^1.10.3",
+    "sqlite3": "^4.0.6",
+    "tape": "^4.10.1",
+    "tcomb": "^3.2.29"
+  }
+}

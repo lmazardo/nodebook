@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<meta name="author" content="Thomas Parisot">
+<title>Node.js • Apprendre par la pratique</title>
+<style>
+#header,
+#content,
+#footer {
+  margin: 2rem auto;
+  max-width: 46rem;
+}
+
+#header {
+  margin-top: 0;
+}
+
+.title,
+#toctitle {
+  color: var(--dark-accent);
+}
+
+a {
+  /* white-space: nowrap; */
+}
+
+img, iframe, video, audio {
+  max-width: 100%;
+}
+
+p {
+  font-weight: normal;
+}
+
+/* Taken out from book.css */
+dl dt {
+  margin-bottom: 0.3125em;
+  font-weight: bold;
+}
+dl dd {
+  margin-bottom: 1.25em;
+}
+
+dt,
+th.tableblock,
+td.content,
+div.footnote {
+  text-rendering: optimizeLegibility;
+}
+
+.literalblock pre,
+.literalblock pre[class],
+.listingblock pre,
+.listingblock pre[class] {
+  overflow: auto;
+  word-wrap: break-word;
+}
+.literalblock pre.nowrap,
+.literalblock pre[class].nowrap,
+.listingblock pre.nowrap,
+.listingblock pre[class].nowrap {
+  overflow-x: auto;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.listingblock {
+  margin: 0 0 2em;
+}
+.listingblock > .content {
+  position: relative;
+}
+.listingblock > .title {
+  font-weight: bold;
+}
+.listingblock code[data-lang]::before {
+  display: none;
+  content: attr(data-lang);
+  position: absolute;
+  font-size: 0.75em;
+  top: 1em;
+  right: 1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #999;
+}
+.listingblock:hover code[data-lang]::before {
+  display: block;
+}
+.listingblock.terminal pre .command::before {
+  content: attr(data-prompt);
+  padding-right: 0.5em;
+  color: #999;
+}
+
+td.hdlist1,
+td.hdlist2 {
+  vertical-align: top;
+  padding-right: 0.625em;
+}
+td.hdlist1 {
+  font-weight: bold;
+}
+.literalblock + .colist,
+.listingblock + .colist {
+  margin-top: -1.5em;
+}
+.colist td:not([class]):first-child {
+  padding: 0.4em 0.75em 0 0.75em;
+  line-height: 1;
+  vertical-align: top;
+}
+.colist td:not([class]):first-child img {
+  max-width: none;
+}
+.colist td:not([class]):last-child {
+  padding: 0.25em 0;
+}
+
+/* Custom classes */
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.RemarquePreTitre,
+#toctitle {
+  font-style: normal;
+  font-weight: bold;
+}
+  .RemarquePreTitre::after {
+    content: "•";
+    padding-left: 5px;
+  }
+.admonitionblock {
+}
+.admonitionblock > table,
+.exampleblock {
+  --commented: rgba(17, 17, 68, .65);
+  --border-radius-base: 8px;
+
+  background-color: #fafafa;
+  border: 1px solid var(--dark-shade);
+  border-left: none;
+  border-right: none;
+  margin: 1.5em 0;
+  padding: 1em;
+}
+.exampleblock .title {
+  font-weight: bold;
+}
+.icon .title {
+  font-size: 2em;
+}
+  .admonitionblock > table td.icon {
+    display: none;
+  }
+
+  @media screen and (min-width: 769px) {
+    .admonitionblock > table td.icon {
+      display: table-cell;
+    }
+  }
+
+  .admonitionblock > table td.icon {
+    padding-right: 1em;
+  }
+  .admonitionblock > table td.icon img {
+    max-width: none;
+  }
+
+.colist ol {
+  margin-left: 1.5em;  /* aligns with the listing edge */
+  padding-left: 0;
+  font-weight: bold;   /* makes it stand out more */
+}
+  .colist ol p {
+    margin: 0 0 .5em;
+  }
+.listingblock:not(.prismjs) pre,
+.language-bash.hljs {
+  background: #323232;
+  color: wheat;
+  margin: 0;
+  padding: 1rem;
+}
+.language-bash.hljs .hljs-built_in,
+.language-bash.hljs .hljs-builtin-name {
+  color: white;
+}
+.language-bash.hljs .hljs-string {
+  color: lightgreen;
+}
+.language-bash.hljs .hljs-variable {
+  color: lightskyblue;
+}
+.keyseq {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.language-bash.hljs .keyseq {
+  color: white;
+}
+.language-bash.hljs kbd {
+  background: transparent;
+  box-shadow: none;
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0.1em 0.4em;
+}
+.listingblock pre.highlightjs,
+.listingblock.prismjs pre {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+.listingblock pre.highlightjs > code,
+.listingblock.prismjs .highlight {
+  border-left: 4px solid var(--dark-accent);
+  padding-left: 1em;
+  font-size: .8em;
+}
+.listingblock pre.highlightjs > code.language-bash {
+  border-left-color: limegreen;
+}
+
+.hdlist .hdlist1 {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td > p:first-child {
+  margin-top: 0;
+}
+
+.hljs-comment {
+  font-style: normal !important;
+}
+
+#toc.toc2 a {
+  text-decoration: none;
+  white-space: normal;
+}
+  #toc.toc2 a:hover,
+  #toc.toc2 a:focus {
+    text-decoration: underline;
+  }
+
+#toc.toc2 ul {
+  list-style: none;
+}
+
+  #toc.toc2 > ul {
+    padding-left: 0;
+  }
+
+  #toc.toc2 ul ul {
+    padding-left: 1em;
+  }
+
+@media screen and (min-width: 769px) {
+  body {
+    padding-left: 25vw !important;
+  }
+
+  #header,
+  #content,
+  #footer {
+    margin-left: 0;
+  }
+
+  #toc.toc2 {
+    height: 100%;
+    left: 0;
+    max-width: 20vw;
+    overflow: auto;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+
+  #toc.toc2 > ul {
+    font-size: 0.85em;
+  }
+
+  #toc li.active > a[href^="#"],
+  [id]:target {
+    background: #ffc;
+  }
+}
+
+.admonitionblock.context-callout > table {
+  border-width: 5px;
+  border-color: var(--brand-color);
+}
+
+</style>
+<link rel="stylesheet" href="https://oncletom.io/styles/blog.css?v=v3.3.2">
+<!-- WebMentions -->
+<link rel="pingback" href="https://webmention.io/oncletom.io/xmlrpc">
+<link rel="webmention" href="https://webmention.io/oncletom.io/webmention">
+<!-- Open Graph -->
+<meta property="og:type" content="book">
+<meta property="og:book:author" content="Thomas Parisot">
+<meta property="og:book:isbn" content="978-2212139938">
+<meta property="og:book:release_date" content="978-2212139938">
+<meta property="og:book:tag" content="Node.js">
+<meta property="og:book:tag" content="JavaScript">
+<meta property="og:book:tag" content="npm">
+<meta property="og:book:tag" content="Développement front-end">
+<meta property="og:book:tag" content="Développement back-end">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Node.js • Apprendre par la pratique">
+<!-- Twitter OpenGraph -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oncletom">
+<meta name="twitter:creator" content="@oncletom">
+<style type="text/css" class="prism-theme">/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+.listingblock [data-bash-subs]::before {
+  content: attr(data-bash-subs) " ";
+  opacity: .5; }
+
+.listingblock [data-bash-conum]::before {
+  content: "(" attr(data-bash-conum) ")";
+  font-weight: bold;
+  opacity: .7;
+}</style>
+<script>
+(function(d){
+  d.addEventListener('DOMContentLoaded', function(){
+    const script = d.createElement('script');
+    script.src = 'https://unpkg.com/menuspy@1.3.0/dist/menuspy.js';
+    script.async = true;
+    script.onload = () => new MenuSpy(document.querySelector('#toc'), {enableLocationHash: false});
+    d.body.appendChild(script);
+  });
+})(document);</script>
+<style type="text/css">
+#toc li.active > a[href^="#"] {
+  font-weight: bold;
+}
+#toc li.active > a[href^="#"]::before {
+  content: "▶ ";
+  display: inline-block;
+  position: absolute;
+  margin-left: -1.2em;
+  font-size: .8em;
+  margin-top: 3px;
+}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Node.js • Apprendre par la pratique</h1>
+<div class="details">
+<span id="author" class="author">Thomas Parisot</span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table des matières</div>
+<ul class="sectlevel1">
+<li><a href="#à_qui_cet_ouvrage_sadresse_t_il">À qui cet ouvrage s&#8217;adresse-t-il ?</a></li>
+<li><a href="#sommaire">Sommaire</a></li>
+<li><a href="#à_propos_de_lauteur">À propos de l&#8217;auteur</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Familiarisez-vous avec JavaScript, Node.js et l&#8217;écosystème de modules <code>npm</code>.
+Apprenez à concevoir et à déployer des <strong>applications web</strong> et
+des <strong>outils en ligne de commande</strong>.</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; Thomas Parisot
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="cover.png" alt="cover" width="60%">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Plus de 500 exemples pour apprendre en pratiquant</strong>.</p>
+</div>
+<div class="paragraph">
+<p>La <a href="https://nodejs.org/fr/">plate-forme Node.js</a> est passée du statut d&#8217;OVNI
+à celui d&#8217;incontournable.
+En 2018, elle fait fonctionner des applications web, de l&#8217;outillage
+front-end, de la distribution de fichiers pair-à-pair, des objets connectés
+et la NASA l&#8217;utilise même pour analyser les données télémétriques
+de ses sondes spatiales.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;intention de cet ouvrage est d&#8217;être votre base de départ
+pour comprendre ce qu&#8217;il se passe dans cet écosystème en perpétuel mouvement.
+Il devrait vous permettre de faire des choix techniques durables et de vous
+rendre opérationnel·le sur LA plate-forme JavaScript, le langage le
+plus populaire du monde selon GitHub.</p>
+</div>
+<div class="paragraph">
+<p>Nous allons parcourir ensemble l&#8217;écosystème Node.js en partant de son historique
+et de sa gouvernance jusqu&#8217;au déploiement en continu de nos applications.
+Nous (re)partirons sur des bases solides de JavaScript pour ensuite
+découvrir petit à petit le potentiel des modules Node.js.
+Ces connaissances sont les fondations pour explorer la conception, le développement
+et le déploiement d&#8217;applications web, d&#8217;utilitaires en ligne
+de commande et d&#8217;applications <em>front-end</em> modernes.
+Une sélection variée de modules complémentaires vous permettra d&#8217;y voir plus clair
+parmi les centaines de milliers de contributions de la communauté Node.js.</p>
+</div>
+<div class="paragraph">
+<p>Plusieurs centaines d&#8217;exemples ponctuent l&#8217;ouvrage pour mieux cerner
+les concepts et leurs résultats.
+Ils sont exécutables dans un terminal grâce à un module&#160;<code>npm</code> ou
+dans un navigateur web grâce à une surcouche interactive.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="à_qui_cet_ouvrage_sadresse_t_il">À qui cet ouvrage s&#8217;adresse-t-il ?</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Aux développeurs et développeuses qui veulent se reconvertir depuis
+un autre langage de programmation comme Perl, PHP ou Ruby</p>
+</li>
+<li>
+<p>Aux développeurs et développeuses qui cherchent à tirer parti
+de l&#8217;outillage npm front-end</p>
+</li>
+<li>
+<p>Aux personnes qui se débrouillent dans leur coin et qui aimeraient
+renforcer leurs compétences en programmation web</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sommaire">Sommaire</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="foreword/preamble.html">Avant-propos</a></p>
+</li>
+<li>
+<p><strong>Chapitre 1</strong>&#160;: <a href="chapter-01/index.html">Histoire, écosystème et gouvernance</a></p>
+</li>
+<li>
+<p><strong>Chapitre 2</strong>&#160;: <a href="chapter-02/index.html">Installer, mettre à jour et développer</a></p>
+</li>
+<li>
+<p><strong>Chapitre 3</strong>&#160;: <a href="chapter-03/index.html">Jouer avec JavaScript</a></p>
+</li>
+<li>
+<p><strong>Chapitre 4</strong>&#160;: <a href="chapter-04/index.html">Jouer avec Node.js</a></p>
+</li>
+<li>
+<p><strong>Chapitre 5</strong>&#160;: <a href="chapter-05/index.html">Jouer avec npm</a></p>
+</li>
+<li>
+<p><strong>Chapitre 6</strong>&#160;: <a href="chapter-06/index.html">Déployer notre code</a></p>
+</li>
+<li>
+<p><strong>Chapitre 7</strong>&#160;: <a href="chapter-07/index.html">Créer une application web</a></p>
+</li>
+<li>
+<p><strong>Chapitre 8</strong>&#160;: <a href="chapter-08/index.html">Créer un outil en ligne de commande</a></p>
+</li>
+<li>
+<p><strong>Chapitre 9</strong>&#160;: <a href="chapter-09/index.html">Créer une application front-end</a></p>
+</li>
+<li>
+<p><strong>Annexe A</strong>&#160;: <a href="appendix-a/index.html">Sélection de modules <code>npm</code></a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="à_propos_de_lauteur">À propos de l&#8217;auteur</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Thomas Parisot est une personne autodidacte qui développe des applications web
+<em>open&#160;source</em>, facilite des projets avec des pratiques de travail collaboratif
+ainsi qu’une approche centrée utilisateurs.
+Il utilise Node.js depuis la version 0.4 et baigne dans les technologies web
+depuis&#160;1998.</p>
+</div>
+<div class="paragraph">
+<p>En parallèle, Thomas fabrique du pain artisanal, s’implique dans des organisations
+coopératives, et aime passer du temps à randonner dans des espaces calmes et naturels.</p>
+</div>
+<div class="paragraph">
+<p>Thomas façonne ses outils de travail au sein de la coopération d&#8217;innovation
+numérique <a href="https://dtc-innovation.org">dtc innovation</a> depuis 2017.
+Auparavant, il a travaillé pendant quatre ans dans le département R&amp;D de
+la&#160;<a href="https://bbc.co.uk/rd">BBC</a>.
+Il a aussi co-fondé les conférences Sud Web et fait ses débuts professionnels à
+l&#8217;agence <a href="https://clever-age.com">Clever Age Bordeaux</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<section class="next">
+  <a href="#top">Haut de page</a> ou
+  <a href="https://oncletom.io/node.js/#apprendre-node-js-en-ligne" class="read-more">retour au sommaire</a>.
+</section>
+</body>
+</html>

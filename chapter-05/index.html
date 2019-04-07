@@ -1,0 +1,4310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<title>Jouer avec&#160;npm</title>
+<style>
+#header,
+#content,
+#footer {
+  margin: 2rem auto;
+  max-width: 46rem;
+}
+
+#header {
+  margin-top: 0;
+}
+
+.title,
+#toctitle {
+  color: var(--dark-accent);
+}
+
+a {
+  /* white-space: nowrap; */
+}
+
+img, iframe, video, audio {
+  max-width: 100%;
+}
+
+p {
+  font-weight: normal;
+}
+
+/* Taken out from book.css */
+dl dt {
+  margin-bottom: 0.3125em;
+  font-weight: bold;
+}
+dl dd {
+  margin-bottom: 1.25em;
+}
+
+dt,
+th.tableblock,
+td.content,
+div.footnote {
+  text-rendering: optimizeLegibility;
+}
+
+.literalblock pre,
+.literalblock pre[class],
+.listingblock pre,
+.listingblock pre[class] {
+  overflow: auto;
+  word-wrap: break-word;
+}
+.literalblock pre.nowrap,
+.literalblock pre[class].nowrap,
+.listingblock pre.nowrap,
+.listingblock pre[class].nowrap {
+  overflow-x: auto;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.listingblock {
+  margin: 0 0 2em;
+}
+.listingblock > .content {
+  position: relative;
+}
+.listingblock > .title {
+  font-weight: bold;
+}
+.listingblock code[data-lang]::before {
+  display: none;
+  content: attr(data-lang);
+  position: absolute;
+  font-size: 0.75em;
+  top: 1em;
+  right: 1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #999;
+}
+.listingblock:hover code[data-lang]::before {
+  display: block;
+}
+.listingblock.terminal pre .command::before {
+  content: attr(data-prompt);
+  padding-right: 0.5em;
+  color: #999;
+}
+
+td.hdlist1,
+td.hdlist2 {
+  vertical-align: top;
+  padding-right: 0.625em;
+}
+td.hdlist1 {
+  font-weight: bold;
+}
+.literalblock + .colist,
+.listingblock + .colist {
+  margin-top: -1.5em;
+}
+.colist td:not([class]):first-child {
+  padding: 0.4em 0.75em 0 0.75em;
+  line-height: 1;
+  vertical-align: top;
+}
+.colist td:not([class]):first-child img {
+  max-width: none;
+}
+.colist td:not([class]):last-child {
+  padding: 0.25em 0;
+}
+
+/* Custom classes */
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.RemarquePreTitre,
+#toctitle {
+  font-style: normal;
+  font-weight: bold;
+}
+  .RemarquePreTitre::after {
+    content: "•";
+    padding-left: 5px;
+  }
+.admonitionblock {
+}
+.admonitionblock > table,
+.exampleblock {
+  --commented: rgba(17, 17, 68, .65);
+  --border-radius-base: 8px;
+
+  background-color: #fafafa;
+  border: 1px solid var(--dark-shade);
+  border-left: none;
+  border-right: none;
+  margin: 1.5em 0;
+  padding: 1em;
+}
+.exampleblock .title {
+  font-weight: bold;
+}
+.icon .title {
+  font-size: 2em;
+}
+  .admonitionblock > table td.icon {
+    display: none;
+  }
+
+  @media screen and (min-width: 769px) {
+    .admonitionblock > table td.icon {
+      display: table-cell;
+    }
+  }
+
+  .admonitionblock > table td.icon {
+    padding-right: 1em;
+  }
+  .admonitionblock > table td.icon img {
+    max-width: none;
+  }
+
+.colist ol {
+  margin-left: 1.5em;  /* aligns with the listing edge */
+  padding-left: 0;
+  font-weight: bold;   /* makes it stand out more */
+}
+  .colist ol p {
+    margin: 0 0 .5em;
+  }
+.listingblock:not(.prismjs) pre,
+.language-bash.hljs {
+  background: #323232;
+  color: wheat;
+  margin: 0;
+  padding: 1rem;
+}
+.language-bash.hljs .hljs-built_in,
+.language-bash.hljs .hljs-builtin-name {
+  color: white;
+}
+.language-bash.hljs .hljs-string {
+  color: lightgreen;
+}
+.language-bash.hljs .hljs-variable {
+  color: lightskyblue;
+}
+.keyseq {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.language-bash.hljs .keyseq {
+  color: white;
+}
+.language-bash.hljs kbd {
+  background: transparent;
+  box-shadow: none;
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0.1em 0.4em;
+}
+.listingblock pre.highlightjs,
+.listingblock.prismjs pre {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+.listingblock pre.highlightjs > code,
+.listingblock.prismjs .highlight {
+  border-left: 4px solid var(--dark-accent);
+  padding-left: 1em;
+  font-size: .8em;
+}
+.listingblock pre.highlightjs > code.language-bash {
+  border-left-color: limegreen;
+}
+
+.hdlist .hdlist1 {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td > p:first-child {
+  margin-top: 0;
+}
+
+.hljs-comment {
+  font-style: normal !important;
+}
+
+#toc.toc2 a {
+  text-decoration: none;
+  white-space: normal;
+}
+  #toc.toc2 a:hover,
+  #toc.toc2 a:focus {
+    text-decoration: underline;
+  }
+
+#toc.toc2 ul {
+  list-style: none;
+}
+
+  #toc.toc2 > ul {
+    padding-left: 0;
+  }
+
+  #toc.toc2 ul ul {
+    padding-left: 1em;
+  }
+
+@media screen and (min-width: 769px) {
+  body {
+    padding-left: 25vw !important;
+  }
+
+  #header,
+  #content,
+  #footer {
+    margin-left: 0;
+  }
+
+  #toc.toc2 {
+    height: 100%;
+    left: 0;
+    max-width: 20vw;
+    overflow: auto;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+
+  #toc.toc2 > ul {
+    font-size: 0.85em;
+  }
+
+  #toc li.active > a[href^="#"],
+  [id]:target {
+    background: #ffc;
+  }
+}
+
+.admonitionblock.context-callout > table {
+  border-width: 5px;
+  border-color: var(--brand-color);
+}
+
+</style>
+<link rel="stylesheet" href="https://oncletom.io/styles/blog.css?v=v3.3.2">
+<!-- WebMentions -->
+<link rel="pingback" href="https://webmention.io/oncletom.io/xmlrpc">
+<link rel="webmention" href="https://webmention.io/oncletom.io/webmention">
+<!-- Open Graph -->
+<meta property="og:type" content="book">
+<meta property="og:book:author" content="Thomas Parisot">
+<meta property="og:book:isbn" content="978-2212139938">
+<meta property="og:book:release_date" content="978-2212139938">
+<meta property="og:book:tag" content="Node.js">
+<meta property="og:book:tag" content="JavaScript">
+<meta property="og:book:tag" content="npm">
+<meta property="og:book:tag" content="Développement front-end">
+<meta property="og:book:tag" content="Développement back-end">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Node.js • Apprendre par la pratique">
+<!-- Twitter OpenGraph -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oncletom">
+<meta name="twitter:creator" content="@oncletom">
+<style type="text/css" class="prism-theme">/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+<style type="text/css" class="extension-interactive-runner">[data-interactive-runtime="loaded"] .interactive--javascript code[data-lang]:before {
+  background-color: #fcfcfc;
+  border: 1px solid #0c2;
+  border-radius: 1px;
+  color: #0c2;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  padding: .5em 1em;
+  top: -2em;
+}
+
+  [lang="en"] [data-interactive-runtime="loaded"] .interactive--javascript code[data-lang]:before {
+    content: "▶ run code";
+  }
+  [lang="fr"] [data-interactive-runtime="loaded"] .interactive--javascript code[data-lang]:before {
+    content: "▶ voir le résultat";
+  }
+  .interactive--javascript code[data-label]:before {
+    content: attr(data-label);
+  }
+
+.interactive iframe {
+  position: absolute;
+  visibility: hidden;
+}
+
+.interactive.status--loaded iframe {
+  position: inherit;
+  visibility: visible;
+}
+
+.interactive.status--loading {
+  opacity: .5;
+}
+</style>
+<script class="extension-interactive-runner">
+(function(d){
+  document.addEventListener('DOMContentLoaded', function(){
+    const script = d.createElement('script');
+    script.src = 'https://embed.runkit.com/';
+    script.async = true;
+    script.onload = function(){
+      function makeListingInteractive (element){
+  if (element.classList.contains('interactive--installed') || element.classList.contains('status--loading')) {
+    return;
+  }
+
+  const code = element.querySelector('code');
+  const nodeVersion = /interactive--runtime--node-([^\s]+)/.exec(element.className)[1];
+  const isEndpoint = element.classList.contains('interactive--endpoint');
+  const mode = isEndpoint ? 'endpoint' : null;
+  let preamble = '';
+
+  const source = code
+    .textContent
+    .replace(/\/\/\s*\(\d+\)$/gm, '')
+    .replace(/^["']?use strict["'][; ]*\n/, '');
+
+  if (isEndpoint) {
+    preamble = `process.nextTick(() => {
+      if (typeof module.exports === 'function') {
+        exports.endpoint = module.exports;
+      }
+      else if (typeof server !== 'undefined') {
+        exports.endpoint = server.listeners("request").pop();
+      }
+});`
+  }
+
+  element.classList.add('status--loading');
+
+  // eslint-disable-next-line no-undef
+  RunKit.createNotebook({
+    nodeVersion,
+    element,
+    source,
+    mode,
+    preamble,
+    onLoad: function(ntbk) {
+      element.classList.add('interactive--installed');
+      element.classList.remove('status--loading');
+      element.classList.add('status--loaded');
+      code.parentNode.setAttribute('hidden', true);
+
+      ntbk.evaluate();
+    }
+  });
+}
+function installEvents () {
+  function getParent(el, condition) {
+    let parent = el;
+
+    while(parent = parent.parentNode) {
+      if (condition(parent)) {
+        return parent;
+      }
+    }
+  }
+
+  function hasClass(className) {
+    return function check(el) {
+      return el.classList.contains(className);
+    }
+  }
+
+  document.querySelector('body').addEventListener('click', function(el) {
+    if (el.target.classList.contains('language-javascript') || el.target.classList.contains('language-js')) {
+      const parentNode = getParent(
+        el.target,
+        hasClass('interactive--javascript')
+      );
+
+      makeListingInteractive(parentNode);
+    }
+  });
+}
+      installEvents();
+      document.body.dataset.interactiveRuntime = 'loaded';
+    };
+    document.body.appendChild(script);
+  });
+})(document);</script>
+<style type="text/css">
+.listingblock [data-bash-subs]::before {
+  content: attr(data-bash-subs) " ";
+  opacity: .5; }
+
+.listingblock [data-bash-conum]::before {
+  content: "(" attr(data-bash-conum) ")";
+  font-weight: bold;
+  opacity: .7;
+}</style>
+<script>
+(function(d){
+  d.addEventListener('DOMContentLoaded', function(){
+    const script = d.createElement('script');
+    script.src = 'https://unpkg.com/menuspy@1.3.0/dist/menuspy.js';
+    script.async = true;
+    script.onload = () => new MenuSpy(document.querySelector('#toc'), {enableLocationHash: false});
+    d.body.appendChild(script);
+  });
+})(document);</script>
+<style type="text/css">
+#toc li.active > a[href^="#"] {
+  font-weight: bold;
+}
+#toc li.active > a[href^="#"]::before {
+  content: "▶ ";
+  display: inline-block;
+  position: absolute;
+  margin-left: -1.2em;
+  font-size: .8em;
+  margin-top: 3px;
+}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Jouer avec&#160;npm</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table des matières</div>
+<ul class="sectlevel1">
+<li><a href="#cli">1. Créer un fichier <code>package.json</code></a></li>
+<li><a href="#modules">2. Installer des modules&#160;npm</a>
+<ul class="sectlevel2">
+<li><a href="#depuis_le_registre_npm">2.1. Depuis le registre npm</a></li>
+<li><a href="#registry">2.2. Trouver son bonheur dans le registre&#160;npm</a></li>
+<li><a href="#uninstall">2.3. Désinstaller un module</a></li>
+<li><a href="#install">2.4. Depuis un fichier <code>package.json</code></a></li>
+<li><a href="#install.version">2.5. Spécifier une version</a></li>
+<li><a href="#semver">2.6. Comprendre les numéros de versions (Semantic Versioning)</a></li>
+<li><a href="#update">2.7. Mises à jour</a></li>
+</ul>
+</li>
+<li><a href="#autres_manières_dinstaller_et_dutiliser_des_modulesnpm">3. Autres manières d&#8217;installer et d&#8217;utiliser des modules&#160;npm</a>
+<ul class="sectlevel2">
+<li><a href="#install.git">3.1. Depuis GitHub, GitLab ou un dépôt&#160;Git</a></li>
+<li><a href="#install.dev">3.2. Dépendances de développement</a></li>
+<li><a href="#install.global">3.3. Exécutable système (installation globale)</a></li>
+</ul>
+</li>
+<li><a href="#scripts">4. Outiller un projet avec les scripts&#160;npm</a>
+<ul class="sectlevel2">
+<li><a href="#start">4.1. Démarrer l&#8217;application</a></li>
+<li><a href="#test">4.2. Exécuter des tests</a></li>
+<li><a href="#run">4.3. Créer un script&#160;npm personnalisé</a></li>
+<li><a href="#run-pre-post">4.4. Exécuter des commandes avant et après des scripts&#160;npm</a></li>
+<li><a href="#run-all">4.5. Automatiser tout l&#8217;outillage projet</a></li>
+</ul>
+</li>
+<li><a href="#package.json">5. Anatomie du fichier <code>package.json</code></a></li>
+<li><a href="#commands">6. Quelques commandes pour aller plus&#160;loin</a>
+<ul class="sectlevel2">
+<li><a href="#view">6.1. npm view : voir les informations d&#8217;un module</a></li>
+<li><a href="#npx">6.2. npx : exécuter un module sans l&#8217;installer</a></li>
+<li><a href="#home">6.3. npm home : visiter le site web d&#8217;un module</a></li>
+<li><a href="#audit">6.4. npm audit : vérifier la sécurité des dépendances</a></li>
+<li><a href="#ci">6.5. npm clean-install : installer à toute vitesse</a></li>
+<li><a href="#doctor">6.6. npm doctor : vérifier l&#8217;état du système</a></li>
+<li><a href="#config">6.7. npm config : changer les réglages de l&#8217;exécutable <code>npm</code></a></li>
+<li><a href="#publish">6.8. npm publish : publier un module&#160;npm</a></li>
+<li><a href="#version">6.9. npm version : déterminer une nouvelle version sans se tromper</a></li>
+</ul>
+</li>
+<li><a href="#questions">7. Questions et mystères autour de&#160;npm</a>
+<ul class="sectlevel2">
+<li><a href="#npm.update">7.1. Quand mettre à jour l&#8217;exécutable&#160;npm ?</a></li>
+<li><a href="#package-lock">7.2. Je ne vois pas l&#8217;intérêt du fichier package-lock.json</a></li>
+<li><a href="#bower">7.3. npm c&#8217;est pour le back-end et bower pour le front-end</a></li>
+<li><a href="#est_ce_que_je_dois_versionner_le_répertoire_node_modules">7.4. Est-ce que je dois versionner le répertoire node_modules ?</a></li>
+<li><a href="#yarn">7.5. Il paraît que Yarn, c&#8217;est mieux</a></li>
+<li><a href="#all-your-base-are-belong-to-us">7.6. npm&#160;est lent, il installe la moitié d&#8217;Internet à chaque&#160;fois</a></li>
+<li><a href="#errors">7.7. Que signifient les erreurs affichées pendant npm install ?</a>
+<ul class="sectlevel3">
+<li><a href="#error-deprecated">7.7.1. Module déprécié</a></li>
+<li><a href="#error-skipping">7.7.2. Problème avec une dépendance optionnelle</a></li>
+<li><a href="#error-404">7.7.3. Module introuvable</a></li>
+<li><a href="#error-crlf">7.7.4. Caractère de fin de ligne sous Windows</a></li>
+<li><a href="#error-pkg">7.7.5. Fichier package.json incomplet</a></li>
+<li><a href="#error-peer-dependency">7.7.6. Dépendance complémentaire à installer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#conclusion">8. Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock tip context-callout">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Vous êtes en train de lire le
+<a href="https://oncletom.io/node.js/">livre &#8220;Node.js&#8221;</a>, écrit par
+<a href="https://oncletom.io">Thomas Parisot</a> et publié par les
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Éditions Eyrolles</a>.</p>
+</div>
+<div class="paragraph">
+<p>Il vous plaît&#160;? Achetez-le en ligne sur
+<a href="https://amzn.to/2E58PEw">Amazon</a>,
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Eyrolles</a> ou
+<a href="https://www.placedeslibraires.fr/livre/9782212139938">Place des Libraires</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Savoir naviguer dans la richesse de l&#8217;écosystème&#160;<code>npm</code> est une force pour
+la durabilité de nos projets.
+Ces modules nous aident à façonner un outillage résilient et adapté à chacun
+de nos projets.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<div class="title">Sommaire</div>
+<ul>
+<li>
+<p>Créer un fichier <code>package.json</code></p>
+</li>
+<li>
+<p>Installer un module&#160;<code>npm</code></p>
+</li>
+<li>
+<p>Outiller un projet avec les scripts&#160;<code>npm</code></p>
+</li>
+<li>
+<p>Anatomie du fichier <code>package.json</code></p>
+</li>
+<li>
+<p>Quelques commandes pour aller plus loin</p>
+</li>
+<li>
+<p>Questions et mystères autour de&#160;<code>npm</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quoteblock abstract">
+<blockquote>
+<div class="paragraph">
+<p>Ce chapitre va nous permettre d&#8217;y voir plus clair du côté des <a href="#modules">modules <code>npm</code></a>.
+Nous apprendrons comment identifier des modules de confiance, les installer et
+les mettre à jour sans casser nos projets.</p>
+</div>
+<div class="paragraph">
+<p>Nous nous tournerons ensuite du côté des <a href="#scripts">scripts&#160;<code>npm</code></a> pour créer
+un outillage sur mesure et de qualité.
+Grâce à eux, nous serons en mesure d&#8217;automatiser les tâches répétitives à notre
+rythme.</p>
+</div>
+<div class="paragraph">
+<p>Enfin, nous découvrirons des commandes moins connues de&#160;<code>npm</code>.
+Elles pourrons nous faciliter la vie ou nous débloquer quand ça ne va pas.</p>
+</div>
+</blockquote>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Remarque</span> Versions de Node et npm</div>
+<div class="paragraph">
+<p>Le contenu de ce chapitre utilise les versions <strong>Node&#160;v10</strong>
+et <strong>npm&#160;v6</strong>.
+Ce sont les versions stables recommandées en&#160;2019.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Le mot <em>npm</em> correspond à trois concepts différents que nous aborderons
+tout au long de ce chapitre&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>l'<strong>exécutable</strong> <code>npm</code>&#160;– un programme écrit en ECMAScript&#160;;</p>
+</li>
+<li>
+<p>le <strong>registre</strong> <code>npm</code>&#160;– une plate-forme de distribution de modules&#160;;</p>
+</li>
+<li>
+<p>un <strong>module</strong> <code>npm</code>&#160;– en général installé depuis le registre et utilisable
+avec les fonctions <code>require()</code> et <code>import</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Je préciserai toujours si l&#8217;utilisation de <code>npm</code> fait référence
+à l'<em>exécutable</em>, au <em>registre</em> ou à un <em>module</em>.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> est installé par défaut avec Node.
+Vérifions la version installée en ouvrant un terminal
+et en écrivant la commande suivante&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm --version
+6.4.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Si un message s&#8217;affiche en indiquant que <code>npm</code> n&#8217;est pas un programme reconnu,
+veuillez vous référer au <a href="#../chapter-02/index.adoc">chapitre&#160;2</a> et
+vérifier que Node v10 est bien installé.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Jouer avec les exemples dans un terminal</div>
+<div class="paragraph">
+<p>Les exemples titrés d&#8217;un nom de fichier peuvent être installés sur votre ordinateur.
+Exécutez-les dans un terminal et amusez-vous à les modifier en parallèle de
+votre lecture pour voir ce qui change.</p>
+</div>
+<div class="listingblock">
+<div class="title">Installation des exemples via le module npm <code>nodebook</code></div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install --global nodebook
+<span data-bash-subs="$"></span>nodebook install chapter-05
+<span data-bash-subs="$"></span>cd $(nodebook dir chapter-05)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La commande suivante devrait afficher un résultat qui confirme que vous êtes
+au bon endroit&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>node hello.js</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Suivez à nouveau les instructions d&#8217;installation pour rétablir les exemples
+dans leur état initial.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cli">1. Créer un fichier <code>package.json</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>La présence d&#8217;un fichier <code>package.json</code> devient nécessaire dès qu&#8217;un projet
+inclut un <a href="#modules">module&#160;<code>npm</code></a> ou a vocation à être publié pour être repris
+dans un autre projet&#160;– que ce soit dans un cadre professionnel ou personnel.</p>
+</div>
+<div class="paragraph">
+<p>Le fichier <code>package.json</code> est la clé de voûte servant à reproduire l&#8217;installation
+du projet et créer un <a href="#scripts">outillage autonome</a>.
+La commande <code>npm init</code> génère un tel fichier.
+
+L&#8217;utilisation de l&#8217;option <code>--yes</code> va plus vite car elle nous évite
+de répondre aux questions&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm init --yes</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Si aucun fichier <code>package.json</code> n&#8217;existe dans le répertoire courant,
+il sera créé avec des valeurs par défaut&#160;– le nom du module correspondra
+au nom du répertoire courant.
+Si ce fichier existait déjà, il sera alors préservé et son contenu sera affiché&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="title">package.json</div>
+<div class="content">
+<pre>{
+  "name": "nodebook.chapter-05",
+  "private": true,
+  "version": "1.0.0",
+  "main": "./examples/index.js",
+  "description": "",
+  "scripts": {
+    "lint": "eslint ./examples",
+    "print-args": "node examples/print-args.js",
+    "start": "micro examples/app.js",
+    "test": "mocha examples/tests.js",
+    "pretest": "npm run lint"
+  },
+  "engines": {
+    "node": "^10.0.0"
+  },
+  "author": "Thomas Parisot (https://oncletom.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oncletom/nodebook/issues"
+  },
+  "homepage": "https://github.com/oncletom/nodebook",
+  "dependencies": {
+    "cowsay": "^1.3.1",
+    "lodash": "^4.17.11",
+    "micro": "^9.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "mocha": "^5.2.0"
+  }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous reviendrons sur la structure du fichier.
+En attendant, focalisons-nous sur les opérations courantes comme
+l&#8217;installation de modules.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="modules">2. Installer des modules&#160;npm</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Le mécanisme des modules est documenté dans
+le <a href="../chapter-04/index.html#modules">chapitre&#160;4</a>.
+Les fonctions <code>require()</code> et <code>import</code> chargent nos propres modules mais aussi
+les modules de base, installés avec Node.
+Les modules <code>npm</code> sont <strong>complémentaires et téléchargeables</strong> à l&#8217;aide
+de l&#8217;exécutable <code>npm</code>.</p>
+</div>
+<div class="paragraph">
+<p>Cette section va nous aider à comprendre ce qui se passe pendant les phases
+d&#8217;installation, de mise à jour et de désinstallation des modules <code>npm</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="depuis_le_registre_npm">2.1. Depuis le registre npm</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Le registre&#160;<code>npm</code> (<span class="URL"><a href="https://npmjs.com" class="bare">npmjs.com</a></span>) est l&#8217;hébergement principal
+des modules ECMAScript, pour Node et le front-end.</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm install</code> s&#8217;utilise directement quand nous connaissons déjà
+le nom d&#8217;un module à installer,
+par exemple  <em>cowsay</em> (<span class="URL"><a href="https://npmjs.com/cowsay" class="bare">npmjs.com/cowsay</a></span>)&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install cowsay
++ cowsay@1.3.1
+added 10 packages from 3 contributors in 1.667s
+found 0 vulnerabilities</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le module est installé et prêt à être inclus dans un script.
+Nous constatons aussi que le champ <code>dependencies</code> est apparu
+dans le fichier <code>package.json</code>&#160;:
+</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"dependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"cowsay"</span><span class="token operator">:</span> <span class="token string">"^1.3.1"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> tient les comptes des modules installés à notre demande.
+Cela nous sera utile pour <a href="#install">installer les modules sur un autre ordinateur</a>.
+Nous reviendrons plus tard sur la notation des versions
+– on en reparlera sous le nom de <em>versions sémantiques</em> (<em>Semantic Versionning</em>).
+</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs interactive interactive--javascript interactive--runtime--node-v10">
+<div class="title">cow.js</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span>say<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cowsay'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> message <span class="token operator">=</span> <span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">{</span> text<span class="token punctuation">:</span> <span class="token string">'Bonjour !'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;inclusion d&#8217;un module&#160;<code>npm</code> est identique
+à celle d&#8217;un <a href="../chapter-04/index.html#modules-builtin">module de&#160;base</a>.
+</p>
+</div>
+<div class="paragraph">
+<p>Regardons le résultat sans plus tarder&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>node cow.js
+___________
+< Bonjour ! >
+-----------
+       \   ^__^
+        \  (oo)\_______
+           (__)\       )\/\
+               ||----w |</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le module&#160;<code>npm</code> nous a permis d&#8217;utiliser du code sans avoir à le
+créer, alors qu&#8217;il n&#8217;était pas fourni par la plate-forme Node.</p>
+</div>
+<div class="paragraph">
+<p>Maintenant que nous savons installer un module&#160;<code>npm</code>, nous pouvons en chercher
+d&#8217;autres et comprendre comment les utiliser.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Question</span> Où sont stockés les modules&#160;npm ?</div>
+<div class="paragraph">
+<p>
+Les modules <code>npm</code> et leurs dépendances sont stockés dans un répertoire
+<code>node_modules</code>, situé au même niveau que le fichier <code>package.json</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Sous le capot</span> Ce que fait l&#8217;exécutable&#160;npm pendant l&#8217;installation</div>
+<div class="paragraph">
+<p>
+
+L&#8217;exécutable <code>npm</code> effectue un bon nombre d&#8217;actions lorsqu&#8217;on valide la
+commande <code>npm install cowsay</code>&#160;:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Il interroge le registre <span class="URL">npmjs.com</span> pour obtenir des informations sur le module demandé.</p>
+</li>
+<li>
+<p>Il détermine que <code>1.3.1</code> est la version la plus récente.</p>
+</li>
+<li>
+<p>Il télécharge une archive compressée (<code>.tar.gz</code>) qui contient tous les fichiers de la version <code>1.3.1</code>.</p>
+</li>
+<li>
+<p>L&#8217;archive est décompressée dans le répertoire <code>node_modules</code>.</p>
+</li>
+<li>
+<p>Les dépendances sont elles aussi téléchargées puis décompressées dans le répertoire <code>node_modules</code>.</p>
+</li>
+<li>
+<p>Le module <code>cowsay</code> est inscrit dans le fichier <code>package.json</code>.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Remarque</span> Dépendances de développement</div>
+<div class="paragraph">
+<p>
+Il existe une variante de la commande pour distinguer les dépendances
+spécifiques à l&#8217;outillage du projet.
+Rendez-vous dans la section &#8220;<a href="#install.dev">Dépendances de développement</a>&#8221;
+pour en savoir plus.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="registry">2.2. Trouver son bonheur dans le registre&#160;npm</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Le registre <code>npm</code> (<span class="URL"><a href="https://npmjs.com" class="bare">npmjs.com</a></span>) fourmille de modules
+– de simples fonctions, des bibliothèques ou des frameworks complets.
+Ils couvrent un spectre d&#8217;usages très larges&#160;: accès aux bases de données,
+frameworks web, outils <em>front-end</em>, utilitaires de test,
+compression de données, paiement bancaire, des frameworks mobiles, etc.</p>
+</div>
+<div class="paragraph">
+<p>Cherchons une bibliothèque pour nous connecter à une base de données MySQL ou MariaDB.
+Tapez &#8220;mysql&#8221; dans le champ de recherche du registre&#160;<code>npm</code> ou saisissez
+directement l&#8217;URL menant aux résultats de cette recherche
+(<span class="URL"><a href="https://npmjs.com/search?q=mysql" class="bare">npmjs.com/search?q=mysql</a></span>)&#160;:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/npm-registry-search.png" alt="npm registry search">
+</div>
+<div class="title">Figure 1. Extrait des résultats d&#8217;une recherche de modules&#160;npm avec le mot-clé &#8220;mysql&#8221;</div>
+</div>
+<div class="paragraph">
+<p>Les résultats sont triés par pertinence&#160;– un mélange entre popularité,
+qualité et maintenance des projets.</p>
+</div>
+<div class="paragraph">
+<p>Je trouve qu&#8217;il est difficile de décider uniquement en regardant la liste.
+J&#8217;ai tendance à ouvrir un onglet par module pour en lire la documentation.
+Prenons le cas du module <em>mysql2</em> (<span class="URL"><a href="https://npmjs.com/mysql2" class="bare">npmjs.com/mysql2</a></span>) justement&#160;:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/npm-package-mysql2.png" alt="npm package mysql2">
+</div>
+<div class="title">Figure 2. Extrait de la page consacrée au module&#160;npm&#160;mysql2</div>
+</div>
+<div class="paragraph">
+<p>Plusieurs éléments de cette page tendent à me rassurer
+et m&#8217;aident à juger de la robustesse de ce module&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>les badges colorés qui affichent le statut d&#8217;exécution des tests&#160;;</p>
+</li>
+<li>
+<p>une introduction de <strong>documentation claire et concise</strong>&#160;;</p>
+</li>
+<li>
+<p>un <strong>nombre de téléchargements</strong> en progrès réguliers&#160;;</p>
+</li>
+<li>
+<p>l&#8217;utilisation avec des <a href="../chapter-03/index.html#promise">promesses</a>&#160;;</p>
+</li>
+<li>
+<p>le nombre important de modules dépendants&#160;;</p>
+</li>
+<li>
+<p><strong>je reconnais une personne</strong> qui contribue du code de qualité&#160;– Rebecca&#160;Turner (<span class="URL"><a href="https://npmjs.com/~iarna" class="bare">npmjs.com/~iarna</a></span>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>J&#8217;ai un doute quand je lis <span class="Menu">108&#160;issues</span> et <span class="Menu">13&#160;pull&#160;requests</span>.
+Dans ce cas-là, je me dis que les personnes qui maintiennent le projet ne sont
+pas forcément très réactives.</p>
+</div>
+<div class="paragraph">
+<p>Cependant, il y a suffisamment d&#8217;indicateurs au vert pour l&#8217;installer avec
+<code>npm install mysql2</code> puis l&#8217;essayer dans un script.
+</p>
+</div>
+<div class="paragraph">
+<p>Le module <em>mysql-libmysqlclient</em> (<span class="URL"><a href="https://npmjs.com/mysql-libmysqlclient" class="bare">npmjs.com/mysql-libmysqlclient</a></span>)
+ne me fait pas du tout le même effet.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/npm-package-mysql-libmysqlclient.png" alt="npm package mysql libmysqlclient">
+</div>
+<div class="title">Figure 3. Extrait de la page consacrée au module&#160;npm&#160;mysql-libmysqlclient</div>
+</div>
+<div class="paragraph">
+<p>La page du module ne met pas d&#8217;exemple simple à comprendre et fait référence
+à des versions de Node antédiluviennes.
+Rien n&#8217;indique qu&#8217;il ne peut pas fonctionner avec Node&#160;v10,
+mais la présence du mot <span class="Menu">binding</span> m&#8217;évoque que l&#8217;installation du module
+compile un programme écrit dans un autre langage
+– en l&#8217;occurrence, <em>libmysqlclient</em>.
+</p>
+</div>
+<div class="paragraph">
+<p>Point positif&#160;: il n&#8217;y a que <span class="Menu">14&#160;issues</span> GitHub.
+C&#8217;est peu, mais l&#8217;une d&#8217;entre elles est intitulée
+<span class="Menu">Does not work with any modern version of Node.js</span>.
+Cela confirme mes doutes&#160;; c&#8217;est suffisant pour que je passe mon chemin.</p>
+</div>
+<div class="paragraph">
+<p>En continuant plus loin dans la liste des résultats de recherche,
+je suis tombé sur le module nommé <em>falchion</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/npm-package-falchion.png" alt="npm package falchion">
+</div>
+<div class="title">Figure 4. Extrait de la page consacrée au module&#160;npm&#160;falchion</div>
+</div>
+<div class="paragraph">
+<p>Il n&#8217;y a qu&#8217;une seule version du module, qui date de quatre années
+avec une documentation qui tient sur une ligne.
+Il y a très peu de chances que nous puissions en faire quelque chose.</p>
+</div>
+<div class="paragraph">
+<p>Voici au final ce que j&#8217;estime être le plus important pour me faire
+une idée d&#8217;un module et décider de l&#8217;installer ou&#160;non&#160;:
+</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Présence d&#8217;une <strong>documentation</strong>&#160;– je peux me faire une idée des fonctionnalités
+et de la complexité d&#8217;utilisation du module.</p>
+</li>
+<li>
+<p>Des badges d'<strong>intégration continue</strong>&#160;– je sais ainsi qu&#8217;il y a des tests
+unitaires qui sont exécutés automatiquement avant que le module soit publié.</p>
+</li>
+<li>
+<p>Le nombre de <strong>téléchargements</strong>&#160;– je sais si d&#8217;autres personnes s&#8217;en servent
+en espérant qu&#8217;ils remontent les problèmes rencontrés.</p>
+</li>
+<li>
+<p>Le nombre de <strong>versions</strong>&#160;– cela me donne une idée de la maturité du projet
+et de la réactivité aux demandes de la communauté.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ce sont des <strong>critères subjectifs</strong>.
+Un module est parfois populaire par ancienneté alors qu&#8217;il existe des alternatives,
+plus légères ou plus simples d&#8217;utilisation.
+C&#8217;est le cas du module <em>moment.js</em>, plus populaire que <em>date-fns</em>&#160;– que je préfère.</p>
+</div>
+<div class="paragraph">
+<p>Il y a aussi des modules dans lesquels j&#8217;ai une confiance quasi-aveugle.
+Ils sont publiés par les personnes présentes dans cette liste non&#160;exhaustive&#160;:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Tableau 1. Personnes ayant écrit des modules npm à suivre</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~dougwilson" class="URL">dougwilson</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/jdalton" class="URL">jdalton</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~sindresorhus" class="URL">sindresorhus</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~feross" class="URL">feross</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/jshttp" class="URL">jshttp</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~substack" class="URL">substack</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~fgribreau" class="URL">fgribreau</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~mbostock" class="URL">mbostock</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~zkat" class="URL">zkat</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~iarna" class="URL">iarna</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/nodejitsu" class="URL">nodejitsu</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~isaacs" class="URL">isaacs</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://npmjs.com/~rwaldron" class="URL">rwaldron</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Sélection de modules npm</div>
+<div class="paragraph">
+<p>J&#8217;ai compilé une liste de modules utiles pour mieux démarrer
+dans vos projets.
+Vous la trouverez en <a href="../appendix-a/index.html">annexe&#160;A</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="uninstall">2.3. Désinstaller un module</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;utilisation de la commande <code>npm uninstall</code> supprime en toute sécurité
+un module&#160;<code>npm</code> et les fichiers qu&#8217;il a installés.
+La commande le retire ensuite de la liste des dépendances
+du fichier <code>package.json</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm uninstall cowsay
+removed 10 packages in 1.963s
+found 0 vulnerabilities</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le module <em>cowsay</em> n&#8217;est plus installé.
+Que se passe-t-il si nous exécutons à nouveau un l&#8217;exemple <code>cow.js</code>&#160;?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>node cow.js
+internal/modules/cjs/loader.js:596
+    throw err;
+    ^
+
+Error: Cannot find module 'cowsay'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Le chargement du module a échoué car Node n&#8217;arrive pas à le trouver
+– et c&#8217;est normal.</p>
+</div>
+<div class="paragraph">
+<p>Nous devons relancer la commande <code>npm install cowsay</code>
+pour que le script fonctionne à nouveau.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install">2.4. Depuis un fichier <code>package.json</code></h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Jusqu&#8217;à présent, nous avons installé des modules en les ajoutant un par&#160;un.
+La procédure est légèrement différente quand nous installons le projet de zéro
+ou quand le fichier <code>package.json</code> a été mis à jour par un·e collègue, par exemple.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exemple suivant illustre la remise à zéro des modules
+utilisés en exemple de ce chapitre&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>cd $(nodebook dir {chapter-id} --root)
+<span data-bash-subs="$"></span>rm -rf node_modules
+<span data-bash-subs="$"></span>npm install
+added 164 packages from 583 contributors in 4.781s
+found 0 vulnerabilities</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous nous sommes positionnés dans un répertoire qui contient
+un fichier <code>package.json</code> puis nous avons supprimé tout ce qui aurait pu
+être installé.</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm install</code> s&#8217;utilise de manière systématique quand
+nous récupérons du code avec Git pour la première fois (<code>git clone</code>)
+ou après une mise à jour, par exemple avec <code>git pull</code>.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> vérifie que la correspondance est bien respectée
+entre ce qui est installé dans le répertoire <code>node_modules</code> et
+les modules listés dans le fichier <code>package.json</code>.
+La commande <code>npm install</code> installe, met à jour et retire les modules nécessaires.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> npm&#160;clean-install (npm ci)</div>
+<div class="paragraph">
+<p>
+La commande <code>npm clean-install</code> réinstalle un projet de zéro de manière prédictible.
+<a href="#ci">Nous y reviendrons plus loin</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install.version">2.5. Spécifier une version</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Par défaut, l&#8217;exécutable <code>npm</code> installe la dernière version d&#8217;un module.
+Nous avons la liberté d&#8217;en installer d&#8217;autres qui sont antérieures.
+C&#8217;est pratique quand des modules arrêtent de prendre en charge
+des navigateurs web ou des versions de Node alors que nous les utilisons encore.</p>
+</div>
+<div class="paragraph">
+<p>Nous allons nous servir du module <em>lodash</em> (<span class="URL"><a href="https://npmjs.com/lodash" class="bare">npmjs.com/lodash</a></span>)
+pour illustrer nos allées et venues entre différentes versions.
+À l&#8217;heure où j&#8217;écris ces lignes, sa version la plus récente est la <code>4.17.11</code>.
+C&#8217;est ce que rapporte le résultat de la commande <code>npm install lodash</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash
++ lodash@4.17.11</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;utilisation du caractère <code>@</code> conjointement à un numéro de version précise
+la version à installer&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash@3.0.0
++ lodash@3.0.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous avons installé une version précise, mais il y a sûrement des mises à jour
+qui ont suivi pour corriger des bogues.
+Le problème est que, à ce stade, nous ne connaissons pas le numéro de version
+à spécifier.
+Idéalement, je préférerais installer la version la plus récente de la série&#160;3.
+Il se trouve que l&#8217;exécutable <code>npm</code> sait le faire pour nous et sans effort&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash@3
++ lodash@<mark>3.10.1</mark></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous pouvons faire la même chose avec les versions les plus récentes de
+la série&#160;3 et de la série&#160;2.2&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash@3
++ lodash@3.10.1
+<span data-bash-subs="$"></span>npm install lodash@2.2
++ lodash@2.2.1</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Connaître toutes les versions d&#8217;un module</div>
+<div class="paragraph">
+<p>
+La <a href="#view">commande <code>npm view</code></a> affiche les informations d&#8217;un module&#160;<code>npm</code>
+directement depuis notre terminal.
+Elle affiche toutes les versions publiées avec l&#8217;argument <code>versions</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm view lodash <mark>versions</mark>
+[ '0.1.0',
+  '0.2.0',
+  ...
+  '1.0.0',
+  '1.0.1',
+  '1.0.2',
+  ... ]</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Revenons à la version la plus récente en réutilisant la
+<a href="#install">commande d&#8217;installation</a> abordée auparavant&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash
++ lodash@2.4.2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Quelque chose d&#8217;inattendu s&#8217;est produit&#160;: la version la plus récente
+de la série&#160;2 a été installée au lieu de la version&#160;4.17.11.
+Nous trouverons un élément de réponse dans le fichier <code>package.json</code>&#160;:
+</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"dependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"cowsay"</span><span class="token operator">:</span> <span class="token string">"^1.3.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"lodash"</span><span class="token operator">:</span> <span class="token string">"&lt;mark>^2.4.2&lt;/mark>"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> respecte la version indiquée dans le fichier <code>package.json</code>
+si aucune autre n&#8217;est précisée dans la commande.
+Si la dépendance n&#8217;est pas listée, alors l&#8217;exécutable <code>npm</code> installe la version
+la plus récente.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;étiquette <code>latest</code> explicite notre envie d&#8217;installer la version
+la plus récente et sans tenir compte du fichier <code>package.json</code>&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash@<mark>latest</mark>
++ lodash@4.17.11</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous sommes désormais en mesure de choisir entre différentes versions
+d&#8217;un module et de manière plus ou moins&#160;fine.</p>
+</div>
+<div class="paragraph">
+<p>Nous prendrons le temps d&#8217;explorer le mécanisme de numérotation des versions
+dans la section suivante afin de mieux comprendre ce qui est renseigné
+dans le fichier <code>package.json</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Connaître les étiquettes d&#8217;un module</div>
+<div class="paragraph">
+<p>
+La <a href="#view">commande <code>npm view</code></a> va à nouveau nous aider.
+Elle affiche toutes les versions publiées avec l&#8217;argument <code>dist-tags</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm view lodash dist-tags
+{ <mark>latest</mark>: '4.17.11' }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ce mécanisme d&#8217;étiquette sert de raccourci pour associer un numéro de version
+(qui change) à un intitulé (qui reste dans le temps).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="semver">2.6. Comprendre les numéros de versions (Semantic Versioning)</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Les numéros de versions ont été utilisés de deux manières dans les
+sections précédentes&#160;: avec l&#8217;exécutable <code>npm</code> et en observant la liste
+de dépendances dans le fichier <code>package.json</code>.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> découpe un numéro de version en trois parties&#160;:
+<em>majeure</em>, <em>mineure</em> et <em>patch</em>.
+Pour le numéro de version <code>1.2.3</code>, <code>1</code> indique la version majeure,
+<code>2</code> la version mineure et <code>3</code> la version <em>patch</em>.</p>
+</div>
+<div class="paragraph">
+<p>Si nous devions mettre à jour <code>lodash@2.2.0</code>&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Vers <code>lodash@2.2.1</code>&#160;: mise à jour patch&#160;– des bogues sont corrigés.</p>
+</li>
+<li>
+<p>Vers <code>lodash@2.4.2</code>&#160;: mise à jour mineure&#160;– des fonctionnalités sont ajoutées,
+corrigées ou modifiées sans affecter notre code.</p>
+</li>
+<li>
+<p>Vers <code>lodash@4.17.11</code>&#160;: mise à jour majeure&#160;– des fonctionnalités sont
+modifiées, remaniées ou supprimées et peuvent casser notre code qui repose dessus.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Une mise à jour majeure demande de lire attentivement la documentation du module
+pour comprendre le volume de travail à fournir avant de monter en version.
+La mise à jour mineure peut occasionnellement demander du travail selon
+l&#8217;interprétation des développeurs de modules <code>npm</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Tableau 2. Différentes manières d&#8217;exprimer des versions</caption>
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 22.2222%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symbole</th>
+<th class="tableblock halign-left valign-top">Version</th>
+<th class="tableblock halign-left valign-top">Représentation alternative</th>
+<th class="tableblock halign-left valign-top">Représentation étendue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.0.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>^</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>^1.0.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.x.x</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=1.0.0 &lt;2.0.0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>~</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>~1.0.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.0.x</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=1.0.0 &lt;1.1.0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>x.x.x</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=0.0.1</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Je ne pense pas qu&#8217;il soit nécessaire de toujours choisir la dernière version majeure.
+Les versions <em>patch</em> et mineures sont plus importantes à mes yeux,
+car elles contiennent des corrections dont bénéficient nos applications.
+</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Calculateur de version</div>
+<div class="paragraph">
+<p>L&#8217;outil en ligne <span class="URL"><a href="https://semver.npmjs.com" class="bare">semver.npmjs.com</a></span> sert à tester
+la syntaxe des versions sémantiques avec de véritables modules&#160;<code>npm</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="update">2.7. Mises à jour</h3>
+<div class="paragraph">
+<p>Nous avons appris à installer des modules <code>npm</code> dans les versions de notre choix
+et à les réinstaller depuis la liste contenue dans le fichier <code>package.json</code>.
+Comment savoir s&#8217;il faut les mettre à&#160;jour&#160;?</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;utilisation combinée des commandes <code>npm outdated</code> et <code>npm update</code> va
+nous permettre d&#8217;y arriver.</p>
+</div>
+<div class="paragraph">
+<p>Commençons par installer d&#8217;anciennes versions des modules <em>lodash</em> et <em>cowsay</em>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash@2.0.0 cowsay@1.0.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm outdated</code> affiche les dépendances qui ne sont pas à&#160;jour&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm outdated
+Package  Current  Wanted   Latest  Location
+cowsay     1.0.0   1.3.1    1.3.1  nodebook.chapter-05
+lodash     2.0.0   2.4.2  4.17.11  nodebook.chapter-05</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le numéro de version affiché dans la colonne <code>Wanted</code> est celui qui sera atteint
+avec la commande <code>npm update</code>.
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm update
++ cowsay@1.3.1
++ lodash@2.4.2
+added 7 packages and updated 3 packages in 2.717s</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Observons ce qui a changé dans les résultats de la commande <code>npm outdated</code>&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm outdated
+Package  Current  Wanted   Latest  Location
+lodash     2.4.2   2.4.2  4.17.11  nodebook.chapter-05</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Les modules <em>cowsay</em> et <em>lodash</em> ont été mis à jour au plus sûr et seul le
+deuxième est désormais listé&#160;; il peut rester en l&#8217;état si nous n&#8217;avons pas le temps
+de rendre notre code compatible avec ses changements.</p>
+</div>
+<div class="paragraph">
+<p>Sinon, une <a href="#install.version">installation manuelle</a> s&#8217;impose
+avec l&#8217;étiquette <code>latest</code>&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash@latest
++ lodash@4.17.11</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Un dernier appel à <code>npm outdated</code> nous en donne le cœur&#160;net&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm outdated</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Si rien ne s&#8217;affiche, c&#8217;est que tout est bon&#160;: nos modules sont à&#160;jour&#160;!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="autres_manières_dinstaller_et_dutiliser_des_modulesnpm">3. Autres manières d&#8217;installer et d&#8217;utiliser des modules&#160;npm</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Dans la section précédente, nous avons vu comment installer des modules
+depuis le registre&#160;<code>npm</code>.
+Maintenant, nous allons apprendre à les installer depuis des sources
+variées, uniquement à des fins de développement ou en tant que
+commandes exécutables au niveau du système d&#8217;exploitation.</p>
+</div>
+<div class="sect2">
+<h3 id="install.git">3.1. Depuis GitHub, GitLab ou un dépôt&#160;Git</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Il arrive que l&#8217;auteur·e d&#8217;un module&#160;<code>npm</code> corrige un problème
+sans publier le correctif sur le registre&#160;<code>npm</code>.
+Il arrive aussi qu&#8217;un module soit hébergé de manière publique ou privée
+sur une plate-forme d&#8217;hébergement Git comme GitLab ou GitHub,
+sans passer par le registre&#160;<code>npm</code>.</p>
+</div>
+<div class="paragraph">
+<p>Le module <em>cowsay</em> est publié sur le registre&#160;<code>npm</code>, mais il est aussi
+hébergé sur GitHub à l&#8217;adresse <span class="URL"><a href="https://github.com/piuccio/cowsay" class="bare">github.com/piuccio/cowsay</a></span>.
+Installons-le depuis cette source&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install https://github.com/piuccio/cowsay
++ cowsay@1.3.1
+updated 1 package in 5.866s</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> vérifie qu&#8217;un fichier <code>package.json</code> est situé à la racine
+du dépôt.
+Dans ce cas de figure, il utilise le programme Git pour obtenir le code source
+du module.</p>
+</div>
+<div class="paragraph">
+<p>Une écriture raccourcie existe pour installer un module depuis un hébergement
+Git populaire, sans avoir à écrire l&#8217;URL en entier&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install github:piuccio/cowsay
++ cowsay@1.3.1
+updated 1 package in 4.513s</pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">⚠️</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Considérations</span> Performance d&#8217;accès à&#160;Git</div>
+<div class="paragraph">
+<p>L&#8217;installation est plus lente depuis un dépôt Git que depuis un registre&#160;<code>npm</code>.
+L&#8217;exécutable&#160;<code>npm</code> fait appel à l&#8217;exécutable&#160;<code>git</code> pour cloner l&#8217;historique
+du dépôt et de ses dépendances pour extraire la version adéquate
+de la copie de travail.</p>
+</div>
+<div class="paragraph">
+<p>Le temps de téléchargement sera proportionnel au nombre de <em>commits</em>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> sait aussi installer des modules avec le protocole
+<em>Secure Shell</em> (<em>SSH</em>) désigné par <code>git+ssh</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install git+ssh://git@github.com:piuccio/cowsay.git
++ cowsay@1.3.1
+updated 1 package in 10.263s</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Les clients Git et SSH doivent être configurés au niveau du système pour
+être en mesure de s&#8217;authentifier sur l&#8217;hôte distant.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est une solution intéressante pour automatiser l&#8217;installation de modules privés.
+L&#8217;étape suivante serait de déployer un registre&#160;<code>npm</code> privé ou de souscrire
+une option payante sur le registre principal.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install.dev">3.2. Dépendances de développement</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Les dépendances de développement sont des modules <code>npm</code> utilisés
+pour <strong>exécuter les tests unitaires</strong> ou pour <strong>de l&#8217;outillage</strong> sont aussi des
+dépendances de développement.
+Ce sont des modules que nous n&#8217;appelons pas directement avec les
+fonctions <code>require()</code> et <code>import</code>.</p>
+</div>
+<div class="paragraph">
+<p>Par exemple, le module&#160;<code>npm</code> <em>mocha</em> est utilisé pour structurer et exécuter
+des tests unitaires pour Node et les navigateurs web.
+Il est donc logique de l&#8217;installer comme dépendance de développement.
+L&#8217;option <code>--save-dev</code> signale cette intention à l&#8217;exécutable <code>npm</code>&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install --save-dev mocha
++ mocha@5.2.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> range alors ce module dans une nouvelle section du
+fichier <code>package.json</code>&#160;– la section <code>devDependencies</code>&#160;:</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"dependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"cowsay"</span><span class="token operator">:</span> <span class="token string">"^1.3.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"lodash"</span><span class="token operator">:</span> <span class="token string">"^4.17.11"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"&lt;mark>devDependencies&lt;/mark>"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"mocha"</span><span class="token operator">:</span> <span class="token string">"^5.2.0"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Optimisation</span> Installer seulement les dépendances de production</div>
+<div class="paragraph">
+<p>
+La <a href="#install">commande <code>npm install</code></a> accepte l&#8217;option <code>--production</code>.
+Elle installe seulement les dépendances listées dans la section <code>dependencies</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install --production</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le <strong>poids d&#8217;installation est ainsi réduit</strong>.
+C&#8217;est l&#8217;idéal dans le cas du déploiement de
+<a href="../chapter-06/index.html#lambda">fonctions événementielles</a>
+(<a href="../chapter-06/index.html">chapitre&#160;6</a>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install.global">3.3. Exécutable système (installation globale)</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Certains modules <code>npm</code> s&#8217;installent comme des programmes exécutables.
+Ils s&#8217;appellent ensuite dans un terminal, exactement comme nous le faisions
+jusqu&#8217;à présent avec l&#8217;exécutable <code>npm</code>.
+</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est le cas du module <em>serve</em> (<span class="URL"><a href="https://npmjs.com/serve" class="bare">npmjs.com/serve</a></span>), par exemple.
+Il démarre un serveur web en ligne de commande pour tester le rendu
+de fichiers HTML sans avoir à configurer de logiciels comme <em>Apache</em> ou <em>nginx</em>.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;installation est rendue globale&#160;– à l&#8217;échelle du système d&#8217;exploitation
+– avec l&#8217;utilisation de l&#8217;option <code>--global</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install <mark>--global</mark> serve
++ serve@10.0.0</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Question</span> Comment savoir si un module&#160;npm s&#8217;installe comme un exécutable système ?</div>
+<div class="paragraph">
+<p>En général, les modules qui se prêtent bien au jeu du <code>npm install --global</code>
+sont ceux qui documentent des exemples de commande à exécuter,
+qui se décrivent comme des outils en ligne de commande ou qui
+mentionnent explicitement l&#8217;installation globale.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>serve</code> est disponible suite à l&#8217;installation globale&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>serve --version
+10.0.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le module&#160;<code>npm</code> s&#8217;exécute de manière transparente, sans invoquer Node ni
+l&#8217;exécutable&#160;<code>npm</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>serve .
+INFO: Accepting connections at http://localhost:3000</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Documentation</span> L&#8217;option&#160;--help</div>
+<div class="paragraph">
+<p>Par convention, les modules <code>npm</code> qui s&#8217;utilisent en ligne de commande
+sont accompagnés d&#8217;une documentation.
+Ce manuel décrit des cas d&#8217;usage ainsi que les options à disposition.</p>
+</div>
+<div class="paragraph">
+<p>Affichage de la documentation du module&#160;<code>npm</code> <em>serve</em>
+depuis la ligne de commande&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>serve --help</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Un module installé de manière globale se désinstalle en passant l&#8217;option
+<code>--global</code> à la <a href="#uninstall">commande <code>npm uninstall</code></a>&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm uninstall --global serve</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le <a href="../chapter-08/index.html">chapitre&#160;8</a> sera l&#8217;occasion d&#8217;entrer plus
+en détail dans le développement d&#8217;exécutables système écrits en ECMAScript.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="scripts">4. Outiller un projet avec les scripts&#160;npm</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Les scripts&#160;<code>npm</code> sont des outils puissants qui <strong>autonomisent l&#8217;outillage projet</strong>,
+<strong>automatisent des actions</strong> manuelles et <strong>simplifient des actions</strong> trop
+complexes à mémoriser.</p>
+</div>
+<div class="paragraph">
+<p>Ils sont consignés dans la section <code>scripts</code> du fichier <code>package.json</code>.
+Ils se basent sur des scripts Node et des modules <code>npm</code> pour
+lancer des actions quand des fichiers sont modifiés,
+transformer des feuilles de style, exécuter des tests unitaires ou fonctionnels,
+déployer le projet, entre autres.</p>
+</div>
+<div class="paragraph">
+<p>Ils permettent de créer des conventions entre nos projets.
+Nous réutiliserons ainsi les mêmes noms et adapterons les commandes
+au projet en question.</p>
+</div>
+<div class="sect2">
+<h3 id="start">4.1. Démarrer l&#8217;application</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Le script <code>npm start</code> concerne les projets dont le script principal
+tourne en continu&#160;– une application web par exemple.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exemple suivant démarre un serveur web sans que nous ayons à connaître
+la commande associée&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm start
+
+<span data-bash-subs=">"></span>nodebook.chapter-05@1.0.0 start          <span data-bash-conum="1"></span>
+<span data-bash-subs=">"></span>micro examples/app.js                    <span data-bash-conum="2"></span>
+
+micro: Accepting connections on port 3000</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>L&#8217;exécutable <code>npm</code> affiche le nom du script en cours d&#8217;exécution</p>
+</li>
+<li>
+<p><code>micro examples/app.js</code> est la commande réellement exécutée par npm</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Nous sommes libres de renseigner la valeur du champ <code>scripts.start</code>
+du fichier <code>package.json</code> comme bon nous semble&#160;:
+</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"micro examples/app.js"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"dependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"micro"</span><span class="token operator">:</span> <span class="token string">"^9.3.3"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous avons utilisé le module&#160;<code>npm</code> <em>micro</em> (<span class="URL"><a href="https://npmjs.com/micro" class="bare">npmjs.com/micro</a></span>)
+pour démarrer une application web.
+Plus exactement, nous avons utilisé l&#8217;exécutable fourni par ce module.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Les modules exécutables dans les scripts&#160;npm</div>
+<div class="paragraph">
+<p>Les <a href="#install.global">modules <code>npm</code> exécutables</a> sont disponibles au niveau du
+système lorsqu&#8217;ils sont installés avec l&#8217;option <code>--global</code>.</p>
+</div>
+<div class="paragraph">
+<p>Les exécutables des modules listés dans <code>dependencies</code> et <code>devDependencies</code>
+sont utilisables dans les scripts&#160;<code>npm</code>.</p>
+</div>
+<div class="paragraph">
+<p>Nous pouvons ainsi contenir tous les exécutables nécessaires dans les
+dépendances du projet.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Nous verrons dans le <a href="#../chapter-06/index.adoc">chapitre&#160;6</a> que les
+plates-formes de service utilisent aussi la valeur du champ <code>scripts.start</code>
+pour déterminer comment démarrer notre application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="test">4.2. Exécuter des tests</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Le script <code>npm test</code> concerne tous les projets pour lesquels nous avons écrit
+des tests qu&#8217;ils soient unitaires ou fonctionnels.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;intention de la commande lancée par le script&#160;<code>npm</code> est de terminer
+en erreur si un des tests n&#8217;aboutit pas au résultat escompté.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exemple suivant lance un test unitaire qui s&#8217;assure de la cohérence
+d&#8217;un des exemples précédents&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm test
+
+<span data-bash-subs=">"></span>nodebook.chapter-05@1.0.0 test   <span data-bash-conum="1"></span>
+<span data-bash-subs=">"></span>mocha examples/tests.js          <span data-bash-conum="2"></span>
+
+app.js
+  ✓ prints a cow as a response
+
+1 passing</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>L&#8217;exécutable <code>npm</code> affiche le nom du script en cours d&#8217;exécution.</p>
+</li>
+<li>
+<p><code>mocha examples/tests.js</code> est la commande réellement exécutée par npm.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Cette fois-ci, nous avons personnalisé la valeur du champ <code>scripts.test</code>
+du fichier <code>package.json</code>&#160;:
+</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"mocha examples/tests.js"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"devDependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"mocha"</span><span class="token operator">:</span> <span class="token string">"^5.2.0"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous avons eu recours au module&#160;<code>npm</code> <em>mocha</em> (<span class="URL"><a href="https://npmjs.com/mocha" class="bare">npmjs.com/mocha</a></span>),
+de même qu&#8217;avec le <a href="#start">script de démarrage</a>, nous nous sommes basés
+sur l&#8217;exécutable fourni par le module.
+En revanche, nous l&#8217;avons listé dans la <a href="#install.dev">section <code>devDependencies</code></a>
+car il est relatif à l&#8217;outillage du projet.
+</p>
+</div>
+<div class="paragraph">
+<p>Les services d&#8217;intégration continue lancent le script <code>npm test</code>
+lorsqu&#8217;ils détectent qu&#8217;ils ont affaire à un projet Node.
+</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Documentation</span> Scripts définis par&#160;npm</div>
+<div class="paragraph">
+<p>D&#8217;autres scripts que <code>test</code> et <code>start</code> sont définis par l&#8217;exécutable&#160;<code>npm</code>.
+Ils sont tous documentés sur&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="URL"><a href="https://docs.npmjs.com/misc/scripts" class="bare">docs.npmjs.com/misc/scripts</a></span></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="run">4.3. Créer un script&#160;npm personnalisé</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Les scripts&#160;<code>npm</code> personnalisés sont utiles <strong>lorsque nous souhaitons outiller</strong>
+notre projet sans forcément que ce soit en rapport avec le lancement des tests
+ou de l&#8217;application.</p>
+</div>
+<div class="paragraph">
+<p>Les scripts personnalisés se démarrent avec <code>npm run</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm <mark>run</mark> print-args
+
+<span data-bash-subs=">"></span>nodebook.chapter-05@1.0.0 print-args
+<span data-bash-subs=">"></span>node examples/print-args.js
+
+Rien à signaler.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous avons créé ce script en configurant la valeur du champ <code>scripts.print-args</code>
+du fichier <code>package.json</code>&#160;:</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"print-args"</span><span class="token operator">:</span> <span class="token string">"node examples/print-args.js"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Lister les scripts disponibles</div>
+<div class="paragraph">
+<p>La commande <code>npm run</code> (sans argument) liste tous les scripts&#160;<code>npm</code> du projet.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Avec le temps, j&#8217;ai développé les conventions suivantes&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>npm run build</code>&#160;: construit les artefacts à déployer.</p>
+</li>
+<li>
+<p><code>npm run deploy</code>&#160;: déploie le projet vers l&#8217;hébergeur.</p>
+</li>
+<li>
+<p><code>npm run lint</code>&#160;: applique un vérificateur syntaxique au code du projet.</p>
+</li>
+<li>
+<p><code>npm run watch</code>&#160;: démarre l&#8217;application et la relance à chaque changement.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Passer des arguments à un script&#160;npm</div>
+<div class="paragraph">
+<p>
+Une option spéciale nous aide à transmettre des arguments à un script.
+Les arguments doivent être placés à droite de l&#8217;option <code>--</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm run print-args un --test=true
+['un']
+<span data-bash-subs="$"></span>npm run print-args ##--## un --test=true
+['un', '--test=true']</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Un script&#160;<code>npm</code> peut faire appel à d&#8217;autres&#160;:</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"lint"</span><span class="token operator">:</span> <span class="token string">"eslint ./examples"</span><span class="token punctuation">,</span>
+    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"npm run lint &lt;mark>&amp;&amp;&lt;/mark> mocha examples/tests.js"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>J&#8217;ai plutôt tendance à découper mes scripts de sorte à ce qu&#8217;ils fassent
+tous une chose et une seule.
+Je peux ainsi les appeler de manière individuelle.
+
+</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"lint"</span><span class="token operator">:</span> <span class="token string">"eslint ./examples"</span><span class="token punctuation">,</span>
+    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"npm run lint &amp;&amp; npm run test:unit"</span><span class="token punctuation">,</span>
+    <span class="token property">"test:unit"</span><span class="token operator">:</span> <span class="token string">"mocha examples/tests.js"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La section suivante va nous aider à orchestrer l&#8217;exécution des scripts
+les uns par rapport aux autres.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Accéder aux valeurs du fichier <code>package.json</code></div>
+<div class="paragraph">
+<p>
+Toutes les sections du fichier <code>package.json</code> sont accessibles depuis
+les scripts&#160;<code>npm</code> sous forme de
+<a href="../chapter-04/index.html#process.argv">variables d&#8217;environnement</a>.
+Leur nom est préfixé par <code>npm_package</code> suivi de leur nom &#8220;mis à plat&#8221;.
+Ainsi, le champ <code>version</code> est accessible en tant que <code>$npm_package_version</code>
+et le champ <code>config.port</code> en tant que <code>$npm_package_config_port</code>&#160;:</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"&lt;mark>config&lt;/mark>"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"&lt;mark>port&lt;/mark>"</span><span class="token operator">:</span> <span class="token string">"4000"</span>
+  <span class="token punctuation">}</span>;
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"node server --port $npm_package_&lt;mark>config&lt;/mark>_&lt;mark>port&lt;/mark>"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="run-pre-post">4.4. Exécuter des commandes avant et après des scripts&#160;npm</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;ordre d&#8217;exécution des scripts se contrôle en utilisant les préfixes
+<code>pre</code> et <code>post</code>.
+Par exemple, les scripts nommés <code>pretest</code> et <code>posttest</code> seront exécutés
+respectivement avant et après le script <code>test</code>.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">package.json</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"lint"</span><span class="token operator">:</span> <span class="token string">"eslint ./examples"</span><span class="token punctuation">,</span>
+    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"mocha examples/tests.js"</span><span class="token punctuation">,</span>
+    <span class="token property">"&lt;mark>pre&lt;/mark>test"</span><span class="token operator">:</span> <span class="token string">"npm run lint"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dans cet exemple de configuration, l&#8217;exécution de la commande <code>npm test</code>
+lancera d&#8217;abord le script <code>pretest</code>, puis <code>lint</code> puis enfin&#160;<code>test</code>&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm test
+
+<span data-bash-subs=">"></span>nodebook.chapter-05@1.0.0 pretest
+<span data-bash-subs=">"></span>npm run lint
+...
+
+<span data-bash-subs=">"></span>nodebook.chapter-05@1.0.0 lint
+<span data-bash-subs=">"></span>eslint ./examples
+...
+
+<span data-bash-subs=">"></span>nodebook.chapter-05@1.0.0 test
+<span data-bash-subs=">"></span>mocha examples/tests.js
+...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ce mécanisme est utile pour s&#8217;intercaler sur des temps particuliers
+du cycle de vie d&#8217;un projet&#160;Node.
+En voici une sélection.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Script</th>
+<th class="tableblock halign-left valign-top">Quand ?</th>
+<th class="tableblock halign-left valign-top">Pourquoi ?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pretest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avant les tests</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Préparer l&#8217;espace de travail</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>posttest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Après les tests</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vérifier les règles de syntaxe de notre code</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postinstall</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Après installation les dépendances</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Préparation significative du projet (téléchargements supplémentaires, etc.)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>prestart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avant de démarrer l&#8217;application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Préparatifs légers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>prepublishOnly</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avant de publier le module</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Préparation du projet avant de le distribuer (compilation de fichiers, etc.)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="run-all">4.5. Automatiser tout l&#8217;outillage projet</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Les scripts&#160;<code>npm</code> suffisent à outiller la majorité des projets.
+Cependant ils deviennent difficiles à lire lorsque les
+lignes deviennent trop longues.</p>
+</div>
+<div class="paragraph">
+<p><em>npm-run-all</em> (<span class="URL"><a href="https://npmjs.com/npm-run-all" class="bare">npmjs.com/npm-run-all</a></span>) est un
+module qui parallélise leur exécution et simplifie l&#8217;appel d&#8217;un groupe de scripts.</p>
+</div>
+<div class="listingblock">
+<div class="title">package.json</div>
+<div class="content">
+<pre>{
+  "scripts": {
+    "build": "npm-run-all --parallel 'build:*'", // <b class="conum">(1)</b>
+    "build:front-end": "browserify ...",
+    "build:backend": "browserify ...",
+    "build:css": "sass ..."
+  }
+  "devDependencies": {
+    "npm-run-all": "*"
+  }
+}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Les trois scripts préfixés par <code>build:</code> seront appelés en parallèle en exécutant <code>npm run build</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Il est aussi possible de déclencher des actions parallèles après une première
+action séquentielle.</p>
+</div>
+<div class="listingblock">
+<div class="title">package.json</div>
+<div class="content">
+<pre>{
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm-run-all clean --parallel 'build:*'", // <b class="conum">(1)</b>
+    "build:front-end": "browserify ...",
+    "build:backend": "browserify ..."
+  }
+  "devDependencies": {
+    "npm-run-all": "*"
+  }
+}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>npm-run-all</code> exécute le script <code>clean</code> avant les autres scripts préfixés par <code>build:</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Ils vous appartient d&#8217;orchestrer les scripts en les groupant avec un motif de noms
+ainsi qu&#8217;en combinant les options <code>--parallel</code> (alias&#160;<code>-p</code>)
+et <code>--sequential</code> (alias&#160;<code>-s</code>) pour activer ou désactiver
+le parallélisme d&#8217;exécution.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Remarque</span> Pourtant j&#8217;ai entendu parler de Gulp et de Grunt</div>
+<div class="paragraph">
+<p>L&#8217;énorme avantage d&#8217;outiller un projet avec la commande <code>npm run</code> et
+l&#8217;exécutable <code>npm-run-all</code> est que nous utilisons directement les outils
+dont nous avons besoin.</p>
+</div>
+<div class="paragraph">
+<p>Gulp et Grunt introduisent une complexité d&#8217;apprentissage et des couches
+d&#8217;abstraction qui augmentent la fragilité de l&#8217;outillage et la barrière d&#8217;entrée de nos projets.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est tant mieux si nous pouvons nous en passer pour façonner nos propres outils.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="package.json">5. Anatomie du fichier <code>package.json</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Le fichier <code>package.json</code> est essentiel pour tirer parti de l&#8217;exécutable <code>npm</code>.
+Tout projet concerné par l'<a href="#install">installation de modules <code>npm</code></a> ou par
+l'<a href="#scripts">outillage des scripts</a> va forcément avoir ce fichier quelque
+part dans son arborescence.</p>
+</div>
+<div class="paragraph">
+<p>Il se décompose en plusieurs parties&#160;:
+les <strong>informations générales</strong> qui aident les utilisateurs et utilisatrices
+à découvrir le module en <a href="#registry">effectuant une recherche</a>,
+les <strong>points d&#8217;entrée</strong> pour inclure ou exécuter le module
+et la <strong>configuration projet</strong> qui affecte le fonctionnement de l&#8217;exécutable npm.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Tableau 3. Informations pour faciliter la découverte et la compréhension</caption>
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Section</th>
+<th class="tableblock halign-left valign-top">Obligatoire&#160;?</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Modifiable</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2714;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#semver">Semver</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avec <a href="#version"><code>npm version</code></a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2714;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explique l&#8217;intention du module à une personne qui le découvre</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keywords</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tableau de texte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Facilite sa découverte sur <span class="URL">npmjs.com</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>homepage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2714;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte&#160;(URL)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indique où trouver de la documentation et des exemples d&#8217;utilisation – cela peut être l&#8217;adresse du dépôt GitLab ou GitHub</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>license</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explicite les conditions de réutilisation du code dans un autre projet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bugs.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte&#160;(URL)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Facilite la remontée de bogues</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>repository.type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">En général la valeur est <code>git</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>repository.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte&#160;(URL)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Facilite la découverte du code source à l&#8217;origine du module</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Tableau 4. Points d&#8217;entrée pour utiliser votre module</caption>
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Section</th>
+<th class="tableblock halign-left valign-top">Obligatoire&#160;?</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Modifiable</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2714;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correspond au nom à spécifier aux fonctions <code>require()</code> et <code>import</code>. Un changement de nom obligera à mettre à jour tous les scripts qui appellent ce module</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>main</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte (chemin)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Script qui sera utilisé lors de l&#8217;appel à <code>require()</code> et <code>import</code> (par défaut <code>index.js</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Texte (chemin)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Script qui sera utilisé comme exécutable lors de l&#8217;appel <code>npx &lt;module&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Objet (nom/chemin)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Idem – forme qui permet de déclarer plusieurs exécutables au sein d&#8217;un même module</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Tableau 5. Configuration projet pour l&#8217;exécutable <code>npm</code></caption>
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Section</th>
+<th class="tableblock halign-left valign-top">Obligatoire&#160;?</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Modifiable</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>private</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Booléen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empêche la publication accidentelle sur le registre&#160;<code>npm</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>engines</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Objet (nom/<a href="#semver">SemVer</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Certains hébergeurs utilisent ce champ pour déterminer la version de Node à utiliser</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dependencies</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Objet (nom/<a href="#semver">SemVer</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avec <code>npm install</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Voir la section &#8220;<a href="#install">Installer des modules <code>npm</code></a>&#8221;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>devDependencies</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Objet (nom/<a href="#semver">SemVer</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avec <code>npm install</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Voir la section &#8220;<a href="#install.dev">Dépendances de développement</a>&#8221;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scripts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#x2718;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Objet (nom/commande)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">À la main</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Voir la section &#8220;<a href="#scripts">Scripts&#160;<code>npm</code></a>&#8221;</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Documentation</span> Tout sur le fichier package.json</div>
+<div class="paragraph">
+<p>
+
+La page <span class="URL"><a href="https://docs.npmjs.com/files/package.json" class="bare">docs.npmjs.com/files/package.json</a></span> documente
+de manière exhaustive les sections du fichier <code>package.json</code>.</p>
+</div>
+<div class="paragraph">
+<p>En la lisant, vous apprendrez l&#8217;existence d&#8217;autres sections qui pourraient
+peut-être vous intéresser.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="commands">6. Quelques commandes pour aller plus&#160;loin</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nous venons de voir les commandes les plus utilisées de l&#8217;exécutable&#160;<code>npm</code>.
+Il en existe d&#8217;autres dont l&#8217;intérêt varie en fonction de vos envies et de
+vos pratiques de développement.
+Pas d&#8217;inquiétude donc si vous ne les utilisez pas toutes&#160;:
+j&#8217;en parle pour <strong>éclairer quelques points intéressants à explorer</strong>.</p>
+</div>
+<div class="sect2">
+<h3 id="view">6.1. npm view : voir les informations d&#8217;un module</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm view</code> donne une vue synthétique d&#8217;un module&#160;<code>npm</code> donné.
+Elle est similaire à celle que nous pourrions trouver sur le registre&#160;<code>npm</code>,
+mais condensée pour l&#8217;affichage dans un terminal.</p>
+</div>
+<div class="paragraph">
+<p>Nous y retrouvons des informations fournies par les personnes en charge du module
+ainsi que d&#8217;autres, fournies par le registre&#160;<code>npm</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm view nodebook
+
+nodebook@0.9.1 | CC-BY-NC-SA-4.0 | deps: 6 | versions: 21
+Node.js – Apprendre par l'exemple
+
+keywords: nodejs, book, french, livre, learn, apprendre
+
+bin: nodebook
+
+dist
+.tarball https://registry.npmjs.org/nodebook/nodebook-0.9.1.tgz
+.shasum: 5ea87e9b85782e23164705a49cb7bd2dc4063775
+.integrity: sha512-...
+.unpackedSize: 15.0 MB
+
+dependencies:
+finalhandler: ^1.1.1  serve-static: ^1.13.2
+get-port: ^3.2.0      update-check: ^1.5.2
+glob: ^7.1.2          yargs: ^11.1.0
+
+maintainers:
+- oncletom
+
+dist-tags:
+latest: 0.9.1
+
+published 23 hours ago by oncletom</pre>
+</div>
+</div>
+<div class="hdlist">
+<div class="title">Sélection de champs que je trouve intéressants</div>
+<table>
+<tr>
+<td class="hdlist1">
+<code>bin</code>
+</td>
+<td class="hdlist2">
+<p>Indique la présence d&#8217;un moins un <a href="#install.global">exécutable</a>.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>dist</code>
+</td>
+<td class="hdlist2">
+<p>Donne des informations à propos du fichier téléchargé avec <code>npm install &lt;module&gt;</code>.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>dependencies</code>
+</td>
+<td class="hdlist2">
+<p>Liste les modules additionnels téléchargés lors de l&#8217;installation.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>dist-tags</code>
+</td>
+<td class="hdlist2">
+<p>Précise les étiquettes définies par personnes en charge du module,
+utiles quand nous souhaitons <a href="#install.version">jongler entre ses différentes versions</a>.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Nous pouvons aussi zoomer sur une métadonnée.
+Par exemple, spécifions le champ <code>dependencies</code> pour ne lister que les
+dépendances directes&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm view nodebook dependencies
+{ finalhandler: '^1.1.1',
+  'get-port': '^3.2.0',
+  glob: '^7.1.2',
+  'serve-static': '^1.13.2',
+  'update-check': '^1.5.2',
+  yargs: '^11.1.0' }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Il est même possible de zoomer sur un niveau plus fin de métadonnée,
+avec une annotation similaire à celle d&#8217;un objet ECMAScript&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm view nodebook dist.<mark>unpackedSize</mark>
+14985184
+<span data-bash-subs="$"></span>npm view nodebook dist
+{ integrity:
+   'sha512-...',
+  shasum: '5ea87e9b85782e23164705a49cb7bd2dc4063775',
+  tarball:
+    'https://registry.npmjs.org/nodebook/nodebook-0.9.1.tgz',
+  fileCount: 486,
+  <mark>unpackedSize</mark>: 14985184 }</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="npx">6.2. npx : exécuter un module sans l&#8217;installer</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>L'<a href="#install.global">installation globale</a> est idéale pour disposer d&#8217;un module
+npm sous forme d&#8217;exécutable système.
+On peut cependant vite arriver à en installer beaucoup sans vraiment penser à
+les enlever quand on n&#8217;en a plus besoin.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npx</code> (pour <code>npm executable</code>) s&#8217;installe automatiquement avec npm.
+Il agit comme un raccourci&#160;: il va récupérer le module désiré et l&#8217;exécute en
+lui passant les arguments souhaités.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npx cowsay Magique !
+npx: installed 10 in 2.122s
+ ___________
+< Magique ! >
+ -----------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>C&#8217;est en quelque sorte l&#8217;équivalent des trois commandes suivantes&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install --global cowsay
+<span data-bash-subs="$"></span>cowsay Magique !
+<span data-bash-subs="$"></span>npm uninstall cowsay</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="home">6.3. npm home : visiter le site web d&#8217;un module</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Vous vous demandez où trouver davantage de documentation à propos d&#8217;un
+module&#160;<code>npm</code>&#160;?
+<code>npm home</code> ouvre un nouvel onglet de navigateur et dirige ce dernier
+vers sur le site web du module de votre choix.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm home lodash
+<span data-bash-subs="$"></span>npm home micro</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="audit">6.4. npm audit : vérifier la sécurité des dépendances</h3>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm audit</code> part à la recherche de vulnérabilités connues
+dans l&#8217;intégralité des dépendances d&#8217;un projet.</p>
+</div>
+<div class="paragraph">
+<p><code>npm install</code> effectue un audit de manière implicite afin de s&#8217;assurer
+que notre projet n&#8217;est pas compromis à notre insu.
+Les deux dernières lignes sont issues de la fonctionnalité d&#8217;audit de sécurité&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install lodash@3
++ lodash@3.10.1
+added 1 package from 5 contributors in 1.95s
+found 1 low severity vulnerability
+  run `npm audit fix` to fix them, or `npm audit` for details</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Un affichage plus détaillé est présenté en exécutant <code>npm audit</code>&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm audit
+
+<span data-bash-subs="#"></span>Run  npm install lodash@4.17.10  to resolve 1 vulnerability
+Recommended action is a potentially breaking change
+┌───────────────┬───────────────────────────────────────────┐
+│ Low           │ Prototype Pollution                       │
+├───────────────┼───────────────────────────────────────────┤
+│ Package       │ <mark>lodash</mark>                                    │
+├───────────────┼───────────────────────────────────────────┤
+│ Dependency of │ lodash                                    │
+├───────────────┼───────────────────────────────────────────┤
+│ <mark>Path</mark>          │ lodash                                    │
+├───────────────┼───────────────────────────────────────────┤
+│ More info     │ https://nodesecurity.io/advisories/577    │
+└───────────────┴───────────────────────────────────────────┘
+
+found 1 low severity vulnerability
+  1 vulnerability requires semver-major dependency updates.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Chaque module concerné par une faille connue est listé à l&#8217;écran (champ <code>Package</code>).
+Le champ <code>Path</code> spécifie l&#8217;arbre de dépendances qui mène à la vulnérabilité
+– c&#8217;est utile pour identifier quelle dépendance directe actualiser.</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm audit</code> précise la marche à suivre dès qu&#8217;elle le peut.
+Ici, elle indique qu&#8217;une <a href="#semver">mise à jour majeure</a> est
+nécessaire pour se débarrasser du problème.
+Cela nécessitera peut-être d&#8217;ajuster le code utilisant cette
+dépendance sous peine de casser notre application.
+</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm audit fix</code> corrigera toutes les dépendances pour lesquelles
+il est possible de changer la version de manière automatique et sans risque.
+Les mises à jour majeures sont toujours manuelles et demandent votre intervention.
+</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ci">6.5. npm clean-install : installer à toute vitesse</h3>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm clean-install</code> (<code>npm ci</code>) est destinée à installer les
+modules listés dans le fichier <code>package.json</code>.
+Elle vise à s&#8217;exécuter plus rapidement et dans des environnements
+autres que ceux de développement&#160;: en intégration continue, en production, etc.</p>
+</div>
+<div class="paragraph">
+<p>Cette commande fait une chose de plus que <a href="#install"><code>npm install</code></a>&#160;:
+elle supprime systématiquement le répertoire <code>node_modules</code> pour rendre
+chaque installation reproductible à l&#8217;identique.
+Elle fait aussi une chose de moins&#160;: elle se contente d&#8217;installer les
+modules tels que listés dans le <a href="#package-lock">fichier <code>package-lock.json</code></a>.
+C&#8217;est ce dernier point qui rend cette commande si rapide&#160;– moins de vérifications,
+moins d&#8217;allers-retours, moins de complexité.</p>
+</div>
+<div class="listingblock prismjs highlight-prismjs">
+<div class="title">.travis.yml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml"><span class="token key atrule">language</span><span class="token punctuation">:</span> node_js
+<span class="token key atrule">node_js</span><span class="token punctuation">:</span> v10
+<span class="token key atrule">install</span><span class="token punctuation">:</span> npm ci   <span class="token comment"># <b class="conum">(1)</b></span>
+<span class="token key atrule">script</span><span class="token punctuation">:</span> npm test
+<span class="token key atrule">cache</span><span class="token punctuation">:</span> npm        <span class="token comment"># <b class="conum">(2)</b></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Surcharge la commande par défaut (<code>npm install</code>)</p>
+</li>
+<li>
+<p>Les modules <code>npm</code> seront sauvegardés entre deux jobs&#160;– l&#8217;installation ira plus vite si les modules sont obtenus depuis le cache plutôt que depuis le registre&#160;<code>npm</code>.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Remettre un projet à&#160;zéro</div>
+<div class="paragraph">
+<p>La commande <code>npm clean-install</code> est pratique pour remettre un projet à zéro,
+en cas de problème d&#8217;installation ou après avoir bidouillé dans le répertoire
+<code>node_modules</code> par exemple.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="doctor">6.6. npm doctor : vérifier l&#8217;état du système</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p><code>npm doctor</code> est une commande utilitaire qui vérifie que npm trouve
+tout ce qu&#8217;il lui faut pour bien fonctionner.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> inspecte le système à la recherche de Git,
+teste la connectivité vers le registre&#160;<code>npm</code> et s&#8217;assure qu&#8217;il a accès en écriture
+à des répertoires essentiels à son bon fonctionnement.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm doctor
+Check                               Value
+npm ping                            OK
+npm -v                              v6.4.0
+node -v                             v10.0.0
+npm config get registry             https://registry.npmjs.org
+which git                           /usr/local/bin/git
+Perms check on cached files         ok
+Perms check on global node_modules  ok
+Perms check on local node_modules   ok
+Verify cache contents               verified 4066 tarballs</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="config">6.7. npm config : changer les réglages de l&#8217;exécutable <code>npm</code></h3>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm config</code> affiche et modifie la configuration
+de l&#8217;exécutable <code>npm</code>.
+Elle se découpe en plusieurs sous-commandes comme en atteste cette tentative
+d&#8217;utilisation&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm config
+npm ERR! Usage:
+npm ERR! npm config set <key> <value>
+npm ERR! npm config get [<key>]
+npm ERR! npm config delete <key>
+npm ERR! npm config list [--json]
+npm ERR! npm config edit</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La sous-commande <code>get</code> affiche la valeur par défaut d&#8217;une clé de configuration&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm config get loglevel
+notice</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cette configuration reflète le degré d&#8217;affichage de l&#8217;exécutable.
+Elle agit comme un curseur pour choisir une vue plus ou moins détaillée de
+ce qui se trame sous le capot.</p>
+</div>
+<div class="paragraph">
+<p>Augmentons le taux d&#8217;affichage avec la sous-commande <code>set</code>&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm config set loglevel http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nous voyons désormais les requêtes HTTP lancées (ici, en rejouant
+l&#8217;exemple d'<a href="#install.global">installation globale</a> du module&#160;<em>serve</em>)&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm install --global serve
+GET 200 https://registry.npmjs.org/serve 653ms
+GET 304 https://registry.npmjs.org/chalk 271ms (from cache)
+GET 304 https://registry.npmjs.org/arg 274ms (from cache)
+...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La sous-commande&#160;<code>ls</code> récapitule tous nos changements de configuration.
+Elle affiche tous les réglages par défaut en la suffixant de l&#8217;option <code>--long</code>&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm config ls
+<span data-bash-subs="$"></span>npm config ls --long</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Sauvegarder sa configuration&#160;npm</div>
+<div class="paragraph">
+<p>
+
+Chaque appel à <code>npm config set</code> enregistre les changements dans un fichier
+de configuration <code>~/.npmrc</code>.</p>
+</div>
+<div class="paragraph">
+<p>Il est propre à l&#8217;utilisateur actif de notre ordinateur.
+Il vous appartient de le sauvegarder ou d&#8217;en fournir un spécifique dans le cadre
+de votre environnement de production ou d&#8217;intégration continue.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Pour y voir plus clair, voici une petite sélection des éléments
+de configuration que vous pourriez être amené·e à modifier sur votre
+machine de développement ou sur votre configuration de production&#160;:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Tableau 6. Sélection d&#8217;éléments de configuration de la commande npm</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Clé</th>
+<th class="tableblock halign-left valign-top">Valeur par défaut</th>
+<th class="tableblock halign-left valign-top">Remarque</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>access</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>restricted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passez à <code>public</code> pour faire en sorte que les modules faisant partie d&#8217;une organisation soient considérés comme publics.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>audit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passez à <code>false</code> pour désactiver l&#8217;audit automatique à chaque installation de module (voir <a href="#audit"><code>npm audit</code></a>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cache</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>~/.npm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modifiez le chemin pour que le cache des modules <code>npm</code> soit géré ailleurs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>color</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passez à <code>false</code> pour désactiver l&#8217;utilisation des couleurs de&#160;<code>npm</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>depth</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Infinity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Le nombre utilisé limitera la profondeur d&#8217;affichage des commandes <code>npm ls</code>, <code>npm outdated</code>, etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>git</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>git</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nom de l&#8217;exécutable ou chemin d&#8217;accès de l&#8217;exécutable <code>git</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>https-proxy</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adresse du proxy HTTPS – remplace alors la variable d&#8217;environnement <code>HTTPS_PROXY</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loglevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>notice</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Change le taux d&#8217;affichage des messages – <code>silent</code>, <code>error</code>, <code>warn</code> diminueront ce taux tandis que <code>http</code>, <code>timing</code>, <code>info</code>, <code>verbose</code> ou <code>silly</code> augmenteront le niveau de détail.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>offline</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passez à <code>true</code> pour que l&#8217;installation des modules <code>npm</code> se fasse sans transiter par le réseau.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>progress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passez à <code>false</code> pour désactiver l&#8217;affichage de la barre de progression.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>proxy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adresse du proxy HTTP – remplace alors la variable d&#8217;environnement <code>HTTP_PROXY</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>registry</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://registry.npmjs.org/" class="bare">registry.npmjs.org/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Changez cette valeur par celle de votre registre privé ou auto-hébergé.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>send-metrics</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passez à <code>true</code> pour envoyer des statistiques d&#8217;utilisation à l&#8217;équipe de&#160;<code>npm</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tmp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$TMPDIR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Changez cette valeur pour utiliser un autre répertoire temporaire.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Documentation</span> Tout sur npm&#160;config</div>
+<div class="paragraph">
+<p>La page <span class="URL"><a href="https://docs.npmjs.com/misc/config#config-settings" class="bare">docs.npmjs.com/misc/config#config-settings</a></span> documente
+de manière exhaustive toutes les clés de configuration et leur effet sur
+l&#8217;exécutable&#160;<code>npm</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="publish">6.8. npm publish : publier un module&#160;npm</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Nous savons comment <a href="#install">installer des modules</a> depuis le registre,
+mais nous n&#8217;avons pas encore vu comment contribuer nous-même à cet écosystème.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;option <code>--dry-run</code> est peut-être la première à utiliser avec cette commande,
+puisqu&#8217;elle fait comme si nous voulions publier le module, mais
+sans aller jusqu&#8217;à téléverser le code sur le registre&#160;<code>npm</code>.
+Je la recommande pour voir de nos propres yeux ce qui serait transmis
+et rectifier un problème avant qu&#8217;il ne se produise&#160;– vous n&#8217;avez pas envie
+de mettre en ligne un fichier qui contient un mot de passe n&#8217;est-ce pas&#160;?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm publish --dry-run
+npm notice
+npm notice 📦  nodebook.chapter-05@1.0.0
+npm notice === Tarball Contents ===
+npm notice 754B    package.json
+npm notice 59B     .eslintrc.yaml
+npm notice 59.3kB  index.adoc
+npm notice 133B    examples/app.js
+npm notice 115B    examples/cow.js
+npm notice 65B     examples/hello.js
+npm notice 138B    examples/print-args.js
+npm notice 223B    examples/tests.js
+npm notice 46.3kB  images/module-content.png
+npm notice 75.6kB  images/npm-package-falchion.png
+npm notice 219.5kB images/npm-package-mysql-libmysqlclient.png
+npm notice 170.2kB images/npm-package-mysql2.png
+npm notice 172.7kB images/npm-registry-search.png
+npm notice === Tarball Details ===
+npm notice name:          nodebook.chapter-05
+npm notice version:       1.0.0
+npm notice package size:  656.8 kB
+npm notice unpacked size: 745.1 kB
+npm notice shasum:        7f2887b8840124cf8d0c2fa72e8d61cd739
+npm notice integrity:     sha512-a6yvb8WO[...]yUeLy2jg/viXQ==
+npm notice total files:   13</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Configuration</span> Empêcher un module d&#8217;être publié</div>
+<div class="paragraph">
+<p>
+La section de configuration <code>private</code> est à ajouter dans le fichier <code>package.json</code>
+d&#8217;un module pour empêcher toute publication involontaire.</p>
+</div>
+<div class="listingblock">
+<div class="title">package.json</div>
+<div class="content">
+<pre>{
+  "name": "...",
+  "private": true
+}</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>La publication d&#8217;un module implique que vous ayez configuré les sections
+<code>main</code> ou <code>bin</code> du fichier <code>package.json</code> pour respectivement indiquer
+quel fichier charger avec <code>require('&lt;module&gt;')</code> ou exécuter avec <a href="#npx"><code>npx &lt;module&gt;</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>La publication d&#8217;un module nécessite de se créer un compte sur le registre
+<span class="URL"><a href="https://npmjs.com" class="bare">npmjs.com</a></span>.
+
+Si c&#8217;est la première fois, l&#8217;exécutable <code>npm</code> vous
+demandera alors de vous identifier&#160;– le module sera ensuite publié en votre nom.</p>
+</div>
+<div class="paragraph">
+<p>Idéalement, je recommande de ne pas publier de module à la main mais de
+<strong>préférer l&#8217;utilisation d&#8217;un service d&#8217;intégration continue</strong> comme
+<em>Travis&#160;CI</em> (<span class="URL"><a href="https://travis-ci.com" class="bare">travis-ci.com</a></span>).
+La configuration d&#8217;un tel service permet de publier <a href="#version">une nouvelle version</a>
+seulement si les tests passent au&#160;vert.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Ignorer des fichiers à publier</div>
+<div class="paragraph">
+<p>
+L&#8217;exécutable <code>npm</code> ignore par défaut les mêmes fichiers que Git.
+Il honore la présence des fichiers <code>.gitignore</code> et exclut les fichiers
+et répertoires concernés de la publication.</p>
+</div>
+<div class="paragraph">
+<p>Le fichier <code>.npmignore</code> remplace <code>.gitignore</code> dans le cas
+où votre besoin de fichiers à versionner est différent de celui de fichiers
+à publier sur le registre&#160;<code>npm</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">.npmignore</div>
+<div class="content">
+<pre>.DS_Store        <span data-bash-conum="1"></span>
+node_modules     <span data-bash-conum="2"></span>
+
+src/*.html       <span data-bash-conum="3"></span>
+!src/index.html  <span data-bash-conum="4"></span></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Ignore un fichier nommé <code>.DS_Store</code>&#160;– courant sous macOS.</p>
+</li>
+<li>
+<p>Ignore le répertoire <code>node_modules</code> et tout ce qu&#8217;il contient.</p>
+</li>
+<li>
+<p>Ignore tous les fichiers <code>.html</code> contenus dans le répertoire&#160;<code>src</code>.</p>
+</li>
+<li>
+<p>À l&#8217;exception du fichier <code>index.html</code> contenu dans le répertoire&#160;<code>src</code>.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="version">6.9. npm version : déterminer une nouvelle version sans se tromper</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Nous ne pouvons pas <a href="#publish">publier</a> deux fois une même version d&#8217;un
+module&#160;<code>npm</code>.
+Nous devons donc a&#160;minima modifier la valeur de la section <code>version</code>
+dans le fichier <code>package.json</code>.</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm version</code> automatise le calcul du prochain numéro de version,
+reflète ce dernier dans le champ <code>version</code> du fichier <code>package.json</code>
+et procède à un <code>commit</code> Git, étiqueté avec cette nouvelle version.
+Je trouve cette manière élégante, notamment en complément de la
+publication automatique par le biais d&#8217;un service d&#8217;intégration continue.</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>npm version</code> se complète forcément d&#8217;un argument pour
+indiquer la <a href="#semver">granularité de version sémantique</a> concernée.
+Ainsi, si nous voulons mettre à jour un module actuellement en version&#160;<code>1.0.0</code>&#160;:
+</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>npm version patch</code> la changera en&#160;<code>1.0.1</code>.</p>
+</li>
+<li>
+<p><code>npm version minor</code> la changera en&#160;<code>1.1.0</code>.</p>
+</li>
+<li>
+<p><code>npm version major</code> la changera en&#160;<code>2.0.0</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cette montée en version se complète optionnellement de <a href="#scripts">scripts&#160;<code>npm</code></a>
+pour automatiser d&#8217;autres actions lors d&#8217;une montée en version&#160;:
+
+</p>
+</div>
+<div class="hdlist">
+<div class="title">Ordre d&#8217;exécution des <a href="#run">scripts&#160;<code>npm</code></a> lors d&#8217;une montée de version</div>
+<table>
+<tr>
+<td class="hdlist1">
+<code>preversion</code>
+</td>
+<td class="hdlist2">
+<p>Le nouveau numéro de version n&#8217;a pas encore été appliqué.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>version</code>
+</td>
+<td class="hdlist2">
+<p>Le nouveau numéro de version est appliqué&#160;– vous pouvez encore ajouter de nouveaux fichiers au <code>commit</code>&#160;Git.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>postversion</code>
+</td>
+<td class="hdlist2">
+<p>Le nouveau numéro de version est appliqué et un <code>commit</code> a été ajouté à l&#8217;historique&#160;Git.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Avancé</span> Déterminer la version depuis&#160;Git</div>
+<div class="paragraph">
+<p>
+Peut-être que vous gérez vous-même le numéro de version en l&#8217;attribuant
+directement avec un <code>tag</code>&#160;Git&#160;(<code>git tag</code>).</p>
+</div>
+<div class="paragraph">
+<p>Dans ce cas, la commande <code>npm version from-git</code> reporte le numéro de version
+du dernier <code>tag</code>&#160;Git dans le fichier <code>package.json</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="questions">7. Questions et mystères autour de&#160;npm</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> et le registre du même nom ont accompagné Node quasiment
+depuis le début.
+Il paraît simple de prime abord et je pense que c&#8217;est normal de se sentir
+surpris·e par ses résultats.</p>
+</div>
+<div class="paragraph">
+<p>Passons en revue des critiques ou questionnements que j&#8217;entends régulièrement
+afin d&#8217;y voir plus&#160;clair.</p>
+</div>
+<div class="sect2">
+<h3 id="npm.update">7.1. Quand mettre à jour l&#8217;exécutable&#160;npm ?</h3>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<div class="paragraph">
+<p>De nouvelles versions de l&#8217;exécutable <code>npm</code> sont régulièrement publiées.
+Un message s&#8217;affiche dans notre terminal lorsque nous l&#8217;utilisons et qu&#8217;il
+détecte qu&#8217;une version plus récente est disponible.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>╭─────────────────────────────────────╮
+│                                     │
+│   Update available 6.0.0 → 6.4.0  │
+│     Run npm i -g npm to update      │
+│                                     │
+╰─────────────────────────────────────╯</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le module qui contient l&#8217;exécutable <code>npm</code> suit le principe des
+<a href="#semver">versions sémantiques</a>.
+Ainsi, la mise à jour sera sans effort si le numéro majeur reste le même.</p>
+</div>
+<div class="paragraph">
+<p>J&#8217;ai tendance à regarder du côté de <span class="URL"><a href="https://github.com/npm/npm/releases" class="bare">github.com/npm/npm/releases</a></span>
+pour lire tous les <em>Breaking Changes</em> et comprendre en quoi la mise à jour
+majeure m&#8217;affecte.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="package-lock">7.2. Je ne vois pas l&#8217;intérêt du fichier package-lock.json</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Le fichier <code>package-lock.json</code> est créé automatiquement par l&#8217;exécutable <code>npm</code>
+dès que vous ajoutez votre première dépendance à un projet.</p>
+</div>
+<div class="paragraph">
+<p>Jetons un œil à son contenu pour tenter d&#8217;en cerner les contours&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "name": "nodebook.chapter-05",
+  "version": "1.0.0",
+  "lockfileVersion": 1,
+  "requires": true,
+  "dependencies": {
+    "acorn": {
+      "version": "5.6.1",
+      "resolved":
+        "https://registry.npmjs.org/acorn/-/acorn-5.6.1.tgz",
+      "integrity": "sha512-...",
+      "dev": true
+    },
+    "cowsay": {
+      "version": "1.3.1",
+      "resolved":
+        "https://registry.npmjs.org/cowsay/-/cowsay-1.3.1.tgz",
+      "integrity": "sha512-...",
+      "requires": {
+        "get-stdin": "^5.0.1",
+        "optimist": "~0.6.1",
+        "string-width": "~2.1.1",
+        "strip-eof": "^1.0.0"
+      }
+    },
+    ...
+  }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Il ressemble beaucoup au fichier <code>package.json</code>.
+On notera qu&#8217;il contient exclusivement des données liées aux dépendances,
+ainsi qu&#8217;à <strong>toutes les dépendances des dépendances</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Si le fichier <code>package.json</code> contient une <a href="#semver">version sémantique</a>,
+<code>package-lock.json</code> <strong>contient la version exacte</strong> de chaque dépendance ainsi
+que deux autres types d&#8217;informations&#160;: l&#8217;URL de téléchargement et une signature
+qui sert à vérifier si le fichier téléchargé est le bon (intégrité).</p>
+</div>
+<div class="paragraph">
+<p>La représentation complète de l&#8217;arbre de dépendances dans le fichier <code>package-lock.json</code>
+traduit deux intentions&#160;:
+rendre l&#8217;installation des dépendances possibles en se basant uniquement sur
+ce fichier et accélérer le processus d&#8217;installation.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title">Avantages</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Le projet s&#8217;installe encore plus rapidement grâce à la commande <code>npm ci</code>.</p>
+</li>
+<li>
+<p>Nous pouvons reproduire la même installation sur plusieurs ordinateurs.</p>
+</li>
+<li>
+<p>La commande <code>npm install</code> installe plus rapidement en présence d&#8217;un fichier <code>package-lock.json</code>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title">Inconvénients</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Nous devons vérifier manuellement s&#8217;il y a des <em>patchs</em> avec <code>npm outdated</code> et <code>npm update</code>.</p>
+</li>
+<li>
+<p>C&#8217;est une chose de plus à apprendre même si on n&#8217;a pas l&#8217;intention de l&#8217;utiliser.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bower">7.3. npm c&#8217;est pour le back-end et bower pour le front-end</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p><em>bower</em> (<span class="URL"><a href="https://bower.io" class="bare">bower.io</a></span>) est un gestionnaire de modules
+spécialisé dans le développement <em>front-end</em>.</p>
+</div>
+<div class="paragraph">
+<p>Je pense qu&#8217;il était utile à une époque où l&#8217;outillage <em>front-end</em> disponible
+dans Node était encore confidentiel.
+Je pense aussi que cette époque est révolue, au sens où l&#8217;outillage dédié à
+Node et aux navigateurs web tend à se confondre.</p>
+</div>
+<div class="paragraph">
+<p>En apprenant ECMAScript, Node et <code>npm</code>, nous gagnons non seulement un outillage
+disponible immédiatement, mais aussi la capacité à créer le nôtre.
+Pour en savoir plus sur comment développer pour le <em>front-end</em> comme on développe
+pour Node, je vous invite à lire le <a href="../chapter-09/index.html">chapitre&#160;9</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title">Avantages</div>
+<div class="ulist">
+<ul>
+<li>
+<p>On peut installer un projet sans qu&#8217;il possède un fichier <code>package.json</code>.</p>
+</li>
+<li>
+<p>On n&#8217;a pas nécessairement besoin de s&#8217;outiller pour utiliser les modules&#160;Bower.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title">Inconvénients</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Si on utilise déjà un fichier <code>package.json</code> pour d&#8217;autres besoins, autant l&#8217;utiliser pour les dépendances <em>front-end</em>&#160;; donc autant utiliser&#160;<code>npm</code>.</p>
+</li>
+<li>
+<p>Le développement de&#160;Bower stagne depuis 2015 et je pense que le projet sera arrêté tôt ou&#160;tard.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="est_ce_que_je_dois_versionner_le_répertoire_node_modules">7.4. Est-ce que je dois versionner le répertoire node_modules ?</h3>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<div class="paragraph">
+<p>Le contenu du répertoire <code>node_modules</code> se recrée automatiquement
+en utilisant l&#8217;exécutable <code>npm</code>, que ce soit avec <a href="#install"><code>npm install</code></a> ou
+<a href="#update"><code>npm update</code></a>.
+Mieux vaut versionner les fichiers <code>package.json</code> et
+<a href="#package-lock"><code>package-lock.json</code></a> pour être certain·e
+de les recréer comme il&#160;faut.</p>
+</div>
+<div class="paragraph">
+<p>Le répertoire <code>node_modules</code> n&#8217;a donc pas besoin d&#8217;être versionné.
+Je vous encourage à <strong>ajouter <code>node_modules</code> dans le fichier <code>.gitignore</code></strong>.
+Ce fichier texte se situe en général à la racine de votre projet.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title">Avantages</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Je n&#8217;en vois pas.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title">Inconvénients</div>
+<div class="ulist">
+<ul>
+<li>
+<p>C&#8217;est difficile à versionner avec Git en cas de conflit.</p>
+</li>
+<li>
+<p>Ça va exploser si deux personnes utilisent des systèmes d&#8217;exploitation différents&#160;– certaines dépendances génèrent des fichiers en fonction du système.</p>
+</li>
+<li>
+<p>Ça va exploser s&#8217;il manque un module quelque part&#160;– et ce sera plus un problème à régler que de <em>ne pas</em> versionner ce répertoire.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="yarn">7.5. Il paraît que Yarn, c&#8217;est mieux</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;application <em>Yarn</em> (<span class="URL"><a href="https://yarnpkg.com" class="bare">yarnpkg.com</a></span>) veut être une alternative
+à l&#8217;exécutable&#160;<code>npm</code>.
+Le programme vise une installation rapide, hors-ligne et sécurisée.</p>
+</div>
+<div class="paragraph">
+<p>npm rattrape régulièrement les fonctionnalités qui &#8220;donnent de l&#8217;avance&#8221; à <em>Yarn</em>.
+Le choix tient donc plutôt du goût ou de l&#8217;idéologie.
+Essayez donc <em>Yarn</em> et gardez-le pour les bonnes raisons&#160;– les vôtres.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title">Avantages</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Le mode <em>workspace</em> permet de lier plusieurs projets entre eux de manière déclarative.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title">Inconvénients</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Il faudra quand même savoir comment fonctionne npm pour les projets qui n&#8217;utilisent pas&#160;<em>Yarn</em>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="all-your-base-are-belong-to-us">7.6. npm&#160;est lent, il installe la moitié d&#8217;Internet à chaque&#160;fois</h3>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> passe le plus clair de son temps à faire des allers-retours
+vers le registre&#160;<code>npm</code> en utilisant votre connexion Internet.
+Il téléchargera un module seulement s&#8217;il ne l&#8217;a pas déjà téléchargé sur un autre projet.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;équipe de développement de l&#8217;exécutable <code>npm</code> travaille à améliorer
+ses performances et sa qualité d&#8217;utilisation.
+Cette équipe n&#8217;a pas d&#8217;influence sur les choix faits par les personnes en charge
+des modules.</p>
+</div>
+<div class="paragraph">
+<p>Le temps de téléchargement d&#8217;un module&#160;<code>npm</code> dépend de deux choses&#160;:
+du <strong>nombre de dépendances</strong> à installer et de leur <strong>poids</strong>, lequel correspond à
+la somme des poids des scripts et des ressources additionnelles (images, documentation).
+Dans les deux cas, <strong>plus il y en&#160;a, plus l&#8217;installation prendra du temps</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Par exemple, le seul ajout de <em>webpack&#160;4</em> (<span class="URL"><a href="https://npmjs.com/webpack" class="bare">npmjs.com/webpack</a></span>)
+augmente le coût de téléchargement de 14&#160;Mo lors de <code>npm install</code>.
+Ce n&#8217;est pas rien et ce n&#8217;est certainement pas la faute de l&#8217;exécutable&#160;<code>npm</code>.</p>
+</div>
+<div class="paragraph">
+<p>Le service en ligne <em>Package Phobia</em> (<span class="URL"><a href="https://packagephobia.now.sh" class="bare">packagephobia.now.sh</a></span>)
+garde un historique du poids des modules <code>npm</code>.
+Celui de <em>webpack</em> se trouve sur
+<span class="URL"><a href="https://packagephobia.now.sh/result?p=webpack" class="bare">packagephobia.now.sh/result?p=webpack</a></span>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/module-content.png" alt="module content">
+</div>
+<div class="title">Figure 5. Coût d&#8217;installation du module&#160;npm&#160;webpack (en foncé) et de ses dépendances (en clair)</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Pratique</span> Connaître le coût des dépendances de son projet</div>
+<div class="paragraph">
+<p>
+
+Le module&#160;<code>npm</code> <em>cost-of-modules</em> (<span class="URL"><a href="https://npmjs.com/cost-of-modules" class="bare">npmjs.com/cost-of-modules</a></span>)
+calcule la quantité et le poids des dépendances listées
+dans un fichier <code>package.json</code>.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est pratique pour identifier quel module remplacer par un autre, plus léger et
+plus rapide à installer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npx cost-of-modules                <span data-bash-conum="1"></span>
+┌───────────┬─────────────┬───────┐
+│ name      │ children    │ size  │
+├───────────┼─────────────┼───────┤
+│ lodash    │ 0           │ 1.34M │
+├───────────┼─────────────┼───────┤
+│ micro     │ 19          │ 0.67M │
+├───────────┼─────────────┼───────┤
+│ cowsay    │ 9           │ 0.22M │
+├───────────┼─────────────┼───────┤
+│ 3 modules │ 28 children │ 2.22M │
+└───────────┴─────────────┴───────┘</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>La <a href="#npx">commande <code>npx</code></a> est un raccourci pour exécuter des modules <code>npm</code> sans les installer.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="errors">7.7. Que signifient les erreurs affichées pendant npm install ?</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> est généreux en messages pendant l&#8217;installation
+de modules.
+C&#8217;est parfois difficile à lire, notamment pour comprendre la raison du message
+et la solution à apporter.</p>
+</div>
+<div class="paragraph">
+<p>Si <code>npm WARN</code> s&#8217;affiche, ce n&#8217;est pas une erreur mais un message
+à caractère informatif.<br>
+Si <code>npm ERR</code> débute la ligne, il y a un problème sur lequel nous
+avons une action immédiate à mener.</p>
+</div>
+<div class="sect3">
+<h4 id="error-deprecated">7.7.1. Module déprécié</h4>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Un module est déprécié quand il n&#8217;est plus maintenu,
+s&#8217;il est développé sous un nouveau nom ou si nous sommes encouragé·e·s à
+<a href="#install.version">faire une mise à jour majeure</a>.</p>
+</div>
+<div class="paragraph">
+<p>Un module déprécié ne nous regarde pas sauf s&#8217;il est listé dans le champ
+<code>dependencies</code> ou <code>devDependencies</code> d&#8217;un fichier <code>package.json</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Exemple d&#8217;encouragements à utiliser un autre module</div>
+<div class="content">
+<pre>npm WARN deprecated babel-preset-es2017@6.24.1:
+  Thanks for using Babel: <mark>we recommend using babel-preset-env</mark>
+  now: please read babeljs.io/env to update!
+
+npm WARN deprecated babel-preset-babili@0.0.10: babili has
+  been <mark>renamed to babel-minify</mark>.
+  Please update to babel-preset-minify</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Exemple de module qui n&#8217;est plus maintenu</div>
+<div class="content">
+<pre>npm WARN deprecated nomnom@1.6.2: <mark>Package no longer supported</mark>.
+  Contact support@npmjs.com for more info.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Un module qui n&#8217;est plus maintenu ne recevra probablement plus de mises à jour.
+Il vaut mieux dans ce cas en trouver un autre qui fait plus ou moins la même chose.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="error-skipping">7.7.2. Problème avec une dépendance optionnelle</h4>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<div class="paragraph">
+<p>Certains modules effectuent une opération de compilation&#160;: une partie de leur
+code source est écrit dans un autre langage que l&#8217;ECMAScript et ils
+font en sorte de créer un pont avec&#160;Node.</p>
+</div>
+<div class="paragraph">
+<p>Il arrive que l&#8217;opération de compilation n&#8217;aboutisse pas pour diverses raisons
+– logiciel manquant, incompatibilité avec le système d&#8217;exploitation
+ou avec l&#8217;architecture CPU.</p>
+</div>
+<div class="paragraph">
+<p>Le fait de voir écrit <code>SKIPPING</code> et <code>OPTIONAL</code> me laisse penser
+que ce n&#8217;est pas grave si l&#8217;opération ne se passe pas comme prévu.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.3
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY:
+  Unsupported platform for fsevents@1.1.3:
+  wanted {"os":"darwin","arch":"any"}
+  (current: {"os":"win32","arch":"x64"})</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="error-404">7.7.3. Module introuvable</h4>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Le module que vous cherchez à installer n&#8217;existe pas.
+Il s&#8217;agit peut-être d&#8217;une erreur de frappe ou alors le module a été retiré
+de la circulation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>npm i aria-roless
+npm ERR! code E404
+npm ERR! 404 Not Found: aria-roless@latest</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="error-crlf">7.7.4. Caractère de fin de ligne sous Windows</h4>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Les anciennes versions de&#160;<code>npm</code> avaient du mal à concilier les caractères de fin
+de ligne sous Windows (<code>\r\n</code>), différents des autres systèmes (<code>\n</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>npm error Expected linebreaks to be 'LF' but
+  found 'CRLF' linebreak-style</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#npm.update">Mettez&#160;<code>npm</code> à jour</a> vers une version plus récente pour
+régler le problème.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="error-pkg">7.7.5. Fichier package.json incomplet</h4>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Les messages suivants s&#8217;affichent quand les champs <code>description</code> et
+<code>repository</code> manquent à l&#8217;appel de notre fichier <code>package.json</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>npm WARN tmp@1.0.0 No description
+npm WARN tmp@1.0.0 No repository field.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Référez-vous à la section &#8220;<a href="#package.json">Anatomie du fichier <code>package.json</code></a>&#8221;
+pour savoir comment remplir ces champs manquants.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="error-peer-dependency">7.7.6. Dépendance complémentaire à installer</h4>
+<div class="paragraph">
+<p>
+
+</p>
+</div>
+<div class="paragraph">
+<p>Certains modules nécessitent des modules complémentaires pour fonctionner.
+Toutefois ces derniers sont à installer manuellement.
+C&#8217;est la signification du message d&#8217;erreur suivant&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>npm WARN <mark>react-power-picture</mark>@1.0.0 <mark>requires</mark> a peer of
+  <mark>react</mark>@^15.0.0-0 || ^16.0.0-0 but none is installed.
+  You must install peer dependencies yourself.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cet exemple indique que nous avons installé le module&#160;<code>npm</code>
+<em>react-power-picture</em> et que le module complémentaire <em>react</em>
+est nécessaire mais que nous ne l&#8217;avons pas installé.</p>
+</div>
+<div class="paragraph">
+<p>Si vous pensez que c&#8217;est une erreur ou une incompréhension, désinstallez
+le module et cherchez une alternative.
+Cela se produit généralement quand on ne s&#8217;aperçoit pas qu&#8217;un module est dédié
+à un certain framework&#160;– qu&#8217;on ne veut pas utiliser.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion">8. Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>L&#8217;exécutable <code>npm</code> est un outil qui va bien au-delà de la simple installation
+de modules&#160;: il va jusqu&#8217;à <strong>créer un outillage autonome</strong> pour chacun de nos projets.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons appris à <strong>jongler entre les différentes versions d&#8217;un module</strong>
+pour comprendre la notion de <a href="#semver">version sémantique</a> et son effet
+sur les commandes d&#8217;installation et de mise à&#160;jour.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons vu que les <strong>scripts&#160;<code>npm</code> représentent un outillage à portée de main</strong>.
+Ils nous facilitent la vie en plus d&#8217;être partagés avec
+les personnes impliquées dans un même projet.</p>
+</div>
+<div class="paragraph">
+<p>Avec le langage ECMAScript (<a href="../chapter-03/index.html">chapitre&#160;3</a>),
+l&#8217;environnement Node (<a href="../chapter-04/index.html">chapitre&#160;4</a>)
+et maintenant&#160;<code>npm</code>, nous avons des fondations solides pour
+déployer du code (<a href="../chapter-06/index.html">chapitre&#160;6</a>) et créer toutes
+sortes d&#8217;applications ECMAScript.</p>
+</div>
+</div>
+</div>
+</div>
+<section class="next">
+  <a href="#top">Haut de page</a> ou
+  <a href="https://oncletom.io/node.js/#apprendre-node-js-en-ligne" class="read-more">retour au sommaire</a>.
+</section>
+</body>
+</html>

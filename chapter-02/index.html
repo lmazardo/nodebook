@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<title>Installer, mettre à jour et développer</title>
+<style>
+#header,
+#content,
+#footer {
+  margin: 2rem auto;
+  max-width: 46rem;
+}
+
+#header {
+  margin-top: 0;
+}
+
+.title,
+#toctitle {
+  color: var(--dark-accent);
+}
+
+a {
+  /* white-space: nowrap; */
+}
+
+img, iframe, video, audio {
+  max-width: 100%;
+}
+
+p {
+  font-weight: normal;
+}
+
+/* Taken out from book.css */
+dl dt {
+  margin-bottom: 0.3125em;
+  font-weight: bold;
+}
+dl dd {
+  margin-bottom: 1.25em;
+}
+
+dt,
+th.tableblock,
+td.content,
+div.footnote {
+  text-rendering: optimizeLegibility;
+}
+
+.literalblock pre,
+.literalblock pre[class],
+.listingblock pre,
+.listingblock pre[class] {
+  overflow: auto;
+  word-wrap: break-word;
+}
+.literalblock pre.nowrap,
+.literalblock pre[class].nowrap,
+.listingblock pre.nowrap,
+.listingblock pre[class].nowrap {
+  overflow-x: auto;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.listingblock {
+  margin: 0 0 2em;
+}
+.listingblock > .content {
+  position: relative;
+}
+.listingblock > .title {
+  font-weight: bold;
+}
+.listingblock code[data-lang]::before {
+  display: none;
+  content: attr(data-lang);
+  position: absolute;
+  font-size: 0.75em;
+  top: 1em;
+  right: 1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #999;
+}
+.listingblock:hover code[data-lang]::before {
+  display: block;
+}
+.listingblock.terminal pre .command::before {
+  content: attr(data-prompt);
+  padding-right: 0.5em;
+  color: #999;
+}
+
+td.hdlist1,
+td.hdlist2 {
+  vertical-align: top;
+  padding-right: 0.625em;
+}
+td.hdlist1 {
+  font-weight: bold;
+}
+.literalblock + .colist,
+.listingblock + .colist {
+  margin-top: -1.5em;
+}
+.colist td:not([class]):first-child {
+  padding: 0.4em 0.75em 0 0.75em;
+  line-height: 1;
+  vertical-align: top;
+}
+.colist td:not([class]):first-child img {
+  max-width: none;
+}
+.colist td:not([class]):last-child {
+  padding: 0.25em 0;
+}
+
+/* Custom classes */
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.RemarquePreTitre,
+#toctitle {
+  font-style: normal;
+  font-weight: bold;
+}
+  .RemarquePreTitre::after {
+    content: "•";
+    padding-left: 5px;
+  }
+.admonitionblock {
+}
+.admonitionblock > table,
+.exampleblock {
+  --commented: rgba(17, 17, 68, .65);
+  --border-radius-base: 8px;
+
+  background-color: #fafafa;
+  border: 1px solid var(--dark-shade);
+  border-left: none;
+  border-right: none;
+  margin: 1.5em 0;
+  padding: 1em;
+}
+.exampleblock .title {
+  font-weight: bold;
+}
+.icon .title {
+  font-size: 2em;
+}
+  .admonitionblock > table td.icon {
+    display: none;
+  }
+
+  @media screen and (min-width: 769px) {
+    .admonitionblock > table td.icon {
+      display: table-cell;
+    }
+  }
+
+  .admonitionblock > table td.icon {
+    padding-right: 1em;
+  }
+  .admonitionblock > table td.icon img {
+    max-width: none;
+  }
+
+.colist ol {
+  margin-left: 1.5em;  /* aligns with the listing edge */
+  padding-left: 0;
+  font-weight: bold;   /* makes it stand out more */
+}
+  .colist ol p {
+    margin: 0 0 .5em;
+  }
+.listingblock:not(.prismjs) pre,
+.language-bash.hljs {
+  background: #323232;
+  color: wheat;
+  margin: 0;
+  padding: 1rem;
+}
+.language-bash.hljs .hljs-built_in,
+.language-bash.hljs .hljs-builtin-name {
+  color: white;
+}
+.language-bash.hljs .hljs-string {
+  color: lightgreen;
+}
+.language-bash.hljs .hljs-variable {
+  color: lightskyblue;
+}
+.keyseq {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.language-bash.hljs .keyseq {
+  color: white;
+}
+.language-bash.hljs kbd {
+  background: transparent;
+  box-shadow: none;
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0.1em 0.4em;
+}
+.listingblock pre.highlightjs,
+.listingblock.prismjs pre {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+.listingblock pre.highlightjs > code,
+.listingblock.prismjs .highlight {
+  border-left: 4px solid var(--dark-accent);
+  padding-left: 1em;
+  font-size: .8em;
+}
+.listingblock pre.highlightjs > code.language-bash {
+  border-left-color: limegreen;
+}
+
+.hdlist .hdlist1 {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td > p:first-child {
+  margin-top: 0;
+}
+
+.hljs-comment {
+  font-style: normal !important;
+}
+
+#toc.toc2 a {
+  text-decoration: none;
+  white-space: normal;
+}
+  #toc.toc2 a:hover,
+  #toc.toc2 a:focus {
+    text-decoration: underline;
+  }
+
+#toc.toc2 ul {
+  list-style: none;
+}
+
+  #toc.toc2 > ul {
+    padding-left: 0;
+  }
+
+  #toc.toc2 ul ul {
+    padding-left: 1em;
+  }
+
+@media screen and (min-width: 769px) {
+  body {
+    padding-left: 25vw !important;
+  }
+
+  #header,
+  #content,
+  #footer {
+    margin-left: 0;
+  }
+
+  #toc.toc2 {
+    height: 100%;
+    left: 0;
+    max-width: 20vw;
+    overflow: auto;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+
+  #toc.toc2 > ul {
+    font-size: 0.85em;
+  }
+
+  #toc li.active > a[href^="#"],
+  [id]:target {
+    background: #ffc;
+  }
+}
+
+.admonitionblock.context-callout > table {
+  border-width: 5px;
+  border-color: var(--brand-color);
+}
+
+</style>
+<link rel="stylesheet" href="https://oncletom.io/styles/blog.css?v=v3.3.2">
+<!-- WebMentions -->
+<link rel="pingback" href="https://webmention.io/oncletom.io/xmlrpc">
+<link rel="webmention" href="https://webmention.io/oncletom.io/webmention">
+<!-- Open Graph -->
+<meta property="og:type" content="book">
+<meta property="og:book:author" content="Thomas Parisot">
+<meta property="og:book:isbn" content="978-2212139938">
+<meta property="og:book:release_date" content="978-2212139938">
+<meta property="og:book:tag" content="Node.js">
+<meta property="og:book:tag" content="JavaScript">
+<meta property="og:book:tag" content="npm">
+<meta property="og:book:tag" content="Développement front-end">
+<meta property="og:book:tag" content="Développement back-end">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Node.js • Apprendre par la pratique">
+<!-- Twitter OpenGraph -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oncletom">
+<meta name="twitter:creator" content="@oncletom">
+<style type="text/css" class="prism-theme">/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+.listingblock [data-bash-subs]::before {
+  content: attr(data-bash-subs) " ";
+  opacity: .5; }
+
+.listingblock [data-bash-conum]::before {
+  content: "(" attr(data-bash-conum) ")";
+  font-weight: bold;
+  opacity: .7;
+}</style>
+<script>
+(function(d){
+  d.addEventListener('DOMContentLoaded', function(){
+    const script = d.createElement('script');
+    script.src = 'https://unpkg.com/menuspy@1.3.0/dist/menuspy.js';
+    script.async = true;
+    script.onload = () => new MenuSpy(document.querySelector('#toc'), {enableLocationHash: false});
+    d.body.appendChild(script);
+  });
+})(document);</script>
+<style type="text/css">
+#toc li.active > a[href^="#"] {
+  font-weight: bold;
+}
+#toc li.active > a[href^="#"]::before {
+  content: "▶ ";
+  display: inline-block;
+  position: absolute;
+  margin-left: -1.2em;
+  font-size: .8em;
+  margin-top: 3px;
+}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Installer, mettre à jour et développer</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table des matières</div>
+<ul class="sectlevel1">
+<li><a href="#install">1. Installer Node.js</a>
+<ul class="sectlevel2">
+<li><a href="#online">1.1. Sans installation, dans un navigateur web</a></li>
+<li><a href="#nvm">1.2. Plusieurs versions sur la même machine&#160;(nvm)</a></li>
+<li><a href="#install-ubuntu">1.3. Distributions Linux : Debian/Ubuntu et RedHat/CentOS</a></li>
+<li><a href="#distributions_linux_lesautres">1.4. Distributions Linux : les&#160;autres</a></li>
+<li><a href="#install-macos">1.5. macOS</a></li>
+<li><a href="#windows">1.6. Windows</a></li>
+<li><a href="#install-rpi">1.7. Raspberry&#160;Pi</a></li>
+<li><a href="#build">1.8. Compiler depuis les sources</a></li>
+<li><a href="#install-docker">1.9. Images Docker</a></li>
+</ul>
+</li>
+<li><a href="#shell">2. Vérifier l&#8217;installation de Node depuis un terminal (shell)</a>
+<ul class="sectlevel2">
+<li><a href="#quest_ce_quun_terminal">2.1. Qu&#8217;est-ce qu&#8217;un terminal ?</a></li>
+<li><a href="#choisir_un_terminal">2.2. Choisir un terminal</a></li>
+</ul>
+</li>
+<li><a href="#ide">3. Choisir un éditeur de texte</a>
+<ul class="sectlevel2">
+<li><a href="#atom">3.1. Atom</a></li>
+<li><a href="#vs-code">3.2. Visual Studio Code</a></li>
+<li><a href="#webstorm">3.3. WebStorm</a></li>
+<li><a href="#vs-ide">3.4. Visual Studio IDE</a></li>
+</ul>
+</li>
+<li><a href="#quand_mettre_à_jour_node_js">4. Quand mettre à jour Node.js ?</a>
+<ul class="sectlevel2">
+<li><a href="#mises_à_jour_de_sécurité">4.1. Mises à jour de sécurité</a></li>
+<li><a href="#versions_mineures">4.2. Versions mineures</a></li>
+<li><a href="#versions_majeures">4.3. Versions majeures</a></li>
+<li><a href="#lifecycle">4.4. Comprendre le cycle de vie produit</a></li>
+</ul>
+</li>
+<li><a href="#conclusion">5. Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock tip context-callout">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Vous êtes en train de lire le
+<a href="https://oncletom.io/node.js/">livre &#8220;Node.js&#8221;</a>, écrit par
+<a href="https://oncletom.io">Thomas Parisot</a> et publié par les
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Éditions Eyrolles</a>.</p>
+</div>
+<div class="paragraph">
+<p>Il vous plaît&#160;? Achetez-le en ligne sur
+<a href="https://amzn.to/2E58PEw">Amazon</a>,
+<a href="https://www.eyrolles.com/Informatique/Livre/node-js-9782212139938/">Eyrolles</a> ou
+<a href="https://www.placedeslibraires.fr/livre/9782212139938">Place des Libraires</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Installons Node et l&#8217;outillage de développement qui nous correspond le mieux,
+peu importe notre niveau de familiarité avec le développement logiciel.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<div class="title">Sommaire</div>
+<ul>
+<li>
+<p>Installer Node.js sur notre ordinateur</p>
+</li>
+<li>
+<p>Choisir un éditeur de code pour écrire nos programmes</p>
+</li>
+<li>
+<p>Déterminer quand migrer vers une nouvelle version de Node.js</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quoteblock abstract">
+<blockquote>
+<div class="paragraph">
+<p>Certains systèmes d&#8217;exploitation embarquent l&#8217;environnement d&#8217;exécution Node,
+tandis que d&#8217;autres ne le font pas, ou alors dans une version trop ancienne.
+Idéalement, nous voudrions pouvoir <strong>installer la version de Node de notre choix</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Les <strong>éditeurs de code</strong> nous facilitent la vie en rendant le code lisible
+en ajoutant de la couleur et des repères visuels.
+Ces logiciels nous invitent à piocher dans leur bibliothèque d&#8217;extensions
+pour en faire un outil qui nous ressemble.</p>
+</div>
+</blockquote>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Remarque</span> Versions de Node et npm</div>
+<div class="paragraph">
+<p>Le contenu de ce chapitre utilise les versions <strong>Node&#160;v10</strong>
+et <strong>npm&#160;v6</strong>.
+Ce sont les versions stables recommandées en&#160;2019.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Il n&#8217;est pas nécessaire d&#8217;avoir suivi des études d&#8217;informatique
+pour vouloir s&#8217;essayer à la programmation.
+Cela n&#8217;implique pas non plus d&#8217;en faire son métier.</p>
+</div>
+<div class="paragraph">
+<p>Que l&#8217;on se qualifie de débutant·e, confirmé·e ou expert·e,
+il y a un petit rituel auquel on coupera difficilement&#160;:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>installer Node.js pour <strong>voir le résultat de nos programmes</strong> écrits en JavaScript&#160;;</p>
+</li>
+<li>
+<p>installer un éditeur de code pour <strong>écrire nos programmes JavaScript plus confortablement</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Si l&#8217;idée est de jouer rapidement avec du code,
+sans rien installer et avec le premier ordinateur qui vous passe sous la main,
+je vous invite à aller directement à la section
+&#8220;<a href="#online">Sans installation, dans un navigateur web</a>&#8221; ci-après.</p>
+</div>
+<div class="paragraph">
+<p>Les sections qui suivent vont vous aider à créer un environnement Node à jour
+sur votre ordinateur.
+Ce contenu s&#8217;applique également à un serveur destiné à héberger vos applications.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="install">1. Installer Node.js</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Il y a plusieurs manières d&#8217;installer Node sur une machine.
+Elles sont <em>toutes</em> correctes.
+Certaines sont plus adaptées que d&#8217;autres,
+selon votre aisance avec un <a href="#shell">terminal</a>
+et selon le besoin de jongler rapidement entre différentes versions de Node.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Si vous vous êtes déjà servi d&#8217;un terminal&#160;: je recommande d&#8217;utiliser <a href="#nvm">nvm</a>.</p>
+</li>
+<li>
+<p>Si vous ne vous êtes jamais servi d&#8217;un terminal&#160;: il est plus simple d&#8217;utiliser un <em>installeur</em> depuis le site officiel de Node.</p>
+</li>
+<li>
+<p>Si vous souhaitez maîtriser les options d&#8217;installation&#160;: il serait logique de <a href="#build">compiler depuis les <em>sources</em></a> et/ou <a href="#docker">d&#8217;utiliser Docker</a>.</p>
+</li>
+<li>
+<p>Si rien de tout ça ne vous parle&#160;: des services en ligne rendent <a href="#online">Node accessible depuis un simple navigateur&#160;web</a>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Question</span> Pourquoi utiliser un installeur ?</div>
+<div class="paragraph">
+<p>Les installeurs facilitent l&#8217;installation de Node, en quelques clics et sans toucher à un terminal.</p>
+</div>
+<div class="paragraph">
+<p>Si vous utilisez un installeur correspondant à une version plus récente de Node,
+c&#8217;est celle-ci qui sera utilisée dans <em>tous</em> vos projets.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est la solution la plus simple pour installer Node.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="online">1.1. Sans installation, dans un navigateur web</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Il est facile de s&#8217;essayer à Node avec un navigateur web moderne comme
+Firefox, Edge ou Chrome.
+Des services en ligne combinent un <a href="#ide">éditeur de texte</a>
+et un environnement d&#8217;exécution Node à distance.</p>
+</div>
+<div class="paragraph">
+<p>Nous brosserons le portrait de trois services qui diffèrent par leurs
+fonctionnalités et leur rapidité de prise en main&#160;:_RunKit, Codenvy et Cloud9.</p>
+</div>
+<div class="paragraph">
+<p>RunKit (<span class="URL"><a href="https://runkit.com" class="bare">runkit.com</a></span>) est de loin le service le plus simple.
+Il s&#8217;articule autour d&#8217;un concept de <em>bac à sable</em>&#160;;
+notre code ne sera pas plus long qu&#8217;un fichier.
+Pour créer un nouveau bac à sable,
+il suffit de se rendre sur <span class="URL"><a href="https://runkit.com/new" class="bare">runkit.com/new</a></span>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/runkit-playground.png" alt="runkit playground" width="85%">
+</div>
+<div class="title">Figure 1. Bac à sable sur RunKit</div>
+</div>
+<div class="paragraph">
+<p>Codenvy (<span class="URL"><a href="https://codenvy.io" class="bare">codenvy.io</a></span>) est un service basé sur le
+logiciel open source Eclipse et édité par la compagnie Red&#160;Hat.
+L&#8217;interface est organisée exactement comme un des <a href="#ide">éditeurs de texte</a>
+abordé plus loin dans ce chapitre.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/codenvy-workspace.png" alt="codenvy workspace" width="85%">
+</div>
+<div class="title">Figure 2. Espace de travail sur Codenvy</div>
+</div>
+<div class="paragraph">
+<p>Le processus de création de projet est relativement intuitif
+et il est très facile d&#8217;importer du code hébergé en ligne, sur GitHub
+notamment.
+La configuration minimale d&#8217;un projet est gratuite tandis que
+les fonctionnalités avancées et le travail en équipe sont payantes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/codenvy-dashboard.png" alt="codenvy dashboard" width="85%">
+</div>
+<div class="title">Figure 3. Processus de création d&#8217;un espace de travail sur Codenvy</div>
+</div>
+<div class="paragraph">
+<p>Enfin, Cloud9 (<span class="URL"><a href="https://c9.io" class="bare">c9.io</a></span>) est un service propriétaire
+édité par la compagnie Amazon Web Services (AWS, <span class="URL"><a href="https://aws.amazon.com" class="bare">aws.amazon.com</a></span>).
+Il intègre des fonctionnalités similaires à celles de Codenvy
+(éditeur en ligne, configuration de machine)
+et s&#8217;intègre de manière poussée avec les autres services d&#8217;AWS,
+dont <em>EC2</em> et <a href="../chapter-06/index.html#hosting.lambda"><em>Lambda</em></a>
+(<a href="../chapter-06/index.html">chapitre 6</a>).
+Le service est entièrement gratuit&#160;; c&#8217;est la consommation de ressources qui
+est payante, à l&#8217;heure, en fonction du dimensionnement des ressources demandées.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cloud9-configuration.png" alt="cloud9 configuration" width="85%">
+</div>
+<div class="title">Figure 4. Configuration d&#8217;un espace de travail Cloud9</div>
+</div>
+<div class="paragraph">
+<p>Cloud9 a peu d&#8217;opinions sur la manière dont votre environnement
+doit être configuré.
+Tout devra être configuré, des accès à votre compte GitHub à la version de
+Node à installer.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cloud9-workspace.png" alt="cloud9 workspace" width="85%">
+</div>
+<div class="title">Figure 5. Espace de travail sur Cloud9</div>
+</div>
+<div class="paragraph">
+<p>Cela tombe bien, <a href="#nvm"><code>nvm</code></a> est préinstallé sur chaque espace de travail.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nvm">1.2. Plusieurs versions sur la même machine&#160;(nvm)</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p><code>nvm</code> est l&#8217;acronyme de <em>Node Version Manager</em>.
+Ce logiciel permet d'<strong>installer plusieurs versions de Node sur un même ordinateur</strong>.
+Si vous êtes sous Windows, <a href="#nvm-windows"><code>nvm-windows</code></a> offre exactement
+les mêmes fonctionnalités (voir encadré).</p>
+</div>
+<div class="paragraph">
+<p>Si vous venez d&#8217;un autre univers de programmation,
+<code>nvm</code> est l&#8217;équivalent de <code>rvm</code> ou <code>rbenv</code> dans le monde Ruby, de <code>phpenv</code> dans
+le monde PHP ou encore de <code>virtualenv</code> pour Python.</p>
+</div>
+<div class="paragraph">
+<p>Le programme s&#8217;obtient à l&#8217;adresse suivante&#160;: <span class="URL"><a href="https://github.com/creationix/nvm" class="bare">github.com/creationix/nvm</a></span>.</p>
+</div>
+<div id="nvm-windows" class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Alternatives</span> <code>nvm</code> pour&#160;Windows</div>
+<div class="paragraph">
+<p><code>nvm</code> ne fonctionne pas sur les ordinateurs équipés de Windows.
+Il existe trois alternatives&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>nvm-windows</code> (<span class="URL"><a href="https://github.com/coreybutler/nvm-windows" class="bare">github.com/coreybutler/nvm-windows</a></span>) offre
+les mêmes fonctionnalités que son équivalent pour Linux et macOS.
+Il est facile à installer et ne demande pas de privilège système particulier
+pour fonctionner.</p>
+</li>
+<li>
+<p>Deux autres solutions sont à essayer si <code>nvm-windows</code> pose problème&#160;:
+<code>nvmw</code> (<span class="URL"><a href="https://github.com/hakobera/nvmw" class="bare">github.com/hakobera/nvmw</a></span>) et
+<code>nodist</code> (<span class="URL"><a href="https://github.com/marcelklehr/nodist" class="bare">github.com/marcelklehr/nodist</a></span>).</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Commande d&#8217;installation du logiciel nvm&#160;v0.33.11</div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>curl -L https://github.com/creationix/nvm/raw/v0.33.11/install.sh | bash</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Alternative</span> nvm sous macOS</div>
+<div class="paragraph">
+<p><code>nvm</code> et Node s&#8217;installent encore plus facilement sous macOS si vous
+utilisez le logiciel <em>Homebrew</em>.</p>
+</div>
+<div class="paragraph">
+<p>Rendez-vous dans la section «&#160;<a href="#install-macos">macOS</a>{nbdp}» pour en
+savoir&#160;plus.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Nous sommes libres d&#8217;installer toutes les versions de Node qui nous intéressent
+en appelant la commande <code>nvm install</code> dans un <a href="#shell">terminal</a>.
+</p>
+</div>
+<div class="listingblock">
+<div class="title">Installation de deux versions différentes de&#160;Node</div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>nvm install v10
+<span data-bash-subs="$"></span>nvm install v9</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dans cet exemple, nous installons deux versions de Node sur le même
+ordinateur.
+La version active est la dernière installée.
+On retrouve à tout moment les versions installées avec la commande <code>nvm ls</code>.
+</p>
+</div>
+<div class="listingblock">
+<div class="title">Liste des versions installées de Node avec la commande <code>nvm&#160;ls</code></div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>nvm ls
+->       v10.9.0
+         v9.0.0
+         system
+default -> v10 (-> v10.9.0) (default)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cet exemple détaille la liste des versions de Node installées
+et celle des <em>alias</em>&#160;– associations entre un libellé et une version.</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>nvm use</code> nous fait naviguer entre des versions différentes de Node.
+L&#8217;utilisation répétée de <code>nvm use v10</code> et de
+<code>nvm use v9</code> nous fera aller et venir entre ces deux versions,
+sans rien perdre de ce que nous étions en train de faire.
+</p>
+</div>
+<div class="paragraph">
+<p>La commande <code>nvm --help</code> affiche de l&#8217;aide à propos des commandes disponibles.
+J&#8217;utilise principalement les suivantes&#160;:
+</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>nvm install</code>&#160;: installe ou met à jour une version de Node.</p>
+</li>
+<li>
+<p><code>nvm ls</code>&#160;: liste les versions installées.</p>
+</li>
+<li>
+<p><code>nvm use</code>&#160;: bascule vers une version donnée.</p>
+</li>
+<li>
+<p><code>nvm alias &lt;nom&gt; &lt;version&gt;</code>&#160;: crée un alias nommé vers une version.</p>
+</li>
+<li>
+<p><code>nvm run &lt;version&gt; &lt;script&gt;</code>&#160;: exécute un script Node dans une version donnée.
+</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Quand nous avons fixé une version de Node à utiliser au quotidien,
+l&#8217;alias spécial <code>default</code> en fait la version qui est systématiquement activée&#160;:
+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>nvm alias default 10</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La commande <code>nvm use</code> nous sert alors à activer une autre version pendant
+la durée nécessaire à notre expérimentation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install-ubuntu">1.3. Distributions Linux : Debian/Ubuntu et RedHat/CentOS</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Ces distributions Linux listent Node dans leurs paquets officiels.
+Un simple <code>apt-get install nodejs</code> et ça fonctionne&#160;!
+Ou presque, car bien souvent on écopera d&#8217;une vieille version de&#160;Node.</p>
+</div>
+<div class="paragraph">
+<p>Des paquets officiels pour Debian (≥&#160;jessie), Ubuntu (≥&#160;12.04), Mint,
+RedHat Enterprise Linux (RHEL) et CentOS sont maintenus sur
+<span class="URL"><a href="https://github.com/nodesource/distributions" class="bare">github.com/nodesource/distributions</a></span>.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;installation de Node&#160;10.x sous Ubuntu et Mint se résume
+aux commandes suivantes&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>sudo su
+<span data-bash-subs="$"></span>curl -sL https://deb.nodesource.com/setup_10.x | bash -
+<span data-bash-subs="$"></span>sudo apt-get install -y nodejs</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pour Debian, il faudra se mettre en <code>root</code> et ensuite saisir ces commandes&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>curl -sL https://deb.nodesource.com/setup_10.x | bash -
+<span data-bash-subs="$"></span>apt-get install -y nodejs</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pour RHEL et CentOS, il faudra se mettre en <code>root</code> et saisir la commande suivante&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>curl -sL https://rpm.nodesource.com/setup_{v}.x | bash -</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="distributions_linux_lesautres">1.4. Distributions Linux : les&#160;autres</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Des paquets officiels pour d&#8217;autres distributions que Debian, Ubuntu et Mint
+sont maintenus et accessibles par le biais des gestionnaires de paquets habituels&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Gentoo&#160;: <code>emerge nodejs</code></p>
+</li>
+<li>
+<p>Fedora (≥ 18)&#160;: <code>sudo yum install nodejs npm</code></p>
+</li>
+<li>
+<p>Arch Linux&#160;: <code>pacman -S nodejs</code></p>
+</li>
+<li>
+<p>FreeBSD, OpenBSD&#160;: <code>pkg install node</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>La liste à jour est maintenue sur le site officiel de Node&#160;:
+<span class="URL"><a href="https://nodejs.org/fr/download/package-manager" class="bare">nodejs.org/fr/download/package-manager</a></span>.</p>
+</div>
+<div class="paragraph">
+<p>Notez que vous pouvez aussi utiliser <a href="#nvm">nvm</a> pour gérer vos versions de
+Node indépendamment du cycle de vie de votre système d&#8217;exploitation Linux.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install-macos">1.5. macOS</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Un installeur officiel pour macOS est fourni sur le site de Node,
+à l&#8217;adresse <span class="URL"><a href="https://nodejs.org/fr/download/" class="bare">nodejs.org/fr/download/</a></span>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#nvm">nvm</a> est la voie alternative recommandée pour gérer plusieurs versions
+de Node en parallèle.</p>
+</div>
+<div class="paragraph">
+<p>Il est toutefois possible d&#8217;installer Node et <code>nvm</code> via le gestionnaire de
+paquets Homebrew (<span class="URL"><a href="https://brew.sh" class="bare">brew.sh</a></span>).
+Il aide à installer des logiciels qui ne sont pas distribués via le
+<em>Mac&#160;App&#160;Store</em>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Installer les <em>Command Line Tools</em> pour compiler des logiciels depuis leur code source.</p>
+</li>
+<li>
+<p>Installation Homebrew.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">Installation des Command Line Tools et de Homebrew sous macOS</div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>xcode-select --install
+<span data-bash-subs="$"></span>BREWRL=https://rawgit.com/Homebrew/install/master/install \
+   /usr/bin/ruby -e "$(curl -fsSL $BREWRL)"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pour installer <code>nvm</code>, il suffit alors de lancer la commande suivante&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>brew install nvm</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ou, pour installer une seule version de Node, la plus récente&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>brew install node</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vous obtiendrez des options d&#8217;installation et de configuration en tapant
+<code>brew info nvm</code> et/ou <code>brew info node</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="windows">1.6. Windows</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Un installeur officiel pour Windows est fourni sur le site de Node à l&#8217;adresse
+<span class="URL"><a href="https://nodejs.org/fr/download/" class="bare">nodejs.org/fr/download/</a></span>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#nvm"><code>nvm-windows</code></a> est la voie alternative recommandée pour gérer plusieurs
+versions de Node en parallèle.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/windows-node-installer.png" alt="windows node installer" width="50%">
+</div>
+<div class="title">Figure 6. Un des écrans d&#8217;installation de Node sous&#160;Windows&#160;10</div>
+</div>
+<div class="paragraph">
+<p>L&#8217;installeur officiel créera plusieurs raccourcis dans le
+dossier du menu <span class="menuseq"><b class="menu">Démarrer</b>&#160;<b class="caret">&#8250;</b> <b class="menuitem">Node.js</b></span>&#160;:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/windows-node-menu.png" alt="windows node menu" width="50%">
+</div>
+<div class="title">Figure 7. Node.js dans le menu Démarrer sous&#160;Windows&#160;10</div>
+</div>
+<div class="paragraph">
+<p>Le menu créé par l&#8217;installeur contient deux icônes que nous utiliserons tout
+au long de la lecture de cet ouvrage&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="menuseq"><b class="menu">Node.js</b>&#160;<b class="caret">&#8250;</b> <b class="menuitem">Node.js</b></span>&#160;: un terminal pour jouer avec JavaScript et voir les résultats que
+Node va interpréter&#160;;</p>
+</li>
+<li>
+<p><span class="menuseq"><b class="menu">Node.js</b>&#160;<b class="caret">&#8250;</b> <b class="menuitem">Node.js command prompt</b></span>&#160;: un terminal pour exécuter nos programmes écrits
+en JavaScript.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Si vous utilisez déjà un gestionnaire de paquets comme Scoop (<span class="URL"><a href="http://scoop.sh" class="bare">scoop.sh</a></span>)
+ou Chocolatey (<span class="URL"><a href="https://chocolatey.org" class="bare">chocolatey.org</a></span>),
+le chemin d&#8217;installation vers Node s&#8217;en trouvera réduit à une simple commande&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="title">Avec Scoop</div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>scoop install nodejs</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Avec Chocolatey</div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>choco install nodejs</pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">🚨</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Attention</span> Versions de Windows</div>
+<div class="paragraph">
+<p>Node n&#8217;est pas compatible avec les versions antérieures à Vista.
+Cela inclut Windows&#160;XP.</p>
+</div>
+<div class="paragraph">
+<p>Mieux vaudra utiliser un <a href="#online">service en ligne</a> pour essayer Node sur
+votre ordinateur ou passer à Linux pour lui redonner une seconde
+vie en toute sécurité&#160;!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install-rpi">1.7. Raspberry&#160;Pi</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Des binaires sont disponibles pour les microcontrôleurs fonctionnant avec des
+processeurs ARM&#160;v6/7/8, au cœur de ce que l&#8217;on appelle
+<em>Internet des Objets</em> (<em>Internet of Things</em>, <em>IoT</em>).
+Ces petits ordinateurs consomment peu d&#8217;énergie, disposent d&#8217;une connectique
+pour se relier à Internet et s&#8217;interfacent avec toutes sortes de capteurs.</p>
+</div>
+<div class="paragraph">
+<p>Un paquet <code>deb</code> est également proposé pour les utilisateurs du
+système d&#8217;exploitation Raspbian (<span class="URL"><a href="https://www.raspbian.org" class="bare">www.raspbian.org</a></span>).
+Les instructions d&#8217;installation sont identiques à celles décrites
+dans la section relative aux <a href="#install-ubuntu">distributions Linux&#160;Debian</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Installation de Node&#160;v10 sur Raspberry&#160;Pi Model&#160;3 (CPU&#160;ARMv8)</div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>curl -SLO https://nodejs.org/dist/v10.9.0/node-v10.9.0-linux-arm64.tar.xz
+<span data-bash-subs="$"></span>tar -xJf "node-v10.9.0-linux-arm64.tar.xz" -C /usr/local --strip-components=1
+<span data-bash-subs="$"></span>ln -s /usr/local/bin/node /usr/local/bin/nodejs</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Tous les binaires et les instructions d&#8217;installation sont disponibles
+sur <span class="URL"><a href="https://nodejs.org/fr/download/" class="bare">nodejs.org/fr/download/</a></span>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="build">1.8. Compiler depuis les sources</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Certaines situations exigeront que vous compiliez Node.
+C&#8217;est le cas si vous cherchez à travailler au plus près du système sur lequel
+vous comptez déployer vos applications.
+Je pense par exemple à des architectures à processeur ARM, PowerPC,
+IBM&#160;System/390 ou bien à des systèmes Android, OpenBSD ou&#160;AIX.</p>
+</div>
+<div class="paragraph">
+<p>La compilation manuelle est également intéressante pour régler plus finement
+certains aspects de Node&#160;: rendre le binaire indépendant des
+bibliothèques système (statique), le module <code>http/2</code>,
+langues et fuseaux horaires fonctionnels avec l&#8217;API ECMA&#160;402&#160;Intl,
+options de sécurité liées à OpenSSL, mais aussi l&#8217;intégration avec des
+profileurs et débogueurs externes (type XCode, GNU&#160;Debugger, Intel&#160;VTune).</p>
+</div>
+<div class="listingblock">
+<div class="title">Étapes de compilation de Node&#160;v10.9.0</div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>curl -sS https://nodejs.org/dist/v10.9.0/node-v10.9.0.tar.gz \
+  | tar -zxf -
+<span data-bash-subs="$"></span>cd node-v10.9.0
+<span data-bash-subs="$"></span>./configure && make && make install</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La compilation manuelle requiert la présence de GCC (≥ 4.9), de Python (≥ 2.6)
+et de GNU Make (≥ 3.81).</p>
+</div>
+<div class="paragraph">
+<p>Les instructions de compilation varient d&#8217;un système d&#8217;exploitation à l&#8217;autre.
+Consultez les dépendances et instructions complètes à
+l&#8217;adresse suivante&#160;: <span class="URL"><a href="https://github.com/nodejs/node/blob/master/BUILDING.md" class="bare">github.com/nodejs/node/blob/master/BUILDING.md</a></span>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install-docker">1.9. Images Docker</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Docker (<span class="URL"><a href="https://docker.com" class="bare">docker.com</a></span>) est un outil open source dit d'<em>applications en conteneur</em>.
+Une de ses qualités principales est d'<strong>isoler l&#8217;exécution d&#8217;applications de leur environnement</strong>.
+Une image Docker décrit la recette d&#8217;installation d&#8217;une application.
+L&#8217;environnement d&#8217;exécution Docker fait office de "passe-plat" avec le système d&#8217;exploitation.
+Une image Docker fonctionne ainsi de la même manière, qu&#8217;elle soit exécutée
+sous Linux, macOS ou encore Windows.</p>
+</div>
+<div class="paragraph">
+<p>Les installeurs et instructions d&#8217;installation de Docker se trouvent
+à l&#8217;adresse <span class="URL"><a href="https://docker.com/community-edition" class="bare">docker.com/community-edition</a></span>.</p>
+</div>
+<div class="paragraph">
+<p>Une fois Docker installé, on peut exécuter une image officielle pour
+Node&#160;v10.</p>
+</div>
+<div class="listingblock">
+<div class="title">Affiche la version de Node</div>
+<div class="content">
+<pre><span data-bash-subs="$"></span>docker run -ti --rm node:10 node --version
+v10.9.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ici, Docker télécharge l&#8217;image <code>node:10</code> et exécute la commande
+<code>node --version</code> dans un contexte isolé du système d&#8217;exploitation.</p>
+</div>
+<div class="paragraph">
+<p>Pour lancer un terminal Node dans Docker, il faudrait saisir la commande suivante&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>docker run -ti --rm node:10 node
+<span data-bash-subs=">"></span>2+2
+4</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Plusieurs variantes d&#8217;images Node se trouvent à notre disposition&#160;:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><span class="Menu">standard</span> (<code>node:10</code>)</dt>
+<dd>
+<p>Base Linux Debian pour tout type d&#8217;applications Node.</p>
+</dd>
+<dt class="hdlist1"><span class="Menu">Debian</span> (<code>node:10-wheezy</code>)</dt>
+<dd>
+<p>Comme <span class="Menu">standard</span> mais sur des bases Debian différentes, comme Wheezy, Stretch, etc..</p>
+</dd>
+<dt class="hdlist1"><span class="Menu">Alpine</span> (<code>node:10-alpine</code>)</dt>
+<dd>
+<p>Distribution spécialement créée pour Docker (<span class="URL"><a href="http://alpinelinux.org" class="bare">alpinelinux.org</a></span>), qui pèse à peine quelques&#160;Mo.</p>
+</dd>
+<dt class="hdlist1"><span class="Menu">Allégée</span> (<code>node:10-slim</code>)</dt>
+<dd>
+<p>Base Linux Debian sans outillage parfois nécessaire à des modules Node&#160;– utile si vous souhaitez économiser de l&#8217;espace disque.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>L&#8217;intégralité des versions et architectures prises en charge est disponible sur
+le catalogue Docker&#160;Hub&#160;: <span class="URL"><a href="https://hub.docker.com/_/node/" class="bare">hub.docker.com/_/node/</a></span>.</p>
+</div>
+<div class="paragraph">
+<p>Nous reviendrons sur ce sujet dans la section
+&#8220;<a href="../chapter-06/index.html#deploy.docker">Déploiement d&#8217;une image Docker</a>&#8221; du
+<a href="../chapter-06/index.html">chapitre&#160;6</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="shell">2. Vérifier l&#8217;installation de Node depuis un terminal (shell)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Nous avons installé un environnement d&#8217;exécution Node dans la section précédente.
+Pour vérifier que tout s&#8217;est bien déroulé, ouvrez un terminal et saisissez
+la commande suivante&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>node --version
+v10.9.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le numéro de version du Node fraichement installé devrait apparaître.
+Si le mot <em>terminal</em> ne vous parle pas, la suite de cette section va vous
+éclairer&#160;– vous pourrez ensuite revenir essayer cette commande.</p>
+</div>
+<div class="sect2">
+<h3 id="quest_ce_quun_terminal">2.1. Qu&#8217;est-ce qu&#8217;un terminal ?</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Le <a href="#shell">terminal</a> est notre compagnon pour dialoguer avec le système d&#8217;exploitation.
+L'<em>invite de commandes</em> est son nom véritable.
+Ce nom nous donne un indice sur la fonction de ce type de logiciel&#160;:
+inviter l&#8217;utilisateur à saisir des commandes pour obtenir des résultats calculés
+par un ordinateur.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/macos-terminal.png" alt="macos terminal" width="70%">
+</div>
+<div class="title">Figure 8. Terminal iTerm2 sous macOS</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Histoire</span> Terminal physique</div>
+<div class="paragraph">
+<p>L&#8217;histoire des invites de commande remonte au temps où les ordinateurs
+étaient plus volumineux que nos logements.
+Une époque lointaine où les ordinateurs étaient véritablement et physiquement
+distants des claviers qui les interrogeaient.</p>
+</div>
+<div class="paragraph">
+<p>Pour en savoir plus&#160;: <span class="URL"><a href="https://fr.wikipedia.org/wiki/Terminal_informatique" class="bare">fr.wikipedia.org/wiki/Terminal_informatique</a></span>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Un terminal est notre <strong>moyen privilégié pour interagir avec Node</strong> lorsqu&#8217;il
+est installé sur un ordinateur.
+Les systèmes d&#8217;exploitation en ont pour la plupart un installé par défaut.
+Cela vaut également pour la majorité des <a href="#online">services en ligne</a>.
+</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/glitch-terminal.png" alt="glitch terminal" width="70%">
+</div>
+<div class="title">Figure 9. Terminal du <a href="#online">service en ligne</a> Glitch</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="choisir_un_terminal">2.2. Choisir un terminal</h3>
+<div class="paragraph">
+<p>Voici une liste non exhaustive d&#8217;applications de type terminal&#160;:
+
+
+</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">macOS</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Terminal.app&#160;: fourni par défaut (dans <span class="menuseq"><b class="menu">Applications</b>&#160;<b class="caret">&#8250;</b> <b class="menuitem">Utilitaires</b></span>)&#160;;</p>
+</li>
+<li>
+<p>iTerm2&#160;: une version améliorée disponible sur <span class="URL"><a href="https://iterm2.com" class="bare">iterm2.com</a></span> (ou <code>brew cask install iterm2</code>)&#160;;</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Linux</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>GNOME Terminal&#160;: fourni par défaut sous Debian, Ubuntu et les distributions utilisant le bureau GNOME (<span class="URL"><a href="https://wiki.gnome.org/Apps/Terminal" class="bare">wiki.gnome.org/Apps/Terminal</a></span>)&#160;;</p>
+</li>
+<li>
+<p>Terminator&#160;: un autre terminal populaire (<span class="URL"><a href="https://gnometerminator.blogspot.com" class="bare">gnometerminator.blogspot.com</a></span>)&#160;;</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Windows</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Node.js Command Prompt&#160;: fourni avec l'<a href="#windows">installeur Windows</a>&#160;;</p>
+</li>
+<li>
+<p>PowerShell&#160;: fourni par défaut depuis Windows&#160;7, sinon disponible sur <span class="URL"><a href="https://github.com/PowerShell/PowerShell" class="bare">github.com/PowerShell/PowerShell</a></span>&#160;– également disponible pour macOS et&#160;Linux.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/windows-terminal.png" alt="windows terminal" width="70%">
+</div>
+<div class="title">Figure 10. Node.js Command Prompt sous Windows&#160;10</div>
+</div>
+<div class="paragraph">
+<p>Maintenant que nous avons installé Node et compris comment
+y accéder depuis notre système d&#8217;exploitation ou navigateur web,
+attaquons-nous au dernier morceau du puzzle&#160;:
+<strong>avec quel logiciel écrire du code JavaScript pour nos applications&#160;Node</strong>&#160;?</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ide">3. Choisir un éditeur de texte</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Programmer pour Node revient dans la majorité des cas à écrire du JavaScript.
+À cela s&#8217;ajoutent le HTML et le CSS dans le cas d&#8217;applications ou de sites&#160;web.</p>
+</div>
+<div class="paragraph">
+<p>À la base, si un éditeur de texte suffit pour écrire du code,
+prenons le temps de regarder ce qui pourrait nous apporter un peu de confort
+dans le processus d&#8217;écriture.</p>
+</div>
+<div class="paragraph">
+<p>Les logiciels présentés ci-après couvrent bon nombre de fonctionnalités
+qui améliorent de près ou de loin notre capacité à écrire du code de qualité.
+Parmi elles, on retrouve la coloration syntaxique,
+l&#8217;inspection dynamique, le débogage, des astuces de productivité et
+d&#8217;intégration à l&#8217;écosystème&#160;Node.</p>
+</div>
+<div class="paragraph">
+<p>Cette sélection a pour but de vous aider à piocher au plus près
+de vos goûts.
+Le meilleur logiciel sera celui qui vous plaira.
+Rien n&#8217;empêche d&#8217;en changer par la suite.</p>
+</div>
+<div class="sect2">
+<h3 id="atom">3.1. Atom</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/atom.png" alt="atom" width="85%">
+</div>
+<div class="title">Figure 11. Atom</div>
+</div>
+<div class="paragraph">
+<p>Atom (<span class="URL"><a href="https://atom.io" class="bare">atom.io</a></span>) est un éditeur de code open-source,
+multilingue et multi plate-forme, dont le développement a été lancé
+par la société commerciale GitHub (<span class="URL"><a href="http://github.com" class="bare">github.com</a></span>).
+Le logiciel est basé sur Electron, un environnement d&#8217;exécution
+d&#8217;applications de bureau reposant sur les technologies web et sur&#160;Node&#160;!</p>
+</div>
+<div class="paragraph">
+<p>Atom offre un écosystème d&#8217;extensions pour étendre les fonctionnalités de l&#8217;éditeur.
+On retrouvera des extensions dédiées à l&#8217;auto-complétion,
+un débogueur Node intégré (pour exécuter nos programmes sans changer de fenêtre),
+mais aussi une vérification syntaxique sur mesure.</p>
+</div>
+<div class="paragraph">
+<p>Toutes les extensions d&#8217;Atom sont disponibles sur <span class="URL"><a href="https://atom.io/packages" class="bare">atom.io/packages</a></span>&#160;;
+voici une liste de celles que j&#8217;utilise au quotidien&#160;:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">minimap (<span class="URL"><a href="https://atom.io/packages/minimap" class="bare">atom.io/packages/minimap</a></span>)</dt>
+<dd>
+<p>Une prévisualisation de l&#8217;intégralité du code source d&#8217;un fichier.</p>
+</dd>
+<dt class="hdlist1">file-icons (<span class="URL"><a href="https://atom.io/packages/file-icons" class="bare">atom.io/packages/file-icons</a></span>)</dt>
+<dd>
+<p>Une manière plus agréable de visualiser les différents types de fichiers
+en fonction de leur icône.</p>
+</dd>
+<dt class="hdlist1">pigments (<span class="URL"><a href="https://atom.io/packages/pigments" class="bare">atom.io/packages/pigments</a></span>)</dt>
+<dd>
+<p>Affiche les couleurs en marge et dans le code source.</p>
+</dd>
+<dt class="hdlist1">language-babel (<span class="URL"><a href="https://atom.io/packages/language-babel" class="bare">atom.io/packages/language-babel</a></span>)</dt>
+<dd>
+<p>Coloration syntaxique de tous les langages compris par l&#8217;outil
+Babel (<span class="URL"><a href="https://babeljs.io" class="bare">babeljs.io</a></span>), dont les versions modernes
+de JavaScript, JSX, GraphQL,&#160;etc.</p>
+</dd>
+<dt class="hdlist1">emmet (<span class="URL"><a href="https://atom.io/packages/emmet" class="bare">atom.io/packages/emmet</a></span>)</dt>
+<dd>
+<p>Génère du HTML à partir d&#8217;une écriture sous forme de sélecteur&#160;CSS.</p>
+</dd>
+<dt class="hdlist1">linter-eslint (<span class="URL"><a href="https://atom.io/packages/linter-eslint" class="bare">atom.io/packages/linter-eslint</a></span>)</dt>
+<dd>
+<p>Vérification syntaxique basée sur les règles projet du module
+ESLint (<span class="URL"><a href="https://eslint.org" class="bare">eslint.org</a></span>, voir
+l'<a href="../appendix-a/index.html#eslint">annexe</a>).</p>
+</dd>
+<dt class="hdlist1">atom-ternjs (<span class="URL"><a href="https://atom.io/packages/atom-ternjs" class="bare">atom.io/packages/atom-ternjs</a></span>)</dt>
+<dd>
+<p>Autocomplétion pour JavaScript, Node et d&#8217;autres bibliothèques
+populaires comme jQuery, chai et underscore.</p>
+</dd>
+<dt class="hdlist1">editorconfig (<span class="URL"><a href="https://atom.io/packages/editorconfig" class="bare">atom.io/packages/editorconfig</a></span>)</dt>
+<dd>
+<p>Adapte les réglages d&#8217;indentation et autres styles d&#8217;écriture de code
+documentés dans chaque projet.</p>
+</dd>
+<dt class="hdlist1">language-sass (<span class="URL"><a href="https://atom.io/packages/language-sass" class="bare">atom.io/packages/language-sass</a></span>)</dt>
+<dd>
+<p>Prise en charge du langage&#160;Sass.</p>
+</dd>
+<dt class="hdlist1">markdown-writer (<span class="URL"><a href="https://atom.io/packages/markdown-writer" class="bare">atom.io/packages/markdown-writer</a></span>)</dt>
+<dd>
+<p>Raccourcis et aides pour formater du texte au format Markdown.</p>
+</dd>
+<dt class="hdlist1">autocomplete-modules (<span class="URL"><a href="https://atom.io/packages/autocomplete-modules" class="bare">atom.io/packages/autocomplete-modules</a></span>)</dt>
+<dd>
+<p>Étend l&#8217;autocomplétion lors des appels aux
+<a href="../chapter-05/index.html">modules <code>npm</code></a> (chapitre&#160;5).</p>
+</dd>
+<dt class="hdlist1">linter-sass-lint (<span class="URL"><a href="https://atom.io/packages/linter-sass-lint" class="bare">atom.io/packages/linter-sass-lint</a></span>)</dt>
+<dd>
+<p>Vérification syntaxique des fichiers&#160;Sass.</p>
+</dd>
+<dt class="hdlist1">node-debugger (<span class="URL"><a href="https://atom.io/packages/node-debugger" class="bare">atom.io/packages/node-debugger</a></span>)</dt>
+<dd>
+<p>Intégration du débogueur&#160;Node.</p>
+</dd>
+<dt class="hdlist1">tablr (<span class="URL"><a href="https://atom.io/packages/tablr" class="bare">atom.io/packages/tablr</a></span>)</dt>
+<dd>
+<p>Éditeur de fichiers&#160;CSV.</p>
+</dd>
+<dt class="hdlist1">linter-markdown (<span class="URL"><a href="https://atom.io/packages/linter-markdown" class="bare">atom.io/packages/linter-markdown</a></span>)</dt>
+<dd>
+<p>Vérification syntaxique des fichiers Markdown.</p>
+</dd>
+<dt class="hdlist1">node-resolver (<span class="URL"><a href="https://atom.io/packages/node-resolver" class="bare">atom.io/packages/node-resolver</a></span>)</dt>
+<dd>
+<p>Navigation au sein des <a href="../chapter-05/index.html">modules <code>npm</code></a>
+en cliquant sur leurs méthodes ou propriétés.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Productivité</span> Installer vos extensions favorites</div>
+<div class="paragraph">
+<p>Chaque extension peut être ajoutée à nos favoris sur le site <span class="URL">atom.io</span>,
+aussi bien pour signaler que nous l&#8217;apprécions que pour la retrouver plus tard.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/atom-favourite.png" alt="atom favourite" width="65%">
+</div>
+<div class="title">Figure 12. Une extension Atom ajoutée aux favoris</div>
+</div>
+<div class="paragraph">
+<p>Le logiciel nous offre une commande à saisir dans un terminal pour
+installer toutes les extensions de nos favoris&#160;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><span data-bash-subs="$"></span>apm stars --install</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vs-code">3.2. Visual Studio Code</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/visual-studio-code.png" alt="visual studio code" width="85%">
+</div>
+<div class="title">Figure 13. Visual Studio Code</div>
+</div>
+<div class="paragraph">
+<p>Visual Studio Code (<span class="URL"><a href="https://code.visualstudio.com" class="bare">code.visualstudio.com</a></span>)
+est un éditeur de code open source, multilingue et multi plate-forme
+dont le développement a été lancé par la société Microsoft.
+Le logiciel est basé sur Electron, un environnement d&#8217;exécution
+d&#8217;applications de bureau reposant sur les technologies web et sur Node.</p>
+</div>
+<div class="paragraph">
+<p>Le système IntelliSense est un de ses atouts principaux.
+Il se sert du contexte disponible pour offrir une auto-complétion
+et des bulles d&#8217;aide pertinentes.
+C&#8217;est un éditeur parfaitement adapté au développement d&#8217;applications Node
+grâce à des fonctionnalités natives comme l&#8217;exécution, le débogage,
+la gestion de tâches et le versionnement&#160;– du code et des modules <code>npm</code>.</p>
+</div>
+<div class="paragraph">
+<p>Visual Studio Code se complète d&#8217;un mode Node (<span class="URL"><a href="https://code.visualstudio.com/Docs/runtimes/nodejs" class="bare">code.visualstudio.com/Docs/runtimes/nodejs</a></span>)
+et d&#8217;une place de marché (<span class="URL"><a href="https://marketplace.visualstudio.com/VSCode" class="bare">marketplace.visualstudio.com/VSCode</a></span>) pour
+étendre ses fonctionnalités.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="webstorm">3.3. WebStorm</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/webstorm.png" alt="webstorm" width="85%">
+</div>
+<div class="title">Figure 14. WebStorm</div>
+</div>
+<div class="paragraph">
+<p>WebStorm (<span class="URL"><a href="https://www.jetbrains.com/webstorm/" class="bare">www.jetbrains.com/webstorm/</a></span>) est un environnement
+de développement (IDE) payant dédié au développement web
+HTML5, JavaScript et&#160;Node.</p>
+</div>
+<div class="paragraph">
+<p>Le logiciel est commercialisé par la société JetBrains, renommée pour ses
+IDE Pycharm (pour Python),
+PhpStorm (pour PHP) et IntelliJ&#160;IDEA (pour Java).</p>
+</div>
+<div class="paragraph">
+<p>WebStorm est compatible Windows, Linux et macOS.
+Ses forces résident dans sa relative légèreté,
+une auto-complétion intelligente prenant en compte la résolution
+des modules CommonJS et AMD, une intégration des outils populaires
+dans l&#8217;écosystème Node (<code>npm</code>, ESLint, Mocha, Karma, Bower, etc.)
+ainsi qu&#8217;un débogage avancé.</p>
+</div>
+<div class="paragraph">
+<p>Le téléchargement de WebStorm inclut une période d&#8217;essai de 30&#160;jours.
+La tarification du produit varie selon que vous soyez un individu ou
+une entreprise et que le paiement soit mensuel ou annuel.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💡</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Astuce</span> Licence open source</div>
+<div class="paragraph">
+<p>Vous pouvez demander à bénéficier d&#8217;une licence gratuite sous réserve
+d&#8217;une preuve de contribution à un ou plusieurs projet(s) <em>open&#160;source</em>.</p>
+</div>
+<div class="paragraph">
+<p>Rendez-vous sur <span class="URL"><a href="https://www.jetbrains.com/buy/opensource/" class="bare">www.jetbrains.com/buy/opensource/</a></span>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vs-ide">3.4. Visual Studio IDE</h3>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/visual-studio.png" alt="visual studio" width="85%">
+</div>
+<div class="title">Figure 15. Visual Studio IDE</div>
+</div>
+<div class="paragraph">
+<p>Visual Studio (<span class="URL"><a href="https://www.visualstudio.com/vs/" class="bare">www.visualstudio.com/vs/</a></span>)
+est un environnement de développement édité par Microsoft.
+Historiquement dédié au développement applicatif
+Windows (Visual Basic, Visual&#160;C++), ce logiciel gère aujourd&#8217;hui bien plus
+de langages, dont&#160;C#, HTML, CSS, JavaScript, ASP.Net.
+Il est surtout extensible, ce qui permet de lui ajouter Python ou encore Node, entre autres.</p>
+</div>
+<div class="paragraph">
+<p>Visual Studio est compatible Windows uniquement.
+Il existe en plusieurs versions, parmi lesquelles la <em>Community</em> qui est gratuite.</p>
+</div>
+<div class="paragraph">
+<p>Afin de bénéficier de l&#8217;intégration complète de l&#8217;écosystème Node,
+il est nécessaire d&#8217;installer l&#8217;extension Node.js Tools for Visual Studio
+(aussi nommée NTVS).
+Elle est gratuite, open source et disponible à l&#8217;adresse suivante&#160;:
+<span class="URL"><a href="https://www.visualstudio.com/vs/node-js/" class="bare">www.visualstudio.com/vs/node-js/</a></span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quand_mettre_à_jour_node_js">4. Quand mettre à jour Node.js ?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Le développement de Node continue pendant que vous lisez ces lignes.
+Les sections suivantes présentent les différentes raisons
+pour lesquelles de nouvelles versions de Node sont distribuées.</p>
+</div>
+<div class="paragraph">
+<p>Quelle que soit la raison, la mise à jour est identique à
+l'<a href="#install">installation initiale de Node</a>&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Si vous aviez utilisé un <strong>installeur</strong>&#160;: téléchargez et installez
+la nouvelle version.</p>
+</li>
+<li>
+<p>Si vous aviez utilisé un <strong>gestionnaire de versions</strong>&#160;: téléchargez la
+nouvelle version et indiquez qu&#8217;elle devient celle par défaut.</p>
+</li>
+<li>
+<p>Si vous aviez <strong>compilé depuis les sources</strong>&#160;: téléchargez les sources
+de la nouvelle version et compilez à nouveau.</p>
+</li>
+<li>
+<p>Si vous aviez utilisé une <strong>image Docker</strong>&#160;: téléchargez la nouvelle
+version en ayant recours à la commande <code>docker pull node:&lt;version&gt;</code>.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="mises_à_jour_de_sécurité">4.1. Mises à jour de sécurité</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Node n&#8217;est pas exempt de bogues. Une catégorie en particulier nécessite d&#8217;être
+réactif&#160;: les failles de sécurité.
+Ces failles offrent une surface d&#8217;attaque à des personnes
+mal intentionnées, qui seraient tentées d&#8217;accéder sans permission à des serveurs,
+et donc aux données qu&#8217;ils contiennent.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;impact peut être faible pour un site personnel, à condition de ne pas laisser
+traîner de mots de passe ici et&#160;là.
+Cela risque de se révéler beaucoup plus fâcheux pour un site e-commerce
+ou une entreprise dont la santé serait mise en&#160;jeu.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;équipe de Node livre des <strong>versions corrigeant les failles de sécurité aussitôt qu&#8217;elle le peut</strong>.
+Une faille n&#8217;est d&#8217;ailleurs pas révélée avant que le correctif
+soit disponible, par mesure de précaution.</p>
+</div>
+<div class="paragraph">
+<p>Que faire si la faille de sécurité affecte la version de Node installée sur&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>notre ordinateur de développement&#160;: c&#8217;est peu risqué, sauf si un module tiers l&#8217;exploite&#160;;</p>
+</li>
+<li>
+<p>notre site web&#160;: redéployez aussitôt le site en question avec une version corrigeant la faille.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Les versions de Node qui corrigent des failles de sécurité ou des bogues connus
+n&#8217;ont quasiment aucun risque de casser une application existante.
+On les appelle les versions <em>patch</em>.
+Elles sont indiquées par le troisième numéro de version&#160;: <code>v10.0.<strong>0</strong></code>, <code>v10.0.<strong>1</strong></code>, …</p>
+</div>
+<div class="paragraph">
+<p>Plusieurs ressources sont à notre disposition pour se tenir informé·e&#160;:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Liste de diffusion (<span class="URL"><a href="https://groups.google.com/group/nodejs-sec" class="bare">groups.google.com/group/nodejs-sec</a></span>)</dt>
+<dd>
+<p>Pour recevoir l&#8217;alerte par courriel (moins d&#8217;une par&#160;mois).</p>
+</dd>
+<dt class="hdlist1">Blog Node.js (<span class="URL"><a href="https://nodejs.org/en/blog/vulnerability/" class="bare">nodejs.org/en/blog/vulnerability/</a></span>)</dt>
+<dd>
+<p>Une page web à consulter avec un navigateur.
+Les mêmes messages sont relayés sur la liste de diffusion.</p>
+</dd>
+<dt class="hdlist1">Fil RSS du blog Node.js (<span class="URL"><a href="https://nodejs.org/en/feed/vulnerability.xml" class="bare">nodejs.org/en/feed/vulnerability.xml</a></span>)</dt>
+<dd>
+<p>Comme le point précédent mais auquel on peut souscrire
+avec un lecteur RSS comme Feedly ou Mozilla Thunderbird.</p>
+</dd>
+<dt class="hdlist1">Compte Twitter @nodesecurity (<span class="URL"><a href="https://twitter.com/nodesecurity" class="bare">twitter.com/nodesecurity</a></span>)</dt>
+<dd>
+<p>Annonce des informations liées à la sécurité générale de Node
+et de son écosystème.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Lien</span> Groupe de travail Node.js Security</div>
+<div class="paragraph">
+<p>Un groupe de travail (<span class="URL"><a href="https://github.com/nodejs/security-wg" class="bare">github.com/nodejs/security-wg</a></span>) veille à
+maintenir et améliorer la sécurité de Node.
+Ces personnes se chargent d&#8217;être proactives dans la détection
+de failles dans l&#8217;architecture de Node, mais aussi dans
+l&#8217;intégration de code tiers, comme la brique OpenSSL
+ou le module <code>npm</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Le <a href="../chapter-06/index.html">chapitre&#160;6</a> décrit
+comment se maintenir à jour sur les
+<a href="../chapter-06/index.html#security">alertes de sécurité</a> de nos
+applications Node.
+Celles-ci risquent notamment d&#8217;être vulnérables à cause des modules <code>npm</code>
+dont elles dépendent&#160;– en plus des vulnérabilités de&#160;Node.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="versions_mineures">4.2. Versions mineures</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Les versions mineures de Node sont celles qui lui ajoutent de
+nouvelles fonctionnalités quasiment sans risque de casser une application existante.
+Elles sont indiquées par le deuxième chiffre du numéro de version&#160;:
+<code>v10.<strong>0</strong>.3</code>, <code>v10.<strong>1</strong>.0</code>, …</p>
+</div>
+<div class="paragraph">
+<p>Les versions mineures sortent une petite dizaine de fois par&#160;an.
+Une migration ne demande pas nécessairement d&#8217;investir beaucoup de temps pour
+adapter et tester nos applications&#160;Node.</p>
+</div>
+<div class="paragraph">
+<p>En cas de sortie d&#8217;une version mineure&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sur notre ordinateur de développement&#160;: on peut migrer si l&#8217;on veut tester
+ou bénéficier des nouvelles fonctionnalités de cette version.</p>
+</li>
+<li>
+<p>Sur notre site web&#160;: pas d&#8217;action immédiate requise.
+On peut migrer si l&#8217;on veut bénéficier des nouvelles fonctionnalités
+de cette version.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="versions_majeures">4.3. Versions majeures</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Les versions majeures ajoutent également de nouvelles fonctionnalités à Node,
+mais elles peuvent être amenées à changer des comportements qui casseraient
+une application existante.</p>
+</div>
+<div class="paragraph">
+<p>Elles sont indiquées par le premier chiffre du numéro de version&#160;:
+<code>v<strong>10</strong>.0.0</code>, <code>v<strong>11</strong>.0.0</code>, …</p>
+</div>
+<div class="paragraph">
+<p>Les versions majeures sortent deux fois par&#160;an.
+Une migration peut demander de consacrer un certain temps à adapter
+et à tester nos applications Node.</p>
+</div>
+<div class="paragraph">
+<p>En cas de sortie d&#8217;une version majeure&#160;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sur notre ordinateur de développement&#160;: nous prenins du temps
+pour tester nos applications et nous assurer de leur bon fonctionnement.</p>
+</li>
+<li>
+<p>Sur la machine de production&#160;: il n&#8217;y a pas d&#8217;action immédiate requise.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lifecycle">4.4. Comprendre le cycle de vie produit</h3>
+<div class="paragraph">
+<p>
+</p>
+</div>
+<div class="paragraph">
+<p>Le développement de la plate-forme Node prend soin de ne pas
+aller trop vite ni d&#8217;altérer la stabilité des applications et des
+outils en fonctionnement.
+Il sort <strong>au maximum deux versions majeures par&#160;an</strong>,
+dont une est maintenue à long terme (<em>Long Term Support</em>, <em>LTS</em>).</p>
+</div>
+<div class="paragraph">
+<p>La notion de version&#160;LTS a été introduite pour donner un repère de stabilité.
+On sait qu&#8217;on peut compter dessus sans se poser de question.
+Les autres versions sont à voir comme des coups d&#8217;essai, dans l&#8217;anticipation d&#8217;une migration
+vers une version suivante, maintenue à long terme.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://github.com/nodejs/Release/blob/master/schedule.png"><img src="./images/schedule.png" alt="schedule" width="85%"></a>
+</div>
+<div class="title">Figure 16. Calendrier de publication des versions de Node</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">💬</div>
+</td>
+<td class="content">
+<div class="title"><span class="RemarquePreTitre">Lien</span> Calendrier de sorties</div>
+<div class="paragraph">
+<p>
+Le calendrier des sorties de Node est tenu à jour sur <span class="URL"><a href="https://github.com/nodejs/Release" class="bare">github.com/nodejs/Release</a></span>.
+Référez-vous à ce calendrier pour des informations à jour sur
+les prochaines versions et l&#8217;arrêt de maintenance des plus anciennes.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Si on récapitule&#160;:
+
+- Les versions <strong>impaires</strong> (v5,&#160;v7,&#160;etc.)
+  - sont développées pendant <em>neuf mois</em>&#160;;
+  - ne sont pas maintenues au-delà.
+- Les versions <strong>paires</strong> (<em>LTS</em>,&#160;v10,&#160;etc.)
+  - sont basées sur la version <em>impaire</em> précédente&#160;;
+  - sont développées pendant <em>six&#160;mois</em>&#160;;
+  - sont maintenues LTS pendant <em>dix-huit&#160;mois</em>&#160;;
+  - basculent en maintenance pendant <em>douze&#160;mois</em> supplémentaires&#160;;
+  - ne sont pas maintenues au-delà.</p>
+</div>
+<div class="paragraph">
+<p>Les patchs de sécurité ne concernent que les versions en <em>développement</em>,
+<em>LTS</em> ou en <em>maintenance</em>.</p>
+</div>
+<div class="paragraph">
+<p>Cette planification garantit une plate-forme et un ensemble de
+fonctionnalités stables de manière prédictible,
+à la fois pour les projets reposant sur Node, mais aussi
+pour l&#8217;écosystème de contributeurs de modules <code>npm</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion">5. Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nous sommes désormais en mesure d&#8217;installer et mettre à jour Node
+sur notre ordinateur.
+Nous savons aussi avec quel(s) logiciel(s) développer nos applications et
+où nous informer pour savoir quand faire nos mises à jour,
+pour corriger des problèmes de sécurité et bénéficier des nouvelles
+fonctionnalités du langage.</p>
+</div>
+<div class="paragraph">
+<p>Le prochain chapitre nous amènera à reprendre les bases du
+langage JavaScript en jouant avec le <a href="#shell">terminal Node</a>.
+On découvrira également les différences entre JavaScript, ECMAScript et&#160;Node.</p>
+</div>
+</div>
+</div>
+</div>
+<section class="next">
+  <a href="#top">Haut de page</a> ou
+  <a href="https://oncletom.io/node.js/#apprendre-node-js-en-ligne" class="read-more">retour au sommaire</a>.
+</section>
+</body>
+</html>
